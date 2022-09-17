@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'screens/sign_up_screen.dart';
+import 'screens/welcome_screen.dart';
+import 'utils/global_theme.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,12 +13,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: GlobalTheme.globalTheme,
       onGenerateRoute: (RouteSettings settings) {
         switch(settings.name) {
           case '/':
-            return MaterialPageRoute(builder: (context) => WelcomeScreen());
+            return MaterialPageRoute(builder: (context) => const WelcomeScreen());
           case '/sign-up':
-            return MaterialPageRoute(builder: (context) => SignUpScreen());
+            return MaterialPageRoute(builder: (context) => const SignUpScreen());
         }
       }
     );
