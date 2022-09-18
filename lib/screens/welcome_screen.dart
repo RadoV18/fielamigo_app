@@ -19,7 +19,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     _controller.initialize().then((_) {
       _controller.setVolume(0);
       _controller.setLooping(true);
-      _controller.play();
+      // _controller.play(); // TODO ENABLE FOR PRODUCTION
       setState(() {});
     });
   }
