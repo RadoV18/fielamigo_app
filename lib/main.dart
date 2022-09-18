@@ -1,3 +1,4 @@
+import 'package:fielamigo_app/screens/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'screens/sign_up_screen.dart';
@@ -15,17 +16,21 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Sizer(
       builder: (context, orientation, deviceType) => MaterialApp(
-        theme: GlobalTheme.globalTheme,
-        onGenerateRoute: (RouteSettings settings) {
-          switch(settings.name) {
-            case '/':
-              return MaterialPageRoute(builder: (context) => const WelcomeScreen());
-            case '/sign-up':
-              return MaterialPageRoute(builder: (context) => const SignUpScreen());
-          }
-          return null;
-        }
-      ),
+          theme: GlobalTheme.globalTheme,
+          onGenerateRoute: (RouteSettings settings) {
+            switch (settings.name) {
+              case '/':
+                return MaterialPageRoute(
+                    builder: (context) => const OnboardingScreen());
+              case '/welcome':
+                return MaterialPageRoute(
+                    builder: (context) => const WelcomeScreen());
+              case '/sign-up':
+                return MaterialPageRoute(
+                    builder: (context) => const SignUpScreen());
+            }
+            return null;
+          }),
     );
   }
 }
