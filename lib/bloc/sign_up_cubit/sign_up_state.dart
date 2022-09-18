@@ -4,21 +4,17 @@ class SignUpState extends Equatable {
   final Email email;
   final Password password;
   final Password confirmPassword;
-  final bool? isOwner;
+  final bool isOwner;
+  final bool isCaregiver;
   final FormzStatus status;
-  final String? emailErrorMessage;
-  final String? passwordErrorMessage;
-  final String? passwordConfirmErrorMessage;
-
+  
   const SignUpState({
     this.email = const Email.pure(),
     this.password = const Password.pure(),
     this.confirmPassword = const Password.pure(),
-    this.isOwner,
-    this.status = FormzStatus.pure,
-    this.emailErrorMessage,
-    this.passwordErrorMessage,
-    this.passwordConfirmErrorMessage
+    this.isOwner = false,
+    this.isCaregiver = false,
+    this.status = FormzStatus.pure
   });
 
   SignUpState copyWith({
@@ -26,17 +22,17 @@ class SignUpState extends Equatable {
     Password? password,
     Password? confirmPassword,
     bool? isOwner,
-    FormzStatus? status,
-    String? emailErrorMessage,
-    String? passwordErrorMessage,
-    String? passwordConfirmErrorMessage,
+    bool? isCaregiver,
+    FormzStatus? status
   }) => SignUpState(
     email: email ?? this.email,
     password: password ?? this.password,
-
+    confirmPassword: confirmPassword ?? this.confirmPassword,
+    isOwner: isOwner ?? this.isOwner,
+    isCaregiver: isCaregiver ?? this.isCaregiver,
+    status: status ?? this.status
   );
   
   @override
-  List<Object?> get props => [email, password, confirmPassword, isOwner,
-  emailErrorMessage, passwordErrorMessage, passwordConfirmErrorMessage];
+  List<Object?> get props => [email, password, confirmPassword, isOwner];
 }

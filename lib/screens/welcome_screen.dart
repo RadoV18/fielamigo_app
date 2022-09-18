@@ -90,7 +90,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 ),
                 TextButton(
                   style: flatButtonStyle,
-                  onPressed: () => Navigator.pushNamed(context, '/sign-up'),
+                  onPressed: () {
+                    _controller.dispose();
+                    Navigator.pushNamed(context, '/sign-up');
+                  },
                   child:
                       Text('Regístrate', style: TextStyle(fontSize: 15.sp)),
                 )

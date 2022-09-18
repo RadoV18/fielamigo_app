@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
-import 'package:meta/meta.dart';
 
 import '../../models/email.dart';
 import '../../models/password.dart';
@@ -13,11 +12,9 @@ class SignUpCubit extends Cubit<SignUpState> {
     email: Email.pure(),
     password: Password.pure(),
     confirmPassword: Password.pure(),
-    isOwner: null,
+    isOwner: false,
+    isCaregiver: false,
     status: FormzStatus.pure,
-    emailErrorMessage: null,
-    passwordErrorMessage: null,
-    passwordConfirmErrorMessage: null
   ));
 
   void setEmail(String email) {
@@ -44,7 +41,17 @@ class SignUpCubit extends Cubit<SignUpState> {
     ));
   }
 
-  void setIsOwner(bool isOwner) => emit(state.copyWith(
-    isOwner: isOwner
-  ));
+  void setOwner() {
+    emit(state.copyWith(
+      isOwner: true,
+      isCaregiver: false
+    ));
+  }
+
+  void setCaregiver() {
+    emit(state.copyWith(
+      isOwner: false,
+      isCaregiver: true
+    ));
+  }
 }

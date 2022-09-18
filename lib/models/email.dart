@@ -13,7 +13,7 @@ class Email extends FormzInput<String, EmailValidationError> {
   
   /// Regular expression for validating email addresses.
   static final RegExp _emailRegExp = RegExp(
-    r'^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$',
+    r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
   );
   
   /// Validate email address using [_emailRegExp].
