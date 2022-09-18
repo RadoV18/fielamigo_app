@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
             case '/sign-up':
               return MaterialPageRoute(builder: (context) => const SignUpScreen());
           }
+          return null;
         }
       ),
     );

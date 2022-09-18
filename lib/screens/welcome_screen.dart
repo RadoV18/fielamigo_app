@@ -1,4 +1,3 @@
-import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:video_player/video_player.dart';
@@ -12,7 +11,6 @@ class WelcomeScreen extends StatefulWidget {
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
   late VideoPlayerController _controller;
-  ChewieController? chewieController;
 
   @override
   void initState() {
@@ -44,12 +42,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       ),
     );
 
-    final TextStyle textStyle = TextStyle(fontSize: 10.sp);
-
     return Scaffold(
       body: Stack(
         children: [
-          Container(
+          SizedBox(
             width: 100.w,
             height: 100.h,
             child: Stack(
@@ -68,39 +64,37 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               ],
             ),
           ),
-          Container(
-            child: Center(
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 15.h,
+          Center(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 15.h,
+                ),
+                Image.asset(
+                  "assets/images/logo.png",
+                  height: 20.h,
+                ),
+                SizedBox(
+                  height: 45.h,
+                ),
+                TextButton(
+                  style: flatButtonStyle,
+                  onPressed: () {},
+                  child: Text(
+                    'Iniciar Sesión',
+                    style: TextStyle(fontSize: 15.sp),
                   ),
-                  Image.asset(
-                    "assets/images/logo.png",
-                    height: 20.h,
-                  ),
-                  SizedBox(
-                    height: 45.h,
-                  ),
-                  TextButton(
-                    style: flatButtonStyle,
-                    onPressed: () {},
-                    child: Text(
-                      'Iniciar Sesión',
-                      style: TextStyle(fontSize: 15.sp),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 2.h,
-                  ),
-                  TextButton(
-                    style: flatButtonStyle,
-                    onPressed: () => Navigator.pushNamed(context, '/sign-up'),
-                    child:
-                        Text('Regístrate', style: TextStyle(fontSize: 15.sp)),
-                  )
-                ],
-              ),
+                ),
+                SizedBox(
+                  height: 2.h,
+                ),
+                TextButton(
+                  style: flatButtonStyle,
+                  onPressed: () => Navigator.pushNamed(context, '/sign-up'),
+                  child:
+                      Text('Regístrate', style: TextStyle(fontSize: 15.sp)),
+                )
+              ],
             ),
           )
         ],
