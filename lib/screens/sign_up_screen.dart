@@ -43,10 +43,11 @@ class SignUpScreen extends StatelessWidget {
                         const _PasswordInput(),
                         const _ConfirmPasswordInput(),
                         const _PasswordStrengthMeter(),
-                        SizedBox(height: 5.h),
+                        SizedBox(height: 2.5.h),
                         const _AccountTypeSelector(),
+                        SizedBox(height: 2.5.h),
                         const _AccountDetails(),
-                        SizedBox(height: 5.h),
+                        SizedBox(height: 2.5.h),
                         const _SignUpButtons(),
                       ],
                     ),
@@ -198,27 +199,81 @@ class _AccountTypeSelector extends StatelessWidget {
             width: 100.w,
             child: const Text('Selecciona el tipo de cuenta:')
           ),
-          Row(children: [
-            ChoiceChip(
-              label: const Text('Dueño'),
-              onSelected: (selected) {
-                bool current = context.read<SignUpCubit>().state.isOwner;
-                if(!current) {
-                  context.read<SignUpCubit>().setOwner();
-                }
-              },
-              selected: context.read<SignUpCubit>().state.isOwner
-            ),
-            ChoiceChip(
-              label: const Text('Cuidador'),
-              onSelected: (selected) {
-                bool current = context.read<SignUpCubit>().state.isCaregiver;
-                if(!current) {
-                  context.read<SignUpCubit>().setCaregiver();                 
-                }
-              },
-              selected: context.read<SignUpCubit>().state.isCaregiver
-            )
+          const SizedBox(height: 10.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  print("tapping owner");
+                  bool current = context.read<SignUpCubit>().state.isOwner;
+                  if(!current) {
+                    context.read<SignUpCubit>().setOwner();
+                  }
+                },
+                child: Ink(
+                  height: 64.0,
+                  width: 64.0,
+                  decoration: BoxDecoration(
+                    border: Border.all(width: 1, color: const Color.fromARGB(255, 139, 139, 139)),
+                    borderRadius: BorderRadius.circular(12),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.black26,
+                        offset: Offset(2, 2),
+                        blurRadius: 5.0
+                      )
+                    ],
+                    color: context.read<SignUpCubit>().state.isOwner
+                      ? Theme.of(context).primaryColor
+                      : Colors.white,
+                  ),
+                  child: Column(
+                      children: const [
+                        Icon(
+                          Icons.person,
+                          size: 40.0
+                        ),
+                        Text('Dueño')
+                      ]
+                    )
+                )
+              ),
+              GestureDetector(
+                onTap: () {
+                  print("tapping caregiver");
+                  bool current = context.read<SignUpCubit>().state.isCaregiver;
+                  if(!current) {
+                    context.read<SignUpCubit>().setCaregiver();
+                  }
+                },
+                child: Ink(
+                  height: 64.0,
+                  width: 64.0,
+                  decoration: BoxDecoration(
+                    border: Border.all(width: 1, color: const Color.fromARGB(255, 139, 139, 139)),
+                    borderRadius: BorderRadius.circular(12),
+                    boxShadow: const [
+                      BoxShadow(
+                          color: Colors.black26,
+                          offset: Offset(2, 2),
+                          blurRadius: 5.0)
+                    ],
+                    color: context.read<SignUpCubit>().state.isCaregiver
+                      ? Theme.of(context).primaryColor
+                      : Colors.white,
+                  ),
+                  child: Column(
+                      children: const [
+                        Icon(
+                          Icons.person,
+                          size: 40.0
+                        ),
+                        Text('Cuidador')
+                      ]
+                    )
+                )
+              )
           ],)
         ]
       );
@@ -236,12 +291,47 @@ class _AccountDetails extends StatelessWidget {
       builder: (context, state) {
         bool owner = context.read<SignUpCubit>().state.isOwner;
         bool caregiver = context.read<SignUpCubit>().state.isCaregiver;
+        String message = '';
+        List<String> features = <String>[];
         if(owner) {
-          return const Text("detalles de dueño");
+          message = 'Como dueño podrás:';
+          features.add('Registrar a tus mascotas.');
+          features.add('Contratar servicios de paseo, alojamiento, cuidado y más!');
         } else if (caregiver) {
-          return const Text("detalles de cuidador");
+          message = 'Como cuidador podrás:';
+          features.add('Ganar dinero cuidando o paseando perros.');
+          features.add('Ofrecer una combinación de servicios para perros.');
+        } else {
+          return Container();
         }
-        return Container();
+        return SizedBox(
+          width: double.infinity,
+          child: Column(
+            children: [
+              SizedBox(
+                width: double.infinity,
+                child: Text(
+                  message,
+                  textAlign: TextAlign.left,
+                  style: TextStyle(fontSize: 15.sp),
+                ),
+              ),
+              ListView.builder(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                itemCount: features.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    leading: const Icon(
+                      Icons.check
+                    ),
+                    title: Text(features[index])
+                  );
+                }
+              )
+            ]
+          ),
+        );
       }
     );
   }  
@@ -255,24 +345,15 @@ class _SignUpButtons extends StatelessWidget {
     return Column(
       children: [
         SizedBox(
-          width: double.infinity, // match to the size of the parent.
+          width: double.infinity,
+          height: 40, // match to the size of the parent.
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(shape: const StadiumBorder()),
             onPressed: () {},
             child: const Text("Crear Cuenta")
           )
         ),
-        const SizedBox(height: 10),
-        SizedBox(
-          height: 40,
-          width: double.infinity,
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(shape: const StadiumBorder()),
-            onPressed: () {},
-            child: const Text("Regístrate con Facebook")
-          ),
-        ),
-        const SizedBox(height: 10),
+        const Divider(),
         SizedBox(
           height: 40,
           width: double.infinity,
@@ -280,6 +361,16 @@ class _SignUpButtons extends StatelessWidget {
             style: ElevatedButton.styleFrom(shape: const StadiumBorder()),
             onPressed: () {},
             child: const Text("Regístrate con Google")
+          ),
+        ),
+        const Divider(),
+        SizedBox(
+          height: 40,
+          width: double.infinity,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(shape: const StadiumBorder()),
+            onPressed: () {},
+            child: const Text("Regístrate con Facebook")
           ),
         ),
         const SizedBox(height: 10),
