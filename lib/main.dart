@@ -1,16 +1,22 @@
 import 'package:fielamigo_app/screens/onboarding_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 import 'screens/sign_up_screen.dart';
 import 'screens/welcome_screen.dart';
 import 'utils/global_theme.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final prefs = await SharedPreferences.getInstance();
+  final bool showHome = prefs.getBool("showHome") ?? false;
+  runApp(MyApp(showHome: showHome));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool showHome;
+
+  const MyApp({Key? key, required this.showHome}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +27,9 @@ class MyApp extends StatelessWidget {
             switch (settings.name) {
               case '/':
                 return MaterialPageRoute(
-                    builder: (context) => const OnboardingScreen());
+                    builder: (context) => showHome
+                        ? const WelcomeScreen()
+                        : const OnboardingScreen());
               case '/welcome':
                 return MaterialPageRoute(
                     builder: (context) => const WelcomeScreen());

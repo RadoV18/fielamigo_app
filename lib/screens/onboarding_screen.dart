@@ -2,9 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:sizer/sizer.dart';
 
-class OnboardingScreen extends StatelessWidget {
+import 'package:shared_preferences/shared_preferences.dart'; // for storing key value data on persistent storage. NOT to be used with critical data
+
+class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
 
+  @override
+  State<OnboardingScreen> createState() => _OnboardingScreenState();
+}
+
+class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     final List<PageViewModel> listPagesViewModel = [
@@ -48,7 +55,10 @@ class OnboardingScreen extends StatelessWidget {
       showSkipButton: true,
       skip: const Text("Skip"),
       done: const Text("Done", style: TextStyle(fontWeight: FontWeight.w600)),
-      onDone: () {
+      onDone: () async {
+        final prefs = await SharedPreferences.getInstance();
+        prefs.setBool("showWelcome", true);
+        if(!mounted)return;
         Navigator.pushNamed(context, '/welcome');
       },
       baseBtnStyle: TextButton.styleFrom(
