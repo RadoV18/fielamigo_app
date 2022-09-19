@@ -6,6 +6,7 @@ class SignUpState extends Equatable {
   final Password confirmPassword;
   final bool isOwner;
   final bool isCaregiver;
+  final String passwordStrength;
   final FormzStatus status;
   
   const SignUpState({
@@ -14,6 +15,7 @@ class SignUpState extends Equatable {
     this.confirmPassword = const Password.pure(),
     this.isOwner = false,
     this.isCaregiver = false,
+    this.passwordStrength = '',
     this.status = FormzStatus.pure
   });
 
@@ -23,6 +25,7 @@ class SignUpState extends Equatable {
     Password? confirmPassword,
     bool? isOwner,
     bool? isCaregiver,
+    String? passwordStrength,
     FormzStatus? status
   }) => SignUpState(
     email: email ?? this.email,
@@ -30,9 +33,11 @@ class SignUpState extends Equatable {
     confirmPassword: confirmPassword ?? this.confirmPassword,
     isOwner: isOwner ?? this.isOwner,
     isCaregiver: isCaregiver ?? this.isCaregiver,
+    passwordStrength: passwordStrength ?? this.passwordStrength,
     status: status ?? this.status
   );
   
   @override
-  List<Object?> get props => [email, password, confirmPassword, isOwner];
+  List<Object?> get props => [email, password, confirmPassword, isOwner,
+  isCaregiver, passwordStrength, status];
 }

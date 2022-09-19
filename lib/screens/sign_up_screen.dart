@@ -22,11 +22,11 @@ class SignUpScreen extends StatelessWidget {
           child: SingleChildScrollView(
             child: Center(
               child: Container(
-                padding: EdgeInsets.fromLTRB(5.w, 10.h, 5.w, MediaQuery.of(context).viewInsets.bottom),
+                padding: EdgeInsets.fromLTRB(5.w, 7.5.h, 5.w, MediaQuery.of(context).viewInsets.bottom),
                 child: Column(
                   children: [
                     SizedBox(
-                      height: 25.h,
+                      height: 20.h,
                       child: Column(
                         children: [
                           SizedBox(
@@ -38,14 +38,16 @@ class SignUpScreen extends StatelessWidget {
                       )
                     ),
                     Column(
-                      children: const [
-                        _EmailInput(),
-                        _PasswordInput(),
-                        _ConfirmPasswordInput(),
-                        _PasswordStrengthMeter(),
-                        _AccountTypeSelector(),
-                        _AccountDetails(),
-                        _SignUpButtons(),
+                      children: [
+                        const _EmailInput(),
+                        const _PasswordInput(),
+                        const _ConfirmPasswordInput(),
+                        const _PasswordStrengthMeter(),
+                        SizedBox(height: 5.h),
+                        const _AccountTypeSelector(),
+                        const _AccountDetails(),
+                        SizedBox(height: 5.h),
+                        const _SignUpButtons(),
                       ],
                     ),
                   ]
@@ -72,11 +74,6 @@ class _EmailInput extends StatelessWidget {
           onChanged: (email) => context.read<SignUpCubit>().setEmail(email),
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
-            enabledBorder: const OutlineInputBorder(
-              borderSide: BorderSide(
-                width: 1
-              )
-            ),
             labelText: 'Correo Electrónico',
             helperText: '',
             errorText: displayError && !context.read<SignUpCubit>().state.email.valid
@@ -105,11 +102,6 @@ class _PasswordInput extends StatelessWidget {
           autocorrect: false,
           enableInteractiveSelection: false,
           decoration: InputDecoration(
-            enabledBorder: const OutlineInputBorder(
-              borderSide: BorderSide(
-                width: 1
-              )
-            ),
             labelText: 'Contraseña',
             helperText: '',
             errorText: displayError && !context.read<SignUpCubit>().state.password.valid
@@ -140,11 +132,6 @@ class _ConfirmPasswordInput extends StatelessWidget {
           autocorrect: false,
           enableInteractiveSelection: false,
           decoration: InputDecoration(
-            enabledBorder: const OutlineInputBorder(
-              borderSide: BorderSide(
-                width: 1
-              )
-            ),
             labelText: 'Confirmar contraseña',
             helperText: '',
             errorText: displayError && !isValid
@@ -163,19 +150,32 @@ class _PasswordStrengthMeter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SignUpCubit, SignUpState>(
-      buildWhen: (previous, current) => previous.password.value != current.password.value,
-      builder: (BuildContext context, state) => Column(
+      buildWhen: (previous, current) {
+        return previous.password.value != current.password.value
+        || previous.passwordStrength != current.passwordStrength;
+      },
+      builder: (BuildContext context, state) {
+        return Column(
         children: [
           SizedBox(
             width: 100.w,
             child: const Text("Nivel de seguridad de la contraseña:", textAlign: TextAlign.left)
           ),
+          const SizedBox(height: 10.0),
           FlutterPasswordStrength(
             password: state.password.value,
-            height: 2.h
+            height: 2.h,
+            radius: 10.0,
+            strengthCallback: (strength) => context.read<SignUpCubit>().setStrength(strength),
+          ),
+          const SizedBox(height: 5.0),
+          SizedBox(
+            width: 100.w,
+            child: Text(context.read<SignUpCubit>().state.passwordStrength, textAlign: TextAlign.left)
           ),
         ],
-      )
+      );
+      }
     );
   }
 }
@@ -257,6 +257,7 @@ class _SignUpButtons extends StatelessWidget {
         SizedBox(
           width: double.infinity, // match to the size of the parent.
           child: ElevatedButton(
+            style: ElevatedButton.styleFrom(shape: const StadiumBorder()),
             onPressed: () {},
             child: const Text("Crear Cuenta")
           )
@@ -266,6 +267,7 @@ class _SignUpButtons extends StatelessWidget {
           height: 40,
           width: double.infinity,
           child: ElevatedButton(
+            style: ElevatedButton.styleFrom(shape: const StadiumBorder()),
             onPressed: () {},
             child: const Text("Regístrate con Facebook")
           ),
@@ -275,6 +277,7 @@ class _SignUpButtons extends StatelessWidget {
           height: 40,
           width: double.infinity,
           child: ElevatedButton(
+            style: ElevatedButton.styleFrom(shape: const StadiumBorder()),
             onPressed: () {},
             child: const Text("Regístrate con Google")
           ),

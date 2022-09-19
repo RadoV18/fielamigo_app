@@ -14,6 +14,7 @@ class SignUpCubit extends Cubit<SignUpState> {
     confirmPassword: Password.pure(),
     isOwner: false,
     isCaregiver: false,
+    passwordStrength: '',
     status: FormzStatus.pure,
   ));
 
@@ -52,6 +53,26 @@ class SignUpCubit extends Cubit<SignUpState> {
     emit(state.copyWith(
       isOwner: false,
       isCaregiver: true
+    ));
+  }
+
+  void setStrength(double strength) {
+    String newStrength = '';
+    if(strength > 0.75) {
+      // green
+      newStrength = 'Fuerte';
+    } else if(strength > 0.5) {
+      // blue
+      newStrength = 'Bueno';
+    } else if(strength > 0.25) {
+      // yellow
+      newStrength = 'Moderado';
+    } else if(strength > 0){
+      // red
+      newStrength = 'Débil';
+    }
+    emit(state.copyWith(
+      passwordStrength: newStrength
     ));
   }
 }

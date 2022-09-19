@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Sizer(
       builder: (context, orientation, deviceType) => MaterialApp(
-          theme: GlobalTheme.globalTheme,
+          // theme: GlobalTheme.globalTheme,
           onGenerateRoute: (RouteSettings settings) {
             switch (settings.name) {
               case '/':
