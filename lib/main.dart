@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 import 'screens/sign_up_screen.dart';
+import 'screens/verification_code_screen.dart';
 import 'screens/welcome_screen.dart';
 import 'utils/global_theme.dart';
 
@@ -36,6 +37,9 @@ class MyApp extends StatelessWidget {
               case '/sign-up':
                 return MaterialPageRoute(
                     builder: (context) => const SignUpScreen());
+              case '/verification-code':
+                return MaterialPageRoute(
+                  builder: (context) => const VerificationCodeScreen());
             }
             return null;
           }),

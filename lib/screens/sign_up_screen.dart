@@ -205,7 +205,6 @@ class _AccountTypeSelector extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () {
-                  print("tapping owner");
                   bool current = context.read<SignUpCubit>().state.isOwner;
                   if(!current) {
                     context.read<SignUpCubit>().setOwner();
@@ -241,7 +240,6 @@ class _AccountTypeSelector extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  print("tapping caregiver");
                   bool current = context.read<SignUpCubit>().state.isCaregiver;
                   if(!current) {
                     context.read<SignUpCubit>().setCaregiver();
@@ -349,7 +347,10 @@ class _SignUpButtons extends StatelessWidget {
           height: 40, // match to the size of the parent.
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(shape: const StadiumBorder()),
-            onPressed: () {},
+            onPressed: () {
+              // TODO send request
+              Navigator.pushNamed(context, "/verification-code");
+            },
             child: const Text("Crear Cuenta")
           )
         ),
