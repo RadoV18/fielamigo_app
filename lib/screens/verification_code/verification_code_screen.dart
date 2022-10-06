@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 
-import '../bloc/sign_up_cubit/sign_up_cubit.dart';
+import '../../bloc/sign_up_cubit/sign_up_cubit.dart';
 class VerificationCodeScreen extends StatelessWidget {
   const VerificationCodeScreen({super.key});
 
