@@ -9,13 +9,8 @@ class VerificationCodeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<SignUpCubit>(
-          create: (BuildContext context) => SignUpCubit()
-        )
-      ],
-      child: Scaffold(
+    return BlocBuilder<SignUpCubit, SignUpState>(
+      builder: (context, state) => Scaffold(
         body: Column(
           children: const [
               _Header(),

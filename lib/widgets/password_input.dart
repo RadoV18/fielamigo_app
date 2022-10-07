@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 
 class PasswordInput extends StatelessWidget {
   
-  final Function(String?) onChange;
+  final Function(String) onChange;
+  final bool displayError;
 
-  const PasswordInput({super.key, required this.onChange});
+  const PasswordInput({
+    super.key,
+    required this.onChange,
+    this.displayError = false
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,10 +19,12 @@ class PasswordInput extends StatelessWidget {
       enableSuggestions: false,
       autocorrect: false,
       enableInteractiveSelection: false,
-      decoration: const InputDecoration(
+      decoration: InputDecoration(
         labelText: 'Contraseña',
         helperText: '',
-        errorText: '',
+        errorText: displayError
+          ? 'La contraseña debe contener al menos 12 caracteres.'
+          : null,
       )
     );
   }

@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 
 class ConfirmPasswordInput extends StatelessWidget {
 
-  final Function(String?) onChange;
+  final Function(String) onChange;
+  final bool displayError;
 
   const ConfirmPasswordInput({
     super.key,
-    required this.onChange
+    required this.onChange,
+    this.displayError = false
   });
 
   @override
@@ -17,10 +19,12 @@ class ConfirmPasswordInput extends StatelessWidget {
       enableSuggestions: false,
       autocorrect: false,
       enableInteractiveSelection: false,
-      decoration: const InputDecoration(
+      decoration: InputDecoration(
         labelText: 'Confirmar contraseña',
         helperText: '',
-        errorText: ''
+        errorText: displayError
+          ? 'Las contraseñas no coinciden.'
+          : null
       )
     );
   }

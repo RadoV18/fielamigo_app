@@ -5,7 +5,7 @@ import 'package:sizer/sizer.dart';
 class PasswordStrengthMeter extends StatelessWidget {
   
   final String password;
-  final Function(double?) callbackStrength;
+  final Function(double) callbackStrength;
   final String passwordStrength;
   
   const PasswordStrengthMeter({
