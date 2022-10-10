@@ -10,15 +10,24 @@ class VerificationCodeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-            SizedBox(height: 10.h),
-            const Header(),
-            SizedBox(height: 10.h),
-            const VerificationCodeInput(),
-            // _ConfirmButton()
-          ]
-        )
+      body: BlocConsumer<VerificationCodeCubit, VerificationCodeState>(
+        listener: (context, state) {
+          if(state.isValid) {
+            Navigator.pushNamed(context, '/user-form');
+          } else {
+            // TODO: show dialog
+          }
+        },
+        builder: (context, state) => Column(
+          children: [
+              SizedBox(height: 10.h),
+              const Header(),
+              SizedBox(height: 10.h),
+              const VerificationCodeInput(),
+              // _ConfirmButton()
+            ]
+          ),
+      )
     );
   }
 }

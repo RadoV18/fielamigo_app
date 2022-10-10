@@ -10,21 +10,18 @@ class VerificationCodeInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<VerificationCodeCubit, VerificationCodeState>(
-        builder:((context, state) => Form(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.w),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                numberInput(context, true, false),
-                numberInput(context, false, false),
-                numberInput(context, false, false),
-                numberInput(context, false, true)
-              ]
-            ),
-          )
-        )
+    return Form(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 10.w),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            numberInput(context, true, false),
+            numberInput(context, false, false),
+            numberInput(context, false, false),
+            numberInput(context, false, true)
+          ]
+        ),
       )
     );
   }
