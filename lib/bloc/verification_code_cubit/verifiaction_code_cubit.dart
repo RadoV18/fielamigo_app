@@ -22,6 +22,6 @@ class VerificationCodeCubit extends Cubit<VerificationCodeState> {
 
   void validate() {
     // TODO: HTTP request to validate
-    print(state.verificationCode);
+    // print(state.verificationCode);
   }
 }

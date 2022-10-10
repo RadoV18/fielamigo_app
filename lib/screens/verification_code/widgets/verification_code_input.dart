@@ -59,6 +59,7 @@ Widget numberInput(BuildContext context, bool isFirst, bool isLast) {
         LengthLimitingTextInputFormatter(1),
         FilteringTextInputFormatter.digitsOnly
       ],
+      style: TextStyle(fontSize: 20.sp)
     )
   );
 }

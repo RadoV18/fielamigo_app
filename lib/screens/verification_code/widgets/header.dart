@@ -11,15 +11,25 @@ class Header extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<SignUpCubit, SignUpState>(
       builder: (context, state) => SizedBox(
-        height: 20.h,
+        height: 25.h,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             SizedBox(
-              height: 15.h,
+              height: 10.h,
               child: Image.asset('assets/images/logo.png')
             ),
-            const Text("Antes de comenzar..."),
-            Text("Ingresa el código que enviamos a ${context.read<SignUpCubit>().state.email.value}")
+            Text(
+              "Antes de comenzar...",
+              style: TextStyle(fontSize: 18.sp)
+            ),
+            Text(
+              "Ingresa el código que enviamos a ${context.read<SignUpCubit>().state.email.value}",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 13.sp
+              )
+            )
           ]
         )
       ),
