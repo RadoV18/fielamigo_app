@@ -2,8 +2,10 @@ import 'package:fielamigo_app/bloc/sign_up_cubit/sign_up_cubit.dart';
 import 'package:fielamigo_app/screens/onboarding/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
+import 'bloc/verification_code_cubit/verifiaction_code_cubit.dart';
 import 'screens/sign_up/sign_up_screen.dart';
 import 'screens/verification_code/verification_code_screen.dart';
 import 'screens/welcome/welcome_screen.dart';
@@ -27,7 +29,10 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider<SignUpCubit>(
           create: (BuildContext context) => SignUpCubit()
-        )
+        ),
+        BlocProvider<VerificationCodeCubit>(
+          create: (BuildContext context) => VerificationCodeCubit()
+        ),
       ],
       child: Sizer(
         builder: (context, orientation, deviceType) => MaterialApp(
@@ -40,7 +45,18 @@ class MyApp extends StatelessWidget {
             '/welcome': (context) => const WelcomeScreen(),
             '/sign-up': (context) => const SignUpScreen(),
             '/verification-code': (context) => const VerificationCodeScreen(),
-          }
+          },
+          builder: (context, child) => ResponsiveWrapper.builder(
+            child,
+            maxWidth: 1200,
+            minWidth: 480,
+            defaultScale: true,
+            breakpoints: [
+            const ResponsiveBreakpoint.resize(480, name: MOBILE),
+            const ResponsiveBreakpoint.autoScale(800, name: TABLET),
+            const ResponsiveBreakpoint.resize(1000, name: DESKTOP),
+          ],
+          )
         )
       ),
     );
