@@ -1,11 +1,32 @@
+import 'package:fielamigo_app/bloc/user_data_cubit/user_data_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sizer/sizer.dart';
 
-
-import 'package:sizer/sizer.dart';class UserDataForm extends StatelessWidget {
+class UserDataForm extends StatefulWidget {
   const UserDataForm({super.key});
 
   @override
+  State<UserDataForm> createState() => _UserDataFormState();
+}
+
+class _UserDataFormState extends State<UserDataForm> {
+  TextEditingController dateController = TextEditingController();
+
+  @override
   Widget build(BuildContext context) {
+    // on date change update the state
+    context.read<UserDataCubit>().setBirthDate(dateController.text);
+
+    // change the date format to dd/mm/yyyy
+    if(dateController.text != '') {
+      int year = int.parse(dateController.text.substring(0, 4));
+      int month = int.parse(dateController.text.substring(5, 7));
+      int day = int.parse(dateController.text.substring(8, 10));
+      String dateValue = '$day/$month/$year';
+      dateController.text = dateValue;
+    }   
+
     return SizedBox(
       height: 40.h,
       child: Column(
@@ -23,8 +44,7 @@ import 'package:sizer/sizer.dart';class UserDataForm extends StatelessWidget {
           ),
           TextFormField(
             onChanged: (value) {
-              // TODO: set name on bloc
-              print(value);
+              context.read<UserDataCubit>().setFirstName(value);
             },
             decoration: const InputDecoration(
               labelText: "Nombre"
@@ -32,8 +52,7 @@ import 'package:sizer/sizer.dart';class UserDataForm extends StatelessWidget {
           ),
           TextFormField(
             onChanged: (value) {
-              // TODO: set last name on bloc
-              print(value);
+              context.read<UserDataCubit>().setLastName(value);
             },
             decoration: const InputDecoration(
               labelText: "Apellido"
@@ -41,8 +60,7 @@ import 'package:sizer/sizer.dart';class UserDataForm extends StatelessWidget {
           ),
           TextFormField(
             onChanged: (value) {
-              // TODO: set phone number on bloc
-              print(value);
+              context.read<UserDataCubit>().setPhoneNumber(value);
             },
             decoration: const InputDecoration(
               labelText: "Teléfono"
@@ -54,7 +72,7 @@ import 'package:sizer/sizer.dart';class UserDataForm extends StatelessWidget {
               SizedBox(width: 5.w),
               Expanded (
                 child: TextFormField(
-                  initialValue: null,
+                  controller: dateController,
                   decoration: const InputDecoration(
                     icon: Icon(Icons.calendar_today),
                     hintText: "dd / mm / aaaa"
@@ -67,10 +85,12 @@ import 'package:sizer/sizer.dart';class UserDataForm extends StatelessWidget {
                       firstDate: DateTime(1900),
                       lastDate: DateTime.now()
                     );
-                      
+                    
                     if (pickedDate != null) {
-                      // TODO: set date on cubit
-                      print(pickedDate);
+                      setState(() {
+                        // rebuild the widget to update the date on bloc
+                        dateController.text = pickedDate.toIso8601String();  
+                      });
                     }
                   }
                 ),

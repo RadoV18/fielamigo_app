@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
+import 'bloc/user_data_cubit/user_data_cubit.dart';
 import 'bloc/verification_code_cubit/verifiaction_code_cubit.dart';
 import 'screens/sign_up/sign_up_screen.dart';
 import 'screens/verification_code/verification_code_screen.dart';
@@ -34,6 +35,9 @@ class MyApp extends StatelessWidget {
         BlocProvider<VerificationCodeCubit>(
           create: (BuildContext context) => VerificationCodeCubit()
         ),
+        BlocProvider<UserDataCubit>(
+          create: (BuildContext context) => UserDataCubit()
+        )
       ],
       child: Sizer(
         builder: (context, orientation, deviceType) => MaterialApp(
