@@ -4,10 +4,9 @@ import 'package:http/http.dart' as http;
 import '../models/user_dto.dart';
 
 class UserProvider {
-  final String _url = 'http://localhost:8080/api/v1/users';
+  final String _url = 'http://10.0.2.2:8080/api/v1/users';
   
   Future<UserDto> createUser(UserDto user) async {
-    print("creating user!");
     final response = await http.post(
       Uri.parse(_url),
       headers: <String, String> {
