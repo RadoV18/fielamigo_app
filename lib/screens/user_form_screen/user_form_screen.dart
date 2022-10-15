@@ -5,8 +5,14 @@ import 'package:sizer/sizer.dart';
 
 import '../../bloc/user_data_cubit/user_data_cubit.dart';
 import 'widgets/address_form.dart';
-import 'widgets/header.dart';
-import 'widgets/user_data_form.dart';
+import '../sign_up/widgets/header.dart';
+import '../sign_up/widgets/user_data_form.dart';
+
+/*
+
+  deprecated
+
+*/
 
 class UserFormScreen extends StatelessWidget {
   const UserFormScreen({super.key});

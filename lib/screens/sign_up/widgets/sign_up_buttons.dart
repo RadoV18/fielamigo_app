@@ -1,4 +1,6 @@
+import 'package:fielamigo_app/bloc/sign_up_cubit/sign_up_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignUpButtons extends StatelessWidget {
   const SignUpButtons({ super.key });
@@ -14,6 +16,7 @@ class SignUpButtons extends StatelessWidget {
             style: ElevatedButton.styleFrom(shape: const StadiumBorder()),
             onPressed: () {
               // TODO send request
+              context.read<SignUpCubit>().submit();
               Navigator.pushNamed(context, "/verification-code");
             },
             child: const Text("Crear Cuenta")

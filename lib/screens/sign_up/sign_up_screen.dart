@@ -1,4 +1,6 @@
 import 'package:fielamigo_app/screens/sign_up/widgets/sign_up_buttons.dart';
+import 'package:fielamigo_app/screens/sign_up/widgets/user_data_form.dart';
+import 'package:fielamigo_app/screens/verification_code/widgets/header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
@@ -44,6 +46,7 @@ class SignUpScreen extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
+                      // const Header(),
                       SizedBox(
                         height: 20.h,
                         child: Column(
@@ -56,37 +59,34 @@ class SignUpScreen extends StatelessWidget {
                           ]
                         )
                       ),
-                      Column(
-                        children: [
-                          EmailInput(
-                            onChange: (String email) =>
-                              context.read<SignUpCubit>().setEmail(email),
-                            displayError: displayEmailError,
-                          ),
-                          PasswordInput(
-                            onChange: (String password) =>
-                              context.read<SignUpCubit>().setPassword(password),
-                            displayError: displayPasswordError,
-                          ),
-                          ConfirmPasswordInput(
-                            onChange: (String password) =>
-                              context.read<SignUpCubit>().setConfirmPassword(password),
-                            displayError: displayConfirmError,
-                          ),
-                          PasswordStrengthMeter(
-                            callbackStrength: (double str) =>
-                              context.read<SignUpCubit>().setStrength(str),
-                            password: state.password.value,
-                            passwordStrength: context.read<SignUpCubit>().state.passwordStrength,
-                          ),
-                          SizedBox(height: 2.5.h),
-                          const AccountTypeSelector(),
-                          SizedBox(height: 2.5.h),
-                          const AccountDetails(),
-                          SizedBox(height: 2.5.h),
-                          const SignUpButtons(),
-                        ],
+                      const UserDataForm(),
+                      EmailInput(
+                        onChange: (String email) =>
+                          context.read<SignUpCubit>().setEmail(email),
+                        displayError: displayEmailError,
                       ),
+                      PasswordInput(
+                        onChange: (String password) =>
+                          context.read<SignUpCubit>().setPassword(password),
+                        displayError: displayPasswordError,
+                      ),
+                      ConfirmPasswordInput(
+                        onChange: (String password) =>
+                          context.read<SignUpCubit>().setConfirmPassword(password),
+                        displayError: displayConfirmError,
+                      ),
+                      PasswordStrengthMeter(
+                        callbackStrength: (double str) =>
+                          context.read<SignUpCubit>().setStrength(str),
+                        password: state.password.value,
+                        passwordStrength: context.read<SignUpCubit>().state.passwordStrength,
+                      ),
+                      SizedBox(height: 2.5.h),
+                      const AccountTypeSelector(),
+                      SizedBox(height: 2.5.h),
+                      const AccountDetails(),
+                      SizedBox(height: 2.5.h),
+                      const SignUpButtons(),
                     ]
                   ),
                 ),

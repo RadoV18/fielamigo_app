@@ -1,4 +1,4 @@
-import 'package:fielamigo_app/bloc/user_data_cubit/user_data_cubit.dart';
+import 'package:fielamigo_app/bloc/sign_up_cubit/sign_up_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
@@ -16,7 +16,7 @@ class _UserDataFormState extends State<UserDataForm> {
   @override
   Widget build(BuildContext context) {
     // on date change update the state
-    context.read<UserDataCubit>().setBirthDate(dateController.text);
+    context.read<SignUpCubit>().setBirthDate(dateController.text);
 
     // change the date format to dd/mm/yyyy
     if(dateController.text != '') {
@@ -44,7 +44,7 @@ class _UserDataFormState extends State<UserDataForm> {
           ),
           TextFormField(
             onChanged: (value) {
-              context.read<UserDataCubit>().setFirstName(value);
+              context.read<SignUpCubit>().setFirstName(value);
             },
             decoration: const InputDecoration(
               labelText: "Nombre"
@@ -52,7 +52,7 @@ class _UserDataFormState extends State<UserDataForm> {
           ),
           TextFormField(
             onChanged: (value) {
-              context.read<UserDataCubit>().setLastName(value);
+              context.read<SignUpCubit>().setLastName(value);
             },
             decoration: const InputDecoration(
               labelText: "Apellido"
@@ -60,7 +60,7 @@ class _UserDataFormState extends State<UserDataForm> {
           ),
           TextFormField(
             onChanged: (value) {
-              context.read<UserDataCubit>().setPhoneNumber(value);
+              context.read<SignUpCubit>().setPhoneNumber(value);
             },
             decoration: const InputDecoration(
               labelText: "Teléfono"
