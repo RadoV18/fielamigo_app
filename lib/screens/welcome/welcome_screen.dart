@@ -79,7 +79,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 ),
                 TextButton(
                   style: flatButtonStyle,
-                  onPressed: () {},
+                  onPressed: () {
+                    _controller.dispose();
+                    Navigator.pushNamed(context, '/log-in');
+                  },
                   child: Text(
                     'Iniciar Sesión',
                     style: TextStyle(fontSize: 15.sp),

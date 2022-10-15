@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
+import 'bloc/log_in_cubit/log_in_cubit.dart';
 import 'bloc/user_data_cubit/user_data_cubit.dart';
 import 'bloc/verification_code_cubit/verifiaction_code_cubit.dart';
 import 'screens/sign_up/sign_up_screen.dart';
@@ -38,6 +39,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<UserDataCubit>(
           create: (BuildContext context) => UserDataCubit()
+        ),
+        BlocProvider<LogInCubit>(
+          create: (BuildContext context) => LogInCubit()
         )
       ],
       child: Sizer(

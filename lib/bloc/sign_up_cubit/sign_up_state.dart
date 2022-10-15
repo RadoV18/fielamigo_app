@@ -1,10 +1,6 @@
 part of 'sign_up_cubit.dart';
 
 class SignUpState extends Equatable {
-  final String firstName;
-  final String lastName;
-  final String phoneNumber;
-  final String birthDate;
   final Email email;
   final Password password;
   final Password confirmPassword;
@@ -14,10 +10,6 @@ class SignUpState extends Equatable {
   final FormzStatus status;
   
   const SignUpState({
-    this.firstName = '',
-    this.lastName = '',
-    this.phoneNumber = '',
-    this.birthDate = 'dd/mm/aaaa',
     this.email = const Email.pure(),
     this.password = const Password.pure(),
     this.confirmPassword = const Password.pure(),
@@ -28,10 +20,6 @@ class SignUpState extends Equatable {
   });
 
   SignUpState copyWith({
-    String? firstName,
-    String? lastName,
-    String? phoneNumber,
-    String? birthDate,
     Email? email,
     Password? password,
     Password? confirmPassword,
@@ -40,10 +28,6 @@ class SignUpState extends Equatable {
     String? passwordStrength,
     FormzStatus? status
   }) => SignUpState(
-    firstName: firstName ?? this.firstName,
-    lastName: lastName ?? this.lastName,
-    phoneNumber: phoneNumber ?? this.phoneNumber,
-    birthDate: birthDate ?? this.birthDate,
     email: email ?? this.email,
     password: password ?? this.password,
     confirmPassword: confirmPassword ?? this.confirmPassword,
@@ -55,10 +39,6 @@ class SignUpState extends Equatable {
   
   @override
   List<Object?> get props => [
-    firstName,
-    lastName,
-    phoneNumber,
-    birthDate,
     email,
     password,
     confirmPassword,

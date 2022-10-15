@@ -1,24 +1,27 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+import '../models/auth_dto.dart';
+import '../models/log_in_dto.dart';
+
 class AuthProvider {
   final String _url = 'http://10.0.2.2:8080/api/v1/auth';
 
-  // Future<AuthDto> login(LoginDto loginDto) async {
-  //   final response = await http.post(
-  //     Uri.parse(_url),
-  //     headers: <String, String>{
-  //       'Content-Type': 'application/json; charset=UTF-8',
-  //     },
-  //     body: jsonEncode(loginDto.toJson()),
-  //   );
+  Future<AuthDto> login(LogInDto loginDto) async {
+    final response = await http.post(
+      Uri.parse(_url),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(loginDto.toJson()),
+    );
 
-  //   if (response.statusCode == 200) {
-  //     return AuthDto.fromJson(jsonDecode(response.body));
-  //   } else {
-  //     throw Exception('Failed to login');
-  //   }
-  // }
+    if (response.statusCode == 200) {
+      return AuthDto.fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception('Failed to login');
+    }
+  }
 
   Future<bool> sendVerificationCode(int code) async {
     final response = await http.post(
