@@ -4,10 +4,14 @@ import 'package:formz/formz.dart';
 
 import '../../data/models/email.dart';
 import '../../data/models/password.dart';
+import '../../data/models/user_dto.dart';
+import '../../data/repository/sign_up_repository.dart';
 
 part 'sign_up_state.dart';
 
 class SignUpCubit extends Cubit<SignUpState> {
+  final SignUpRepository _signUpRepository = SignUpRepository();
+
   SignUpCubit() : super(const SignUpState(
     email: Email.pure(),
     password: Password.pure(),
@@ -74,5 +78,34 @@ class SignUpCubit extends Cubit<SignUpState> {
     emit(state.copyWith(
       passwordStrength: newStrength
     ));
+  }
+
+  void setFirstName(String firstName) {
+    emit(state.copyWith(firstName: firstName));
+  }
+
+  void setLastName(String lastName) {
+    emit(state.copyWith(lastName: lastName));
+  }
+
+  void setPhoneNumber(String phoneNumber) {
+    emit(state.copyWith(phoneNumber: phoneNumber));
+  }
+
+  void setBirthDate(String birthDate) {
+    emit(state.copyWith(birthDate: birthDate));
+  }
+
+  void submit() {
+    UserDto user = UserDto(
+      email: state.email.value,
+      password: state.password.value,
+      firstName: state.firstName,
+      lastName: state.lastName,
+      phoneNumber: state.phoneNumber,
+      birthDate: state.birthDate,
+      isOwner: state.isOwner,
+    );
+    _signUpRepository.signUp(user);
   }
 }
