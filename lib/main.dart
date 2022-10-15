@@ -16,7 +16,7 @@ import 'utils/global_theme.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
-  final bool showHome = prefs.getBool("showHome") ?? false;
+  final bool showHome = prefs.getBool("showWelcome") ?? false;
   runApp(MyApp(showHome: showHome));
 }
 
