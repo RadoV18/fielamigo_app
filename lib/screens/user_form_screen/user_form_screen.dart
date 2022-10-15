@@ -31,7 +31,7 @@ class UserFormScreen extends StatelessWidget {
                 SizedBox(height: 5.h),
                 const Header(),
                 SizedBox(height: 5.h),
-                const UserDataForm(),
+                // const UserDataForm(),
                 SizedBox(height: 5.h),
                 const AddressForm(),
                 SizedBox(height: 5.h),

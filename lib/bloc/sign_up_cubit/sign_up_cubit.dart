@@ -80,32 +80,13 @@ class SignUpCubit extends Cubit<SignUpState> {
     ));
   }
 
-  void setFirstName(String firstName) {
-    emit(state.copyWith(firstName: firstName));
-  }
-
-  void setLastName(String lastName) {
-    emit(state.copyWith(lastName: lastName));
-  }
-
-  void setPhoneNumber(String phoneNumber) {
-    emit(state.copyWith(phoneNumber: phoneNumber));
-  }
-
-  void setBirthDate(String birthDate) {
-    emit(state.copyWith(birthDate: birthDate));
-  }
-
   void submit() {
     UserDto user = UserDto(
       email: state.email.value,
       password: state.password.value,
-      firstName: state.firstName,
-      lastName: state.lastName,
-      phoneNumber: state.phoneNumber,
-      birthDate: state.birthDate,
       isOwner: state.isOwner,
     );
-    _signUpRepository.signUp(user);
+    // TODO: uncomment when backend is ready
+    // _signUpRepository.signUp(user);
   }
 }

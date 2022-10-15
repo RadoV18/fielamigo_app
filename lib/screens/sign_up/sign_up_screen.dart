@@ -1,6 +1,4 @@
 import 'package:fielamigo_app/screens/sign_up/widgets/sign_up_buttons.dart';
-import 'package:fielamigo_app/screens/sign_up/widgets/user_data_form.dart';
-import 'package:fielamigo_app/screens/verification_code/widgets/header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
@@ -46,7 +44,6 @@ class SignUpScreen extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
-                      // const Header(),
                       SizedBox(
                         height: 20.h,
                         child: Column(
@@ -59,7 +56,6 @@ class SignUpScreen extends StatelessWidget {
                           ]
                         )
                       ),
-                      const UserDataForm(),
                       EmailInput(
                         onChange: (String email) =>
                           context.read<SignUpCubit>().setEmail(email),

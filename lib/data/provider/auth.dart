@@ -1,5 +1,8 @@
-// class AuthProvider {
-//   final String _url = 'http://localhost:8080/api/v1/auth';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
+class AuthProvider {
+  final String _url = 'http://10.0.2.2:8080/api/v1/auth';
 
   // Future<AuthDto> login(LoginDto loginDto) async {
   //   final response = await http.post(
@@ -16,4 +19,20 @@
   //     throw Exception('Failed to login');
   //   }
   // }
-// }
+
+  Future<bool> sendVerificationCode(int code) async {
+    final response = await http.post(
+      Uri.parse('$_url/email-verification-code'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode({"code": code})
+    );
+
+    if(response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+}

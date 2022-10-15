@@ -1,4 +1,5 @@
 import 'package:fielamigo_app/bloc/sign_up_cubit/sign_up_cubit.dart';
+import 'package:fielamigo_app/screens/login/login_screen.dart';
 import 'package:fielamigo_app/screens/onboarding/onboarding_screen.dart';
 import 'package:fielamigo_app/screens/user_form_screen/user_form_screen.dart';
 import 'package:flutter/material.dart';
@@ -49,20 +50,10 @@ class MyApp extends StatelessWidget {
                         : const OnboardingScreen(),
             '/welcome': (context) => const WelcomeScreen(),
             '/sign-up': (context) => const SignUpScreen(),
+            '/log-in': (context) => const LoginScreen(),
             '/verification-code': (context) => const VerificationCodeScreen(),
             '/user-form': (context) => const UserFormScreen()
-          },
-          builder: (context, child) => ResponsiveWrapper.builder(
-            child,
-            maxWidth: 1200,
-            minWidth: 480,
-            defaultScale: true,
-            breakpoints: [
-              const ResponsiveBreakpoint.resize(480, name: MOBILE),
-              const ResponsiveBreakpoint.autoScale(800, name: TABLET),
-              const ResponsiveBreakpoint.resize(1000, name: DESKTOP),
-            ],
-          )
+          }
         )
       ),
     );

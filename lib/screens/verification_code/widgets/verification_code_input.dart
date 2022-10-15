@@ -37,7 +37,7 @@ Widget numberInput(BuildContext context, bool isFirst, bool isLast) {
           context.read<VerificationCodeCubit>().addNumber(int.parse(value));
           if(isLast) {
             FocusScope.of(context).unfocus();
-            context.read<VerificationCodeCubit>().validate();
+            context.read<VerificationCodeCubit>().submit();
           } else {
             FocusScope.of(context).nextFocus();
           }
