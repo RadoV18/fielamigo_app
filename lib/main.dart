@@ -1,10 +1,13 @@
 import 'package:fielamigo_app/bloc/sign_up_cubit/sign_up_cubit.dart';
 import 'package:fielamigo_app/screens/login/login_screen.dart';
 import 'package:fielamigo_app/screens/onboarding/onboarding_screen.dart';
+import 'package:fielamigo_app/screens/owner_bookings/owner_bookings_screen.dart';
+import 'package:fielamigo_app/screens/owner_home/owner_home_screen.dart';
+import 'package:fielamigo_app/screens/owner_pets/owner_pets_screen.dart';
+import 'package:fielamigo_app/screens/owner_profile/owner_profile_screen.dart';
 import 'package:fielamigo_app/screens/user_form_screen/user_form_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 import 'bloc/log_in_cubit/log_in_cubit.dart';
@@ -56,6 +59,10 @@ class MyApp extends StatelessWidget {
             '/sign-up': (context) => const SignUpScreen(),
             '/log-in': (context) => const LoginScreen(),
             '/verification-code': (context) => const VerificationCodeScreen(),
+            '/owner/home': (context) => const OwnerHomeScreen(),
+            '/owner/bookings': (context) => const OwnerBookingsScreen(),
+            '/owner/pets': (context) => const OwnerPetsScreen(),
+            '/owner/profile': (context) => const OwnerProfileScreen(),
             '/user-form': (context) => const UserFormScreen()
           }
         )

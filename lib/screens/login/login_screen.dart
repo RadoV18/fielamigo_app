@@ -50,7 +50,11 @@ class LoginScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 5.h),
                     ElevatedButton(
-                      onPressed: () => context.read<LogInCubit>().submit(),
+                      onPressed: () {
+                        context.read<LogInCubit>().submit();
+                        // TODO: check if user is logged in
+                        Navigator.pushNamed(context, "/owner/home");
+                      },
                       child: const Text("Iniciar sesión")
                     ),
                     SizedBox(height: 2.5.h),

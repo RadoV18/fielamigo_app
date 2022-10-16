@@ -22,6 +22,6 @@ const ColorScheme _customColorScheme = ColorScheme(
 
 class GlobalTheme {
   static final globalTheme = ThemeData(
-    // colorScheme: _customColorScheme,
+    colorScheme: _customColorScheme,
   );
 }
