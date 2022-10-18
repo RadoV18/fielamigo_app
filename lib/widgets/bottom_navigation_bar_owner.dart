@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'bottom_nav_curve_painter.dart';
+import 'bottom_nav_shadow_painter.dart';
 import 'nav_bar_icon.dart';
 
 class BottomNavigationBarOwner extends StatelessWidget {
@@ -26,24 +26,16 @@ class BottomNavigationBarOwner extends StatelessWidget {
 
     return BottomAppBar(
       color: Colors.transparent,
-      elevation: 0,
       child: Stack(
         children: [
           CustomPaint(
             size: Size(size.width, height),
-            painter: BottomNavCurvePainter(),
+            painter: BottomNavShadowPainter(),
           ),
-          Center(
-            heightFactor: 0.6,
-            child: FloatingActionButton(
-              elevation: 0.1,
-              onPressed: () {
-                Navigator.pushNamed(context, "/owner/home");
-              },
-              child: const Icon(Icons.home_rounded)
+          Container(
+            decoration: const BoxDecoration(
+              color: Colors.white
             ),
-          ),
-          SizedBox(
             height: height,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -69,7 +61,14 @@ class BottomNavigationBarOwner extends StatelessWidget {
                   // defaultColor: secondaryColor,
                   // selectedColor: primaryColor,
                 ),
-                const SizedBox(width: 56),
+                NavBarIcon(
+                  text: "Inicio",
+                  icon: Icons.home_rounded,
+                  selected: isHomeSelected,
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/owner/home");
+                  },
+                ),
                 NavBarIcon(
                   text: "Mascotas",
                   icon: Icons.pets_rounded,

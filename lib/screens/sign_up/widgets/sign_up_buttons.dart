@@ -22,6 +22,7 @@ class SignUpButtons extends StatelessWidget {
             child: const Text("Crear Cuenta")
           )
         ),
+        const Divider(height: 20),
         SizedBox(
           height: 40,
           width: double.infinity,
@@ -31,6 +32,7 @@ class SignUpButtons extends StatelessWidget {
             child: const Text("Regístrate con Google")
           ),
         ),
+        const SizedBox(height: 20),
         SizedBox(
           height: 40,
           width: double.infinity,
@@ -40,7 +42,7 @@ class SignUpButtons extends StatelessWidget {
             child: const Text("Regístrate con Facebook")
           ),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 30),
       ]
     );
   }

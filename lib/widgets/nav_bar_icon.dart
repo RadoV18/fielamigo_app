@@ -6,7 +6,7 @@ class NavBarIcon extends StatelessWidget {
   final bool selected;
   final Function() onPressed;
   final Color defaultColor;
-  final Color selectedColor;
+  static Color? selectedColor;
   
   const NavBarIcon({
     Key? key,
@@ -14,13 +14,13 @@ class NavBarIcon extends StatelessWidget {
     required this.icon,
     required this.selected,
     required this.onPressed,
-    this.selectedColor = Colors.blue,
     this.defaultColor = Colors.black54
   }) : super(key: key);
   
 
   @override
   Widget build(BuildContext context) {
+    selectedColor = const Color(0xff21c391);
     return ElevatedButton(
       onPressed: onPressed,
       style: ButtonStyle(

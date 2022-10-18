@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
       ],
       child: Sizer(
         builder: (context, orientation, deviceType) => MaterialApp(
-          // theme: GlobalTheme.globalTheme,
+          theme: GlobalTheme.globalTheme,
           initialRoute: '/',
           routes: {
             '/': (context) => showHome
