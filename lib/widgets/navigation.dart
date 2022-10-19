@@ -9,7 +9,7 @@ import '../bloc/bottom_navbar_cubit/bottom_navbar_state.dart';
 class Navigation extends StatelessWidget {
   int startingIndex;
   List<TabItem> tabItems;
-  List screens;
+  List<Widget> screens;
 
   Navigation({super.key, this.startingIndex = 0, required this.tabItems, required this.screens});
 

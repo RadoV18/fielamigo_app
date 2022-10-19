@@ -65,7 +65,7 @@ class MyApp extends StatelessWidget {
             '/sign-up': (context) => const SignUpScreen(),
             '/log-in': (context) => const LoginScreen(),
             '/verification-code': (context) => const VerificationCodeScreen(),
-            '/owner/home': (context) => const OwnerHomeScreen(),
+            '/owner/home': (context) => OwnerHomeScreen(),
             '/owner/bookings': (context) => const OwnerBookingsScreen(),
             '/owner/pets': (context) => const OwnerPetsScreen(),
             '/owner/profile': (context) => const OwnerProfileScreen(),

@@ -13,7 +13,7 @@ class CaregiverHomeScreen extends StatelessWidget {
     TabItem(Icons.person, "Perfil", Colors.green),
   ]);
 
-  List screens = [
+  List<Widget> screens = [
     const CareTest(
       st: 'Uno',
     ),
