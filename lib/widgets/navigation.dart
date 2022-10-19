@@ -6,12 +6,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/bottom_navbar_cubit/bottom_navbar_cubit.dart';
 import '../bloc/bottom_navbar_cubit/bottom_navbar_state.dart';
 
-class Template extends StatelessWidget {
+class Navigation extends StatelessWidget {
   int startingIndex;
   List<TabItem> tabItems;
   List screens;
 
-  Template({super.key, this.startingIndex = 0, required this.tabItems, required this.screens});
+  Navigation({super.key, this.startingIndex = 0, required this.tabItems, required this.screens});
 
   final CircularBottomNavigationController _navigationController =
       CircularBottomNavigationController(2);
