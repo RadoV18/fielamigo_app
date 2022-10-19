@@ -33,6 +33,6 @@ class CaregiverHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Template(startingIndex: 2,tabItems: tabItems, screens: screens);
+    return Navigation(startingIndex: 2,tabItems: tabItems, screens: screens);
   }
 }
