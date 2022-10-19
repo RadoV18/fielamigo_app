@@ -1,4 +1,6 @@
+import 'package:fielamigo_app/bloc/bottom_navbar_cubit/bottom_navbar_cubit.dart';
 import 'package:fielamigo_app/bloc/sign_up_cubit/sign_up_cubit.dart';
+import 'package:fielamigo_app/screens/caregiver_home/caregiver_home_screen.dart';
 import 'package:fielamigo_app/screens/login/login_screen.dart';
 import 'package:fielamigo_app/screens/onboarding/onboarding_screen.dart';
 import 'package:fielamigo_app/screens/owner_bookings/owner_bookings_screen.dart';
@@ -45,6 +47,10 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<LogInCubit>(
           create: (BuildContext context) => LogInCubit()
+        ),
+
+        BlocProvider<BottomNavBarCubit>(
+          create: (BuildContext context) => BottomNavBarCubit()
         )
       ],
       child: Sizer(
@@ -63,7 +69,9 @@ class MyApp extends StatelessWidget {
             '/owner/bookings': (context) => const OwnerBookingsScreen(),
             '/owner/pets': (context) => const OwnerPetsScreen(),
             '/owner/profile': (context) => const OwnerProfileScreen(),
-            '/user-form': (context) => const UserFormScreen()
+            '/user-form': (context) => const UserFormScreen(),
+
+            '/caregiver/home': ((context) => CaregiverHomeScreen()),
           }
         )
       ),
