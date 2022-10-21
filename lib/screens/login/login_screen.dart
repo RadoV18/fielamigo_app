@@ -61,7 +61,7 @@ class LoginScreen extends StatelessWidget {
                       onPressed: () {
                         context.read<LogInCubit>().submit();
                         // TODO: check if user is logged in
-                        Navigator.pushNamed(context, "/caregiver/home");
+                        Navigator.pushNamedAndRemoveUntil(context, "/caregiver/home", (_)=>false);
                       },
                       child: const Text("Caregiver Test")
                     ),

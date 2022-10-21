@@ -1,4 +1,5 @@
 import 'package:circular_bottom_navigation/tab_item.dart';
+import 'package:fielamigo_app/screens/caregiver_bookings/caregiver_bookings.dart';
 import 'package:fielamigo_app/screens/caregiver_test/c_test.dart';
 import 'package:fielamigo_app/widgets/navigation.dart';
 import 'package:flutter/material.dart';
@@ -14,9 +15,7 @@ class CaregiverHomeScreen extends StatelessWidget {
   ]);
 
   List<Widget> screens = [
-    const CareTest(
-      st: 'Uno',
-    ),
+    const OwnerBookings(),
     const CareTest(
       st: "Dos",
     ),
