@@ -7,11 +7,15 @@ import '../bloc/bottom_navbar_cubit/bottom_navbar_cubit.dart';
 import '../bloc/bottom_navbar_cubit/bottom_navbar_state.dart';
 
 class Navigation extends StatelessWidget {
-  int startingIndex;
-  List<TabItem> tabItems;
-  List<Widget> screens;
+  final int startingIndex;
+  final List<TabItem> tabItems;
+  final List<Widget> screens;
 
-  Navigation({super.key, this.startingIndex = 0, required this.tabItems, required this.screens});
+  Navigation({
+    super.key,
+    this.startingIndex = 0,
+    required this.tabItems,
+    required this.screens});
 
   final CircularBottomNavigationController _navigationController =
       CircularBottomNavigationController(2);
@@ -19,23 +23,24 @@ class Navigation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: BlocBuilder<BottomNavBarCubit, BottomNavBarState>(
-          builder: (context, state) {
-            return screens[state.currentIndex];
-          },
-        ),
-        bottomNavigationBar: Padding(
-          padding:
-              EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
-          child: BlocBuilder<BottomNavBarCubit, BottomNavBarState>(
-            builder: (context, state) => CircularBottomNavigation(
-              tabItems,
-              controller: _navigationController,
-              selectedCallback: ((selectedPos) =>
-                  BlocProvider.of<BottomNavBarCubit>(context)
-                      .setIndex(selectedPos!)),
-            ),
+      body: BlocBuilder<BottomNavBarCubit, BottomNavBarState>(
+        builder: (context, state) {
+          return screens[state.currentIndex];
+        },
+      ),
+      bottomNavigationBar: Padding(
+        padding:
+            EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
+        child: BlocBuilder<BottomNavBarCubit, BottomNavBarState>(
+          builder: (context, state) => CircularBottomNavigation(
+            tabItems,
+            controller: _navigationController,
+            selectedCallback: ((selectedPos) =>
+                BlocProvider.of<BottomNavBarCubit>(context)
+                    .setIndex(selectedPos!)),
           ),
-        ));
+        ),
+      )
+    );
   }
 }
