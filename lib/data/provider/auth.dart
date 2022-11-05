@@ -3,9 +3,10 @@ import 'package:http/http.dart' as http;
 
 import '../models/auth_dto.dart';
 import '../models/log_in_dto.dart';
+import './api.dart';
 
 class AuthProvider {
-  final String _url = 'http://10.0.2.2:8080/api/v1/auth';
+  final String _url = "${Api.url}/auth";
 
   Future<AuthDto> login(LogInDto loginDto) async {
     final response = await http.post(
