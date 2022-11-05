@@ -1,4 +1,7 @@
 import 'package:circular_bottom_navigation/tab_item.dart';
+import 'package:fielamigo_app/screens/owner_bookings/owner_bookings_screen.dart';
+import 'package:fielamigo_app/screens/owner_pets/owner_pets_screen.dart';
+import 'package:fielamigo_app/screens/owner_profile/owner_profile_screen.dart';
 import 'package:fielamigo_app/widgets/navigation.dart';
 import 'package:fielamigo_app/widgets/service_button.dart';
 import 'package:flutter/material.dart';
@@ -14,54 +17,60 @@ class OwnerHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: false,
-      body: Center(
-        child: Column(children: [
-          SizedBox(height: 5.h),
-          Text(
-            "Bienvenido, {dueño}",
-            style: TextStyle(
-              fontSize: 20.sp,
-              fontWeight: FontWeight.bold,
+      body: SafeArea(
+        child: Center(
+          child: Column(children: [
+            Text(
+              "Bienvenido, {dueño}",
+              style: TextStyle(
+                fontSize: 20.sp,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          Text(
-            "¿Qué necesita tu perro?",
-            style: TextStyle(
-              fontSize: 16.sp,
-              fontWeight: FontWeight.bold,
+            Text(
+              "¿Qué necesita tu perro?",
+              style: TextStyle(
+                fontSize: 16.sp,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          Expanded(
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: const [
-                  ServiceButton(
-                      text: "Alojamiento",
-                      route: "/owner/boarding",
-                      icon: Icons.bug_report),
-                  ServiceButton(
-                      text: "Paseo",
-                      route: "/owner/walking",
-                      icon: Icons.bug_report),
-                  ServiceButton(
-                      text: "Entrenamiento",
-                      route: "/owner/training",
-                      icon: Icons.bug_report),
-                  ServiceButton(
-                      text: "Cuidado",
-                      route: "/owner/nursing",
-                      icon: Icons.bug_report),
-                  ServiceButton(
-                      text: "Seguros",
-                      route: "/owner/insurance",
-                      icon: Icons.bug_report),
-                  ServiceButton(
-                      text: "Veterinarias",
-                      route: "/vets",
-                      icon: Icons.bug_report),
-                ]),
-          )
-        ]),
+            Expanded(
+              child: Column(
+                  children: const [
+                    SizedBox(height: 10),
+                    ServiceButton(
+                        text: "Alojamiento",
+                        route: "/owner/boarding",
+                        icon: Icons.bug_report),
+                    SizedBox(height: 10),
+                    ServiceButton(
+                        text: "Paseo",
+                        route: "/owner/walking",
+                        icon: Icons.bug_report),
+                    SizedBox(height: 10),
+                    ServiceButton(
+                        text: "Entrenamiento",
+                        route: "/owner/training",
+                        icon: Icons.bug_report),
+                    SizedBox(height: 10),
+                    ServiceButton(
+                        text: "Cuidado",
+                        route: "/owner/nursing",
+                        icon: Icons.bug_report),
+                    SizedBox(height: 10),
+                    ServiceButton(
+                        text: "Seguros",
+                        route: "/owner/insurance",
+                        icon: Icons.bug_report),
+                    SizedBox(height: 10),
+                    ServiceButton(
+                        text: "Veterinarias",
+                        route: "/vets",
+                        icon: Icons.bug_report),
+                  ]),
+            )
+          ]),
+        ),
       ),
       bottomNavigationBar: const BottomNavigationBarOwner(
         isHomeSelected: true,
@@ -71,93 +80,87 @@ class OwnerHomeScreen extends StatelessWidget {
 }
 
 // class OwnerHomeScreen extends StatelessWidget {
-//   OwnerHomeScreen({super.key});
+//   const OwnerHomeScreen({super.key});
 
-//   List<TabItem> tabItems = List.of([
-//     TabItem(Icons.calendar_month_outlined, "Reservas", Colors.red),
-//     TabItem(Icons.message, "Mensajes", Colors.orange),
-//     TabItem(Icons.home, "Inicio", Colors.blue),
-//     TabItem(Icons.timeline_rounded, "Mascotas", Colors.cyan),
-//     TabItem(Icons.person, "Perfil", Colors.green),
-//   ]);
-
-//   List<Widget> screens = [
-//     const CareTest(
-//       st: 'Uno',
-//     ),
-//     const CareTest(
+//   static const List<Widget> screens = [
+//     OwnerBookingsScreen(),
+//     CareTest(
 //       st: "Dos",
 //     ),
-//     const Home(),
-//     const CareTest(
-//       st: "Cuatro",
-//     ),
-//     const CareTest(
-//       st: "Cinco",
-//     ),
+//     Home(),
+//     OwnerPetsScreen(),
+//     OwnerProfileScreen()
 //   ];
 
 //   @override
 //   Widget build(BuildContext context) {
-//     return Navigation(startingIndex: 2, tabItems: tabItems, screens: screens);
+//     return Navigation(
+//       startingIndex: 2,
+//       tabItems: [
+//         TabItem(Icons.calendar_month_outlined, "Reservas", Colors.red),
+//         TabItem(Icons.message, "Mensajes", Colors.orange),
+//         TabItem(Icons.home, "Inicio", Colors.blue),
+//         TabItem(Icons.pets, "Mascotas", Colors.cyan),
+//         TabItem(Icons.person, "Perfil", Colors.green)
+//       ],
+//       screens: screens
+//     );
 //   }
 // }
 
-class Home extends StatelessWidget {
-  const Home({super.key});
+// class Home extends StatelessWidget {
+//   const Home({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Column(children: [
-          SizedBox(height: 5.h),
-          Text(
-            "Bienvenido, {dueño}",
-            style: TextStyle(
-              fontSize: 20.sp,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          Text(
-            "¿Qué necesita tu perro?",
-            style: TextStyle(
-              fontSize: 16.sp,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          Expanded(
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: const [
-                  ServiceButton(
-                      text: "Alojamiento",
-                      route: "/owner/boarding",
-                      icon: Icons.bug_report),
-                  ServiceButton(
-                      text: "Paseo",
-                      route: "/owner/walking",
-                      icon: Icons.bug_report),
-                  ServiceButton(
-                      text: "Entrenamiento",
-                      route: "/owner/training",
-                      icon: Icons.bug_report),
-                  ServiceButton(
-                      text: "Cuidado",
-                      route: "/owner/nursing",
-                      icon: Icons.bug_report),
-                  ServiceButton(
-                      text: "Seguros",
-                      route: "/owner/insurance",
-                      icon: Icons.bug_report),
-                  ServiceButton(
-                      text: "Veterinarias",
-                      route: "/vets",
-                      icon: Icons.bug_report),
-                ]),
-          )
-        ]),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Center(
+//       child: Column(children: [
+//         SizedBox(height: 5.h),
+//         Text(
+//           "Bienvenido, {dueño}",
+//           style: TextStyle(
+//             fontSize: 20.sp,
+//             fontWeight: FontWeight.bold,
+//           ),
+//         ),
+//         Text(
+//           "¿Qué necesita tu perro?",
+//           style: TextStyle(
+//             fontSize: 16.sp,
+//             fontWeight: FontWeight.bold,
+//           ),
+//         ),
+//         Expanded(
+//           child: Column(
+//               mainAxisAlignment: MainAxisAlignment.spaceAround,
+//               children: const [
+//                 ServiceButton(
+//                     text: "Alojamiento",
+//                     route: "/owner/boarding",
+//                     icon: Icons.bug_report),
+//                 ServiceButton(
+//                     text: "Paseo",
+//                     route: "/owner/walking",
+//                     icon: Icons.bug_report),
+//                 ServiceButton(
+//                     text: "Entrenamiento",
+//                     route: "/owner/training",
+//                     icon: Icons.bug_report),
+//                 ServiceButton(
+//                     text: "Cuidado",
+//                     route: "/owner/nursing",
+//                     icon: Icons.bug_report),
+//                 ServiceButton(
+//                     text: "Seguros",
+//                     route: "/owner/insurance",
+//                     icon: Icons.bug_report),
+//                 ServiceButton(
+//                     text: "Veterinarias",
+//                     route: "/vets",
+//                     icon: Icons.bug_report),
+//               ]),
+//         )
+//       ]),
+//     );
+//   }
+// }
