@@ -47,6 +47,8 @@ dependencies:
   responsive_framework: ^0.2.0
   http: ^0.13.5
   circular_bottom_navigation: ^2.2.0
+  image_picker: ^0.8.6
+  flutter_svg: ^1.1.6
 
 dev_dependencies:
   flutter_test:
@@ -73,6 +75,7 @@ flutter:
   assets:
     - assets/images/logo.png
     - assets/videos/welcome.mp4
+    - assets/icons/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

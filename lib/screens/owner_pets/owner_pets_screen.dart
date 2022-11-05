@@ -11,23 +11,20 @@ class OwnerPetsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFEEEEEE),
       appBar: AppBar(
-      leading: Builder(
-        builder: (BuildContext context) {
-          return IconButton(
-            icon: const Icon(Icons.arrow_back_rounded),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          );
-        },
+        leading: Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+              icon: const Icon(Icons.arrow_back_rounded),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            );
+          },
+        ),
+        title: const Text("Mis Mascotas"),
+        centerTitle: true,
       ),
-      title: const Text("Mis Mascotas"),
-      centerTitle: true,
-    ),
       extendBody: true,
-      bottomNavigationBar: const BottomNavigationBarOwner(
-        isPetsSelected: true,
-      ),
       body: SafeArea(
         child: Center(
           child: Padding(
@@ -85,7 +82,8 @@ class OwnerPetsScreen extends StatelessWidget {
             ),
           ),
         ),
-      )
+      ),
+      bottomNavigationBar: const BottomNavigationBarOwner(isPetsSelected: true),
     );
   }
 }
