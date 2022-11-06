@@ -2,6 +2,7 @@ import 'package:fielamigo_app/bloc/add_pet_cubit/add_pet_cubit.dart';
 import 'package:fielamigo_app/screens/owner_add_pet/widgets/breed_autocomplete.dart';
 import 'package:fielamigo_app/screens/owner_add_pet/widgets/dog_image_picker.dart';
 import 'package:fielamigo_app/screens/owner_add_pet/widgets/male_female_options.dart';
+import 'package:fielamigo_app/widgets/custom_app_bar.dart';
 import 'package:fielamigo_app/widgets/custom_date_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,18 +16,9 @@ class OwnerAddPetScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      appBar: AppBar(
-        leading: Builder(
-          builder: (BuildContext context) {
-            return IconButton(
-              icon: const Icon(Icons.arrow_back_rounded),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            );
-          },
-        ),
-        title: const Text("Agregar Mascota"),
+      appBar: CustomAppBar(
+        onBackButtonPressed: () => Navigator.pop(context),
+        title: 'Agregar Mascota',
       ),
       body: BlocBuilder<AddPetCubit, AddPetState>(
         builder: (context, state) {

@@ -1,3 +1,4 @@
+import 'package:fielamigo_app/widgets/custom_app_bar.dart';
 import 'package:fielamigo_app/widgets/pet_card.dart';
 import 'package:flutter/material.dart';
 
@@ -10,19 +11,9 @@ class OwnerPetsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFEEEEEE),
-      appBar: AppBar(
-        leading: Builder(
-          builder: (BuildContext context) {
-            return IconButton(
-              icon: const Icon(Icons.arrow_back_rounded),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            );
-          },
-        ),
-        title: const Text("Mis Mascotas"),
-        centerTitle: true,
+      appBar: CustomAppBar(
+        onBackButtonPressed: () => Navigator.pop(context),
+        title: 'Mis Mascotas',
       ),
       extendBody: true,
       body: SafeArea(

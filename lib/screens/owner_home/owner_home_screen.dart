@@ -1,10 +1,11 @@
 import 'package:circular_bottom_navigation/tab_item.dart';
 import 'package:fielamigo_app/screens/owner_bookings/owner_bookings_screen.dart';
 import 'package:fielamigo_app/screens/owner_pets/owner_pets_screen.dart';
-import 'package:fielamigo_app/screens/owner_profile/owner_profile_screen.dart';
+import 'package:fielamigo_app/screens/profile/profile_screen.dart';
 import 'package:fielamigo_app/widgets/navigation.dart';
 import 'package:fielamigo_app/widgets/service_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../widgets/bottom_navigation_bar_owner.dart';
@@ -19,57 +20,84 @@ class OwnerHomeScreen extends StatelessWidget {
       extendBody: false,
       body: SafeArea(
         child: Center(
-          child: Column(children: [
-            Text(
-              "Bienvenido, {dueño}",
-              style: TextStyle(
-                fontSize: 20.sp,
-                fontWeight: FontWeight.bold,
+          child: Column(
+            children: [
+              Text(
+                "Bienvenido, {dueño}",
+                style: TextStyle(
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            Text(
-              "¿Qué necesita tu perro?",
-              style: TextStyle(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.bold,
+              Text(
+                "¿Qué necesita tu perro?",
+                style: TextStyle(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            Expanded(
-              child: Column(
-                  children: const [
-                    SizedBox(height: 10),
+              Expanded(
+                child: Column(
+                  children: [
+                    const SizedBox(height: 10),
                     ServiceButton(
-                        text: "Alojamiento",
-                        route: "/owner/boarding",
-                        icon: Icons.bug_report),
-                    SizedBox(height: 10),
+                      text: "Alojamiento",
+                      route: "/owner/boarding",
+                      icon: SvgPicture.asset(
+                        "assets/icons/ic_boarding.svg",
+                        height: 8.h,
+                      )
+                    ),
+                    const SizedBox(height: 10),
                     ServiceButton(
-                        text: "Paseo",
-                        route: "/owner/walking",
-                        icon: Icons.bug_report),
-                    SizedBox(height: 10),
+                      text: "Paseo",
+                      route: "/owner/walking",
+                      icon: SvgPicture.asset(
+                        "assets/icons/ic_dog_walk.svg",
+                        height: 8.h,
+                      )
+                    ),
+                    const SizedBox(height: 10),
                     ServiceButton(
-                        text: "Entrenamiento",
-                        route: "/owner/training",
-                        icon: Icons.bug_report),
-                    SizedBox(height: 10),
+                      text: "Entrenamiento",
+                      route: "/owner/training",
+                      icon: SvgPicture.asset(
+                        "assets/icons/ic_training.svg",
+                        height: 8.h,
+                      )
+                    ),
+                    const SizedBox(height: 10),
                     ServiceButton(
-                        text: "Cuidado",
-                        route: "/owner/nursing",
-                        icon: Icons.bug_report),
-                    SizedBox(height: 10),
+                      text: "Cuidado",
+                      route: "/owner/nursing",
+                      icon: SvgPicture.asset(
+                        "assets/icons/ic_nursing.svg",
+                        height: 8.h,
+                      )
+                    ),
+                    const SizedBox(height: 10),
                     ServiceButton(
-                        text: "Seguros",
-                        route: "/owner/insurance",
-                        icon: Icons.bug_report),
-                    SizedBox(height: 10),
+                      text: "Seguros",
+                      route: "/owner/insurance",
+                      icon: SvgPicture.asset(
+                        "assets/icons/ic_insurance.svg",
+                        height: 8.h,
+                      )
+                    ),
+                    const SizedBox(height: 10),
                     ServiceButton(
-                        text: "Veterinarias",
-                        route: "/vets",
-                        icon: Icons.bug_report),
-                  ]),
-            )
-          ]),
+                      text: "Veterinarias",
+                      route: "/vets",
+                      icon: SvgPicture.asset(
+                        "assets/icons/ic_vet.svg",
+                        height: 8.h,
+                      )
+                    ),
+                  ]
+                ),
+              )
+            ]
+          ),
         ),
       ),
       bottomNavigationBar: const BottomNavigationBarOwner(

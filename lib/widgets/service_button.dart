@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
 
 class ServiceButton extends StatelessWidget {
   final String text;
   final String route;
-  final IconData icon;
+  final SvgPicture icon;
 
   const ServiceButton({
     super.key,
@@ -24,10 +25,7 @@ class ServiceButton extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Icon(
-            icon,
-            size: 7.5.h,
-          ),
+          icon,
           Expanded(
             child: Text(
               text,
