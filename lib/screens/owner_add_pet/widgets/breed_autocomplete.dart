@@ -1,4 +1,6 @@
+import 'package:fielamigo_app/bloc/add_pet_cubit/add_pet_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BreedAutocomplete extends StatelessWidget {
   const BreedAutocomplete({super.key});
@@ -20,6 +22,7 @@ class BreedAutocomplete extends StatelessWidget {
     'Australian Cattle Dog',
     'Australian Kelpie',
     'Australian Shepherd',
+    'Chihuahua',
   ];
 
   @override
@@ -48,6 +51,7 @@ class BreedAutocomplete extends StatelessWidget {
           },
         );
       },
+      onSelected: (option) => context.read<AddPetCubit>().setBreed(option),
       optionsViewBuilder: (BuildContext context,
           AutocompleteOnSelected<String> onSelected, Iterable<String> options) {
         return Align(

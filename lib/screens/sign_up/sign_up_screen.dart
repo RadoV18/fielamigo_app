@@ -29,7 +29,7 @@ class SignUpScreen extends StatelessWidget {
         bool displayPasswordError = !password.valid && password.value.isNotEmpty;
         bool displayConfirmError = password.value != confirmPassword.value;
         return Scaffold(
-          resizeToAvoidBottomInset: false,
+          resizeToAvoidBottomInset: true,
           body: NotificationListener<OverscrollIndicatorNotification>(
             onNotification: (OverscrollIndicatorNotification overscroll) {
               overscroll.disallowIndicator();
