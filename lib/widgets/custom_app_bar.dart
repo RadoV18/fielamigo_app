@@ -6,12 +6,14 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
 
   final void Function() onBackButtonPressed;
   final String title;
+  final IconButton? actionButton;
   
   const CustomAppBar({
     super.key,
     required this.onBackButtonPressed,
     this.title = 'Fiel Amigo',
-    this.preferredSize = const Size.fromHeight(56)
+    this.preferredSize = const Size.fromHeight(56),
+    this.actionButton
   });
 
   @override
@@ -27,6 +29,9 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
       ),
       title: Text(title),
       centerTitle: true,
+      actions: [
+        if(actionButton != null) actionButton!
+      ],
     );
   }
 }

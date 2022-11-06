@@ -1,12 +1,11 @@
 import 'package:fielamigo_app/bloc/add_pet_cubit/add_pet_cubit.dart';
 import 'package:fielamigo_app/screens/owner_add_pet/widgets/breed_autocomplete.dart';
-import 'package:fielamigo_app/screens/owner_add_pet/widgets/dog_image_picker.dart';
+import 'package:fielamigo_app/widgets/custom_image_picker.dart';
 import 'package:fielamigo_app/screens/owner_add_pet/widgets/male_female_options.dart';
 import 'package:fielamigo_app/widgets/custom_app_bar.dart';
 import 'package:fielamigo_app/widgets/custom_date_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sizer/sizer.dart';
 import 'widgets/dog_size_options.dart';
 
 class OwnerAddPetScreen extends StatelessWidget {
@@ -38,13 +37,16 @@ class OwnerAddPetScreen extends StatelessWidget {
                           const SizedBox(
                             height: 20,
                           ),
-                          const DogImagePicker(),
+                          CustomImagePicker(
+                            imagePath: state.image?.path ?? "",
+                            onImageSelected: (image) => context.read<AddPetCubit>().setImage(image),
+                          ),
                           const SizedBox(
                             height: 20,
                           ),
                           TextField(
                             decoration: const InputDecoration(
-                              hintText: "Nombre",
+                              labelText: "Nombre",
                             ),
                             onChanged: (value) =>
                                 context.read<AddPetCubit>().setName(value),
@@ -56,16 +58,10 @@ class OwnerAddPetScreen extends StatelessWidget {
                           const SizedBox(
                             height: 20,
                           ),
-                          Row(
-                            children: [
-                              const Text("Fecha de Nacimiento:"),
-                              SizedBox(width: 5.w),
-                              CustomDatePicker(
-                                onDateChanged: (String date) {
-                                  context.read<AddPetCubit>().setBirthDate(date);
-                                },
-                              ),
-                            ],
+                          CustomDatePicker(
+                            onDateChanged: (String date) {
+                              context.read<AddPetCubit>().setBirthDate(date);
+                            },
                           ),
                           const SizedBox(
                             height: 20,
@@ -97,7 +93,8 @@ class OwnerAddPetScreen extends StatelessWidget {
                           TextField(
                             maxLines: 5,
                             decoration: const InputDecoration(
-                              hintText: "Notas",
+                              labelText: "Notas",
+                              hintText: "Agrega algún detalle sobre tu mascota.",
                             ),
                             onChanged: (value) => 
                               context.read<AddPetCubit>().setNotes(value),
