@@ -18,7 +18,10 @@ class DogImagePicker extends StatelessWidget {
           children: [
             Container(
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey.shade500, width: 2),
+                border: Border.all(
+                  color: const Color(0xff047b5b),
+                  width: 3)
+                ,
                 borderRadius: BorderRadius.circular(30.h),
               ),
               child: ClipRRect(

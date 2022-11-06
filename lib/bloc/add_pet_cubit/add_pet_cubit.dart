@@ -2,10 +2,15 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:fielamigo_app/data/repository/add_pet_repository.dart';
+
+import '../../data/models/new_pet_dto.dart';
 
 part 'add_pet_state.dart';
 
 class AddPetCubit extends Cubit<AddPetState> {
+  final AddPetRepository _addPetRepository = AddPetRepository();
+
   AddPetCubit() : super(const AddPetState());
 
   void setImage(File? image) {
@@ -21,7 +26,6 @@ class AddPetCubit extends Cubit<AddPetState> {
   }
 
   void setBirthDate(String birthDate) {
-    print("new date");
     emit(state.copyWith(birthDate: birthDate));
   }
 
@@ -72,6 +76,46 @@ class AddPetCubit extends Cubit<AddPetState> {
   }
 
   void save() {
-    print(state);
+    // validating fields
+    bool ok = true;
+    if (state.image == null) {
+      ok = false;
+    }
+    if (state.name.isEmpty) {
+      ok = false;
+    }
+    if (state.breed.isEmpty) {
+      ok = false;
+    }
+    if (state.birthDate.isEmpty) {
+      ok = false;
+    }
+    if(!state.isMale && !state.isFemale) {
+      ok = false;
+    }
+    if(!state.isSmall && !state.isMedium && !state.isLarge) {
+      ok = false;
+    }
+
+    if(!ok) {
+      return;
+    }
+    print("ok");
+    bool isMale = state.isMale;
+    int size = state.isSmall ? 1 : state.isMedium ? 2 : 3;
+
+    NewPetDto newPetDto = NewPetDto(
+      // TODO: get user id from auth token
+      userId: '1',
+      name: state.name,
+      breed: state.breed,
+      birthDate: state.birthDate,
+      isMale: isMale,
+      size: size,
+      isSterilized: state.isSterilized,
+      notes: state.notes,
+      image: state.image!
+    );
+    _addPetRepository.addPet(newPetDto);
   }
 }
