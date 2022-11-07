@@ -20,8 +20,8 @@ class ProfileScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        CustomAppBar(
-          onBackButtonPressed: () => Navigator.pop(context),
+        const CustomAppBar(
+          showLeading: false,
           title: 'Mi Perfil'
         ),
         SingleChildScrollView(

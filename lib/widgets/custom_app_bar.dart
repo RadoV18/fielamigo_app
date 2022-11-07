@@ -3,14 +3,15 @@ import 'package:flutter/material.dart';
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   final Size preferredSize;
-
-  final void Function() onBackButtonPressed;
+  final bool showLeading;
+  final void Function()? onBackButtonPressed;
   final String title;
   final IconButton? actionButton;
-  
+
   const CustomAppBar({
     super.key,
-    required this.onBackButtonPressed,
+    this.showLeading = true,
+    this.onBackButtonPressed,
     this.title = 'Fiel Amigo',
     this.preferredSize = const Size.fromHeight(56),
     this.actionButton
@@ -19,14 +20,14 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return  AppBar(
-      leading: Builder(
+      leading: showLeading ? Builder(
         builder: (BuildContext context) {
           return IconButton(
             icon: const Icon(Icons.arrow_back_rounded),
             onPressed: onBackButtonPressed,
           );
         },
-      ),
+      ) : Container(),
       title: Text(title),
       centerTitle: true,
       actions: [
