@@ -101,14 +101,19 @@ class _ProfilePersonalInformationScreenState extends State<ProfilePersonalInform
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            ElevatedButton(
-                              onPressed: () => Navigator.pop(context),
-                              child: const Text("Cancelar"),
+                            Expanded(
+                              child: ElevatedButton(
+                                onPressed: () => Navigator.pop(context),
+                                child: const Text("Cancelar"),
+                              ),
                             ),
-                            ElevatedButton(
-                              // TODO: save data
-                              onPressed: () => Navigator.pop(context),
-                              child: const Text("Guardar"),
+                            const SizedBox(width: 10),
+                            Expanded(
+                              child: ElevatedButton(
+                                // TODO: save data
+                                onPressed: () => Navigator.pop(context),
+                                child: const Text("Guardar"),
+                              ),
                             ),
                           ],
                         )

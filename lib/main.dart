@@ -10,6 +10,7 @@ import 'package:fielamigo_app/screens/owner_home/owner_home_screen.dart';
 import 'package:fielamigo_app/screens/owner_pets/owner_pets_screen.dart';
 import 'package:fielamigo_app/screens/profile/profile_screen.dart';
 import 'package:fielamigo_app/screens/profile_personal_information/profile_personal_information.dart';
+import 'package:fielamigo_app/screens/profile_user_address/profile_user_address.dart';
 import 'package:fielamigo_app/screens/user_form_screen/user_form_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -76,6 +77,7 @@ class MyApp extends StatelessWidget {
             '/owner/pets/new': (context) => const OwnerAddPetScreen(),
             '/owner/profile': (context) => const ProfileScreen(),
             '/profile/personal-information': (context) => const ProfilePersonalInformationScreen(),
+            '/profile/address': (context) => const ProfileUserAddressScreen(),
             '/user-form': (context) => const UserFormScreen(),
             '/caregiver/home': ((context) => CaregiverHomeScreen()),
           }
