@@ -23,6 +23,7 @@ class Navigation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       body: BlocBuilder<BottomNavBarCubit, BottomNavBarState>(
         builder: (context, state) {
           return screens[state.currentIndex];

@@ -14,127 +14,123 @@ import '../caregiver_test/c_test.dart';
 class OwnerHomeScreen extends StatelessWidget {
   const OwnerHomeScreen({super.key});
 
+  static const List<Widget> screens = [
+    OwnerBookingsScreen(),
+    CareTest(
+      st: "Dos",
+    ),
+    HomeScreen(),
+    OwnerPetsScreen(),
+    ProfileScreen()
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBody: false,
-      body: SafeArea(
-        child: Center(
-          child: Column(
-            children: [
-              Text(
-                "Bienvenido, {dueño}",
-                style: TextStyle(
-                  fontSize: 20.sp,
-                  fontWeight: FontWeight.bold,
-                ),
+    return Navigation(
+      startingIndex: 2,
+      tabItems: [
+        TabItem(Icons.calendar_month_outlined, "Reservas", Colors.red),
+        TabItem(Icons.message, "Mensajes", Colors.orange),
+        TabItem(Icons.home, "Inicio", Colors.blue),
+        TabItem(Icons.pets, "Mascotas", Colors.cyan),
+        TabItem(Icons.person, "Perfil", Colors.green)
+      ],
+      screens: screens
+    );
+  }
+}
+
+
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Center(
+        child: Column(
+          children: [
+            Text(
+              "Bienvenido, {dueño}",
+              style: TextStyle(
+                fontSize: 20.sp,
+                fontWeight: FontWeight.bold,
               ),
-              Text(
-                "¿Qué necesita tu perro?",
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.bold,
-                ),
+            ),
+            Text(
+              "¿Qué necesita tu perro?",
+              style: TextStyle(
+                fontSize: 16.sp,
+                fontWeight: FontWeight.bold,
               ),
-              Expanded(
-                child: Column(
-                  children: [
-                    const SizedBox(height: 10),
-                    ServiceButton(
-                      text: "Alojamiento",
-                      route: "/owner/boarding",
-                      icon: SvgPicture.asset(
-                        "assets/icons/ic_boarding.svg",
-                        height: 8.h,
-                      )
-                    ),
-                    const SizedBox(height: 10),
-                    ServiceButton(
-                      text: "Paseo",
-                      route: "/owner/walking",
-                      icon: SvgPicture.asset(
-                        "assets/icons/ic_dog_walk.svg",
-                        height: 8.h,
-                      )
-                    ),
-                    const SizedBox(height: 10),
-                    ServiceButton(
-                      text: "Entrenamiento",
-                      route: "/owner/training",
-                      icon: SvgPicture.asset(
-                        "assets/icons/ic_training.svg",
-                        height: 8.h,
-                      )
-                    ),
-                    const SizedBox(height: 10),
-                    ServiceButton(
-                      text: "Cuidado",
-                      route: "/owner/nursing",
-                      icon: SvgPicture.asset(
-                        "assets/icons/ic_nursing.svg",
-                        height: 8.h,
-                      )
-                    ),
-                    const SizedBox(height: 10),
-                    ServiceButton(
-                      text: "Seguros",
-                      route: "/owner/insurance",
-                      icon: SvgPicture.asset(
-                        "assets/icons/ic_insurance.svg",
-                        height: 8.h,
-                      )
-                    ),
-                    const SizedBox(height: 10),
-                    ServiceButton(
-                      text: "Veterinarias",
-                      route: "/vets",
-                      icon: SvgPicture.asset(
-                        "assets/icons/ic_vet.svg",
-                        height: 8.h,
-                      )
-                    ),
-                  ]
-                ),
-              )
-            ]
-          ),
+            ),
+            Expanded(
+              child: Column(
+                children: [
+                  const SizedBox(height: 10),
+                  ServiceButton(
+                    text: "Alojamiento",
+                    route: "/owner/boarding",
+                    icon: SvgPicture.asset(
+                      "assets/icons/ic_boarding.svg",
+                      height: 8.h,
+                    )
+                  ),
+                  const SizedBox(height: 10),
+                  ServiceButton(
+                    text: "Paseo",
+                    route: "/owner/walking",
+                    icon: SvgPicture.asset(
+                      "assets/icons/ic_dog_walk.svg",
+                      height: 8.h,
+                    )
+                  ),
+                  const SizedBox(height: 10),
+                  ServiceButton(
+                    text: "Entrenamiento",
+                    route: "/owner/training",
+                    icon: SvgPicture.asset(
+                      "assets/icons/ic_training.svg",
+                      height: 8.h,
+                    )
+                  ),
+                  const SizedBox(height: 10),
+                  ServiceButton(
+                    text: "Cuidado",
+                    route: "/owner/nursing",
+                    icon: SvgPicture.asset(
+                      "assets/icons/ic_nursing.svg",
+                      height: 8.h,
+                    )
+                  ),
+                  const SizedBox(height: 10),
+                  ServiceButton(
+                    text: "Seguros",
+                    route: "/owner/insurance",
+                    icon: SvgPicture.asset(
+                      "assets/icons/ic_insurance.svg",
+                      height: 8.h,
+                    )
+                  ),
+                  const SizedBox(height: 10),
+                  ServiceButton(
+                    text: "Veterinarias",
+                    route: "/vets",
+                    icon: SvgPicture.asset(
+                      "assets/icons/ic_vet.svg",
+                      height: 8.h,
+                    )
+                  ),
+                ]
+              ),
+            )
+          ]
         ),
-      ),
-      bottomNavigationBar: const BottomNavigationBarOwner(
-        isHomeSelected: true,
       ),
     );
   }
 }
 
-// class OwnerHomeScreen extends StatelessWidget {
-//   const OwnerHomeScreen({super.key});
-
-//   static const List<Widget> screens = [
-//     OwnerBookingsScreen(),
-//     CareTest(
-//       st: "Dos",
-//     ),
-//     Home(),
-//     OwnerPetsScreen(),
-//     OwnerProfileScreen()
-//   ];
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Navigation(
-//       startingIndex: 2,
-//       tabItems: [
-//         TabItem(Icons.calendar_month_outlined, "Reservas", Colors.red),
-//         TabItem(Icons.message, "Mensajes", Colors.orange),
-//         TabItem(Icons.home, "Inicio", Colors.blue),
-//         TabItem(Icons.pets, "Mascotas", Colors.cyan),
-//         TabItem(Icons.person, "Perfil", Colors.green)
-//       ],
-//       screens: screens
-//     );
-//   }
-// }
 
 // class Home extends StatelessWidget {
 //   const Home({super.key});
