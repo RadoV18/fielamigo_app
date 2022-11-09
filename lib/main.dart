@@ -2,6 +2,7 @@ import 'package:fielamigo_app/bloc/add_pet_cubit/add_pet_cubit.dart';
 import 'package:fielamigo_app/bloc/bottom_navbar_cubit/bottom_navbar_cubit.dart';
 import 'package:fielamigo_app/bloc/sign_up_cubit/sign_up_cubit.dart';
 import 'package:fielamigo_app/screens/caregiver_home/caregiver_home_screen.dart';
+import 'package:fielamigo_app/screens/caregiver_services_form/caregiver_services_form.dart';
 import 'package:fielamigo_app/screens/login/login_screen.dart';
 import 'package:fielamigo_app/screens/onboarding/onboarding_screen.dart';
 import 'package:fielamigo_app/screens/owner_add_pet/owner_add_pet.dart';
@@ -81,7 +82,7 @@ class MyApp extends StatelessWidget {
             '/profile/address': (context) => const ProfileUserAddressScreen(),
             '/profile/payment-methods': (context) => const PaymentMethodsScreen(),
             '/user-form': (context) => const UserFormScreen(),
-            '/caregiver/home': ((context) => CaregiverHomeScreen()),
+            '/caregiver/home': ((context) => const CareGiverServicesFormScreen()) //CaregiverHomeScreen()), //TODO change this
           }
         )
       ),
