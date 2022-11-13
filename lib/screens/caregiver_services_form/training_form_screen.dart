@@ -3,10 +3,9 @@ import 'package:fielamigo_app/screens/caregiver_services_form/widgets/text_input
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-class BoardingForm extends StatelessWidget {
-  BoardingForm({super.key});
+class TrainingForm extends StatelessWidget {
+  TrainingForm({super.key});
   final _nightFeeController = TextEditingController();
-  final _pickupFeeController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -21,7 +20,7 @@ class BoardingForm extends StatelessWidget {
           child: Column(
             children: [
               const Text(
-                "Alojamiento",
+                "Entrenamiento",
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -31,11 +30,11 @@ class BoardingForm extends StatelessWidget {
               const SizedBox(
                 height: 30,
               ),
-              EmailInputFb1(inputController: _nightFeeController, hintText: 'Ingresa el monto en Bs.', title: '¿Cuánto quieres cobrar por noche?',),
+              EmailInputFb1(inputController: _nightFeeController, hintText: 'Ingresa el monto en Bs.', title: '¿Cuánto quieres cobrar por hora?',),
               const SizedBox(
                 height: 30,
               ),
-              SliderFb1(min:0, max:10, divisions: 10, onChange:(v){}, title: 'Introduce un máximo de noches', helperText: 'noches'),
+              SliderFb1(min:0, max:10, divisions: 10, onChange:(v){}, title: 'Introduce un máximo de horas', helperText: 'horas'),
               const SizedBox(
                 height: 30,
               ),
@@ -43,7 +42,7 @@ class BoardingForm extends StatelessWidget {
               const SizedBox(
                 height: 30,
               ),
-              EmailInputFb1(inputController: _pickupFeeController, hintText: 'Ingresa el monto en Bs.', title: '¿Cuánto quieres cobrar por el recojo?',),
+              Text('En donde haces los paseos'), // TODO add map
               const SizedBox(
                 height: 30,
               ),

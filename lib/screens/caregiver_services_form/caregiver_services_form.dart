@@ -1,6 +1,9 @@
 import 'dart:developer';
 
 import 'package:fielamigo_app/screens/caregiver_services_form/boarding_form_screen.dart';
+import 'package:fielamigo_app/screens/caregiver_services_form/nursing_form_screen.dart';
+import 'package:fielamigo_app/screens/caregiver_services_form/training_form_screen.dart';
+import 'package:fielamigo_app/screens/caregiver_services_form/walking_form_screen.dart';
 import 'package:fielamigo_app/screens/caregiver_services_form/widgets/card.dart';
 import 'package:fielamigo_app/utils/global_theme.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +16,7 @@ class CareGiverServicesFormScreen extends StatelessWidget {
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.only(
-            top: MediaQuery.of(context).padding.top,
+            top: MediaQuery.of(context).padding.top+20,
             bottom: MediaQuery.of(context).padding.bottom),
         child: Center(
           child: Column(
@@ -26,6 +29,7 @@ class CareGiverServicesFormScreen extends StatelessWidget {
                   color: Colors.black
                 ),
               ),
+              const Text("Selecciona al menos 1 servicio."),
               const SizedBox(height: 30,),
               CardFb1(
                 text: "Alojamiento",
@@ -44,7 +48,7 @@ class CareGiverServicesFormScreen extends StatelessWidget {
                 subtitle:
                     "Si decides pasear, pos MODO SEXO 2",
                 isAlreadyCompleted: true,
-                onPressed: () => log("Paseo"),
+                onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=> WalkingForm())),
               ),
               const SizedBox(
                 height: 15,
@@ -55,7 +59,7 @@ class CareGiverServicesFormScreen extends StatelessWidget {
                 subtitle:
                     "Si decides entrenar, pos MODO SEXO 3",
                 isAlreadyCompleted: true,
-                onPressed: () => log("Entrenamiento"),
+                onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=> TrainingForm())),
               ),
               const SizedBox(
                 height: 15,
@@ -66,7 +70,7 @@ class CareGiverServicesFormScreen extends StatelessWidget {
                 subtitle:
                     "Si decides cuidar, pos MODO SEXO 4",
                 isAlreadyCompleted: true,
-                onPressed: () => log("Cuidado"),
+                onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=> NursingForm())),
               ),
               const SizedBox(height: 50,),
               DecoratedBox(
