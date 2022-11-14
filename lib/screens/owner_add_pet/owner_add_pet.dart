@@ -59,6 +59,7 @@ class OwnerAddPetScreen extends StatelessWidget {
                             height: 20,
                           ),
                           CustomDatePicker(
+                            label: "Fecha de nacimiento",
                             onDateChanged: (String date) {
                               context.read<AddPetCubit>().setBirthDate(date);
                             },

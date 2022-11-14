@@ -39,8 +39,8 @@ class PaymentMethodsScreen extends StatelessWidget {
                     ],
                   ),
                   ElevatedButton(
-                    onPressed: () => Navigator.pushNamed(context, '/payment_methods/add'),
-                    child: const Text('Agregar Método de Pago'),
+                    onPressed: () => Navigator.pushNamed(context, '/payment-methods/add'),
+                    child: const Text('Agregar tarjeta'),
                   ),
                 ]
               ),

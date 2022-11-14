@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 
 class CustomDatePicker extends StatefulWidget {
+  final String label;
   final void Function(String) onDateChanged;
   final bool enabled;
+  final DateTime? firstDate;
+  final DateTime? lastDate;
   
   const CustomDatePicker({
     super.key,
+    required this.label,
     required this.onDateChanged,
-    this.enabled = true
+    this.enabled = true,
+    this.firstDate,
+    this.lastDate
   });
   
 
@@ -32,9 +38,9 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
 
     return TextField(
       controller: dateController,
-      decoration: const InputDecoration(
+      decoration: InputDecoration(
         // icon: Icon(Icons.calendar_today),
-        labelText: "Fecha de Nacimiento",
+        labelText: widget.label,
       ),
       enabled: widget.enabled,
       readOnly: true,
@@ -42,8 +48,8 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
         DateTime? pickedDate = await showDatePicker(
           context: context,
           initialDate: DateTime.now(),
-          firstDate: DateTime(1900),
-          lastDate: DateTime.now()
+          firstDate: widget.firstDate ?? DateTime(1900),
+          lastDate: widget.lastDate ?? DateTime.now()
         );
         if (pickedDate != null) {
           setState(() {

@@ -91,6 +91,7 @@ class _ProfilePersonalInformationScreenState extends State<ProfilePersonalInform
                             // Birthdate
                             CustomDatePicker(
                               enabled: canEdit,
+                              label: "Fecha de Nacimiento",
                               // onDateChanged: (date) => context.read<PersonalInformationCubit>().setBirthdate(date),
                               onDateChanged: (date) => print(date),
                             ),

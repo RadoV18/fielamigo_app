@@ -1,8 +1,9 @@
 import 'package:fielamigo_app/bloc/add_pet_cubit/add_pet_cubit.dart';
 import 'package:fielamigo_app/bloc/bottom_navbar_cubit/bottom_navbar_cubit.dart';
 import 'package:fielamigo_app/bloc/sign_up_cubit/sign_up_cubit.dart';
+import 'package:fielamigo_app/screens/add_payment_method/add_payment_method_screen.dart';
+import 'package:fielamigo_app/screens/boarding_form/boarding_form_screen.dart';
 import 'package:fielamigo_app/screens/caregiver_home/caregiver_home_screen.dart';
-import 'package:fielamigo_app/screens/caregiver_services_form/caregiver_services_form.dart';
 import 'package:fielamigo_app/screens/login/login_screen.dart';
 import 'package:fielamigo_app/screens/onboarding/onboarding_screen.dart';
 import 'package:fielamigo_app/screens/owner_add_pet/owner_add_pet.dart';
@@ -75,14 +76,16 @@ class MyApp extends StatelessWidget {
             '/verification-code': (context) => const VerificationCodeScreen(),
             '/owner/home': (context) => const OwnerHomeScreen(),
             '/owner/bookings': (context) => const OwnerBookingsScreen(),
+            '/owner/boarding': (context) => const BoardingFormScreen(),
             '/owner/pets': (context) => const OwnerPetsScreen(),
             '/owner/pets/new': (context) => const OwnerAddPetScreen(),
             '/owner/profile': (context) => const ProfileScreen(),
             '/profile/personal-information': (context) => const ProfilePersonalInformationScreen(),
             '/profile/address': (context) => const ProfileUserAddressScreen(),
             '/profile/payment-methods': (context) => const PaymentMethodsScreen(),
+            '/payment-methods/add': (context) => const AddPaymentMethodScreen(),
             '/user-form': (context) => const UserFormScreen(),
-            '/caregiver/home': ((context) => const CareGiverServicesFormScreen()) //CaregiverHomeScreen()), //TODO change this
+            '/caregiver/home': ((context) => CaregiverHomeScreen()), //TODO change this
           }
         )
       ),
