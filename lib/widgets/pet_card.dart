@@ -21,7 +21,7 @@ class PetCard extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width * 0.95,
       height: 85,
-      padding: const EdgeInsets.all(15.0),
+      padding: const EdgeInsets.all(10.0),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12.5),
@@ -39,16 +39,16 @@ class PetCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.grey,
-                    width: 2,
+              Card(
+                clipBehavior: Clip.antiAlias,
+                elevation: 4.0,
+                shape: const CircleBorder(
+                  side: BorderSide(
+                    color: Color(0xff047b5b),
+                    width: 2.0,
                   ),
-                  borderRadius: BorderRadius.circular(35),
                 ),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(35),
                   child: Image.network(
                     imageUrl,
                     height: 70,
