@@ -14,6 +14,7 @@ import 'package:fielamigo_app/screens/payment_methods/payment_methods_screen.dar
 import 'package:fielamigo_app/screens/profile/profile_screen.dart';
 import 'package:fielamigo_app/screens/profile_personal_information/profile_personal_information.dart';
 import 'package:fielamigo_app/screens/profile_user_address/profile_user_address.dart';
+import 'package:fielamigo_app/screens/search_results/search_results_screen.dart';
 import 'package:fielamigo_app/screens/user_form_screen/user_form_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -84,6 +85,7 @@ class MyApp extends StatelessWidget {
             '/profile/address': (context) => const ProfileUserAddressScreen(),
             '/profile/payment-methods': (context) => const PaymentMethodsScreen(),
             '/payment-methods/add': (context) => const AddPaymentMethodScreen(),
+            '/search-results': (context) => const SearchResultsScreen(),
             '/user-form': (context) => const UserFormScreen(),
             '/caregiver/home': ((context) => CaregiverHomeScreen()), //TODO change this
           }

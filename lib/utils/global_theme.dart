@@ -26,5 +26,12 @@ class GlobalTheme {
       primary: primary,
       secondary: secondary
     ),
+    tabBarTheme: const TabBarTheme(
+      labelColor: Colors.white,
+      unselectedLabelColor: Color.fromRGBO(255, 255, 255, 0.5),
+      indicator: BoxDecoration(
+        color: Color(0xff4b67a6),
+      ),
+    )
   );
 }

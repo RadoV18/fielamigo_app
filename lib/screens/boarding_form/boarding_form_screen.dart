@@ -39,7 +39,7 @@ class BoardingFormScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 20,),
                   ElevatedButton(
-                    onPressed: () => Navigator.pushNamed(context, '/'),
+                    onPressed: () => Navigator.pushNamed(context, '/search-results'),
                     child: const Text('Buscar alojamiento'),
                   ),
                 ],
