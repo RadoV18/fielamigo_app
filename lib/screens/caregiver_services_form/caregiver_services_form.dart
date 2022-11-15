@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:fielamigo_app/bloc/caregiver_services_form_cubit/caregiver_services_form_cubit.dart';
+import 'package:fielamigo_app/bloc/caregiver_services_form_cubit/caregiver_services_form_state.dart';
 import 'package:fielamigo_app/screens/caregiver_services_form/boarding_form_screen.dart';
 import 'package:fielamigo_app/screens/caregiver_services_form/nursing_form_screen.dart';
 import 'package:fielamigo_app/screens/caregiver_services_form/training_form_screen.dart';
@@ -7,6 +9,7 @@ import 'package:fielamigo_app/screens/caregiver_services_form/walking_form_scree
 import 'package:fielamigo_app/screens/caregiver_services_form/widgets/card.dart';
 import 'package:fielamigo_app/utils/global_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CareGiverServicesFormScreen extends StatelessWidget {
   const CareGiverServicesFormScreen({super.key});
@@ -31,46 +34,58 @@ class CareGiverServicesFormScreen extends StatelessWidget {
               ),
               const Text("Selecciona al menos 1 servicio."),
               const SizedBox(height: 30,),
-              CardFb1(
-                text: "Alojamiento",
-                iconPath: "assets/icons/ic_home_access_pet_parent.svg",
-                subtitle:
-                    "Si decides alojar, pos MODO SEXO 1",
-                isAlreadyCompleted: true,
-                onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=> BoardingForm())),
+              BlocBuilder<CaregiverServicesFormCubit, CaregiverServiesFormState>(
+                builder: (context, state) => 
+                CardFb1(
+                  text: "Alojamiento",
+                  iconPath: "assets/icons/ic_home_access_pet_parent.svg",
+                  subtitle:
+                      "Si decides alojar, pos MODO SEXO 1",
+                  isAlreadyCompleted: state.hasBoardingConfiguration ? true : false,
+                  onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=> BoardingForm())),
+                ),
               ),
               const SizedBox(
                 height: 15,
               ),
-              CardFb1(
-                text: "Paseo",
-                iconPath: "assets/icons/ic_dog_for_walk.svg",
-                subtitle:
-                    "Si decides pasear, pos MODO SEXO 2",
-                isAlreadyCompleted: true,
-                onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=> WalkingForm())),
+              BlocBuilder<CaregiverServicesFormCubit, CaregiverServiesFormState>(
+                builder: (context, state) => 
+                CardFb1(
+                  text: "Paseo",
+                  iconPath: "assets/icons/ic_dog_for_walk.svg",
+                  subtitle:
+                      "Si decides pasear, pos MODO SEXO 2",
+                  isAlreadyCompleted: state.hasWalkingConfiguration ? true : false,
+                  onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=> WalkingForm())),
+                ),
               ),
               const SizedBox(
                 height: 15,
               ),
-              CardFb1(
-                text: "Entrenamiento",
-                iconPath: "assets/icons/ic_service_training_placeholder.svg",
-                subtitle:
-                    "Si decides entrenar, pos MODO SEXO 3",
-                isAlreadyCompleted: true,
-                onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=> TrainingForm())),
+              BlocBuilder<CaregiverServicesFormCubit, CaregiverServiesFormState>(
+                builder: (context, state) =>
+                CardFb1(
+                  text: "Entrenamiento",
+                  iconPath: "assets/icons/ic_service_training_placeholder.svg",
+                  subtitle:
+                      "Si decides entrenar, pos MODO SEXO 3",
+                  isAlreadyCompleted: state.hasTrainingConfiguration ? true : false,
+                  onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=> TrainingForm())),
+                ),
               ),
               const SizedBox(
                 height: 15,
               ),
-              CardFb1(
-                text: "Cuidado",
-                iconPath: "assets/icons/ic_drop_in_service_tile.svg",
-                subtitle:
-                    "Si decides cuidar, pos MODO SEXO 4",
-                isAlreadyCompleted: true,
-                onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=> NursingForm())),
+              BlocBuilder<CaregiverServicesFormCubit, CaregiverServiesFormState>(
+                builder: (context, state) => 
+                CardFb1(
+                  text: "Cuidado",
+                  iconPath: "assets/icons/ic_drop_in_service_tile.svg",
+                  subtitle:
+                      "Si decides cuidar, pos MODO SEXO 4",
+                  isAlreadyCompleted: state.hasNursingConfiguration ? true : false,
+                  onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=> NursingForm())),
+                ),
               ),
               const SizedBox(height: 50,),
               DecoratedBox(

@@ -1,6 +1,8 @@
+import 'package:fielamigo_app/bloc/caregiver_services_form_cubit/caregiver_services_form_cubit.dart';
 import 'package:fielamigo_app/screens/caregiver_services_form/widgets/slider.dart';
 import 'package:fielamigo_app/screens/caregiver_services_form/widgets/text_input.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 
 class TrainingForm extends StatelessWidget {
@@ -11,7 +13,7 @@ class TrainingForm extends StatelessWidget {
     return Material(
       child: Padding(
         padding: EdgeInsets.only(
-          top: MediaQuery.of(context).padding.top+20,
+          top: MediaQuery.of(context).padding.top + 20,
           bottom: MediaQuery.of(context).padding.bottom,
           left: 5.w,
           right: 5.w,
@@ -30,26 +32,42 @@ class TrainingForm extends StatelessWidget {
               const SizedBox(
                 height: 30,
               ),
-              EmailInputFb1(inputController: _nightFeeController, hintText: 'Ingresa el monto en Bs.', title: '¿Cuánto quieres cobrar por hora?',),
+              EmailInputFb1(
+                inputController: _nightFeeController,
+                hintText: 'Ingresa el monto en Bs.',
+                title: '¿Cuánto quieres cobrar por hora?',
+              ),
               const SizedBox(
                 height: 30,
               ),
-              SliderFb1(min:0, max:10, divisions: 10, onChange:(v){}, title: 'Introduce un máximo de horas', helperText: 'horas'),
+              SliderFb1(
+                  min: 0,
+                  max: 10,
+                  divisions: 10,
+                  onChange: (v) {},
+                  title: 'Introduce un máximo de horas',
+                  helperText: 'horas'),
               const SizedBox(
                 height: 30,
               ),
-              SliderFb1(min:0, max:20, divisions: 20, onChange:(v){}, title: 'Introduce el numero máximo de perros', helperText: 'perros'),
+              SliderFb1(
+                  min: 0,
+                  max: 20,
+                  divisions: 20,
+                  onChange: (v) {},
+                  title: 'Introduce el numero máximo de perros',
+                  helperText: 'perros'),
               const SizedBox(
                 height: 30,
               ),
-              Text('En donde haces los paseos'), // TODO add map
+              const Text('En donde haces los paseos'), // TODO add map
               const SizedBox(
                 height: 30,
               ),
               DecoratedBox(
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: const Color(0xff01bf8f), 
+                    borderRadius: BorderRadius.circular(20),
+                    color: const Color(0xff01bf8f),
                   ),
                   child: ElevatedButton(
                       style: ButtonStyle(
@@ -64,10 +82,16 @@ class TrainingForm extends StatelessWidget {
                             RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15)),
                           )),
-                      onPressed: () {},
+                      onPressed: () {
+                        context
+                            .read<CaregiverServicesFormCubit>()
+                            .toggleTrainingConfiguration();
+                        Navigator.pop(context);
+                      },
                       child: const Text(
                         "Guardar",
-                        style:TextStyle(color: Color(0xffffffff), fontSize: 16),
+                        style:
+                            TextStyle(color: Color(0xffffffff), fontSize: 16),
                       ))),
             ],
           ),

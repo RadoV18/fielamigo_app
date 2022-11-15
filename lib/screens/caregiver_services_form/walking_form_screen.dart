@@ -1,12 +1,13 @@
+import 'package:fielamigo_app/bloc/caregiver_services_form_cubit/caregiver_services_form_cubit.dart';
 import 'package:fielamigo_app/screens/caregiver_services_form/widgets/slider.dart';
 import 'package:fielamigo_app/screens/caregiver_services_form/widgets/text_input.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 
 class WalkingForm extends StatelessWidget {
   WalkingForm({super.key});
   final _nightFeeController = TextEditingController();
-  final _pickupFeeController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -43,7 +44,7 @@ class WalkingForm extends StatelessWidget {
               const SizedBox(
                 height: 30,
               ),
-              Text('En donde haces los paseos'), // TODO add map
+              const Text('En donde haces los paseos'), // TODO add map
               const SizedBox(
                 height: 30,
               ),
@@ -65,7 +66,10 @@ class WalkingForm extends StatelessWidget {
                             RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15)),
                           )),
-                      onPressed: () {},
+                      onPressed: () {
+                        context.read<CaregiverServicesFormCubit>().toggleWalkingConfiguration();
+                        Navigator.pop(context);
+                      },
                       child: const Text(
                         "Guardar",
                         style:TextStyle(color: Color(0xffffffff), fontSize: 16),
