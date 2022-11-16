@@ -1,5 +1,6 @@
 import 'package:circular_bottom_navigation/tab_item.dart';
-import 'package:fielamigo_app/screens/caregiver_bookings/caregiver_bookings.dart';
+import 'package:fielamigo_app/screens/caregiver_bookings/caregiver_bookings_screen.dart';
+import 'package:fielamigo_app/screens/caregiver_bookings/caregiver_bookings_screen.dart';
 import 'package:fielamigo_app/screens/caregiver_test/c_test.dart';
 import 'package:fielamigo_app/widgets/navigation.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class CaregiverHomeScreen extends StatelessWidget {
   ]);
 
   List<Widget> screens = [
-    const OwnerBookings(),
+    const CaregiverBookingsScreen(),
     const CareTest(
       st: "Dos",
     ),
@@ -32,6 +33,6 @@ class CaregiverHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Navigation(startingIndex: 2,tabItems: tabItems, screens: screens);
+    return Navigation(startingIndex: 2, tabItems: tabItems, screens: screens);
   }
 }

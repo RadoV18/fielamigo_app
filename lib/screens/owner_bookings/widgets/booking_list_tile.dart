@@ -113,7 +113,7 @@ class BookingListTile extends StatelessWidget {
               Navigator.pushNamedAndRemoveUntil(
                   context, "/owner/bookings/edit", (_) => false);
             },
-            icon: const Icon(Icons.edit, size: 30))
+            icon: const Icon(Icons.tune, size: 30))
       ]),
     );
   }

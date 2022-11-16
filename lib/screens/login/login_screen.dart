@@ -56,17 +56,6 @@ class LoginScreen extends StatelessWidget {
                               context, "/caregiver/home", (_) => false);
                         },
                         child: const Text("Caregiver Test")),
-
-                    /* FA D 8 Botton prueba de mostrar reservas realizadas */
-                    ElevatedButton(
-                        //TODO: remove after testing
-                        onPressed: () {
-                          context.read<LogInCubit>().submit();
-                          // TODO: check if user is logged in
-                          Navigator.pushNamedAndRemoveUntil(
-                              context, "/owner/bookings", (_) => false);
-                        },
-                        child: const Text("Mostrar reservas realizadas")),
                     SizedBox(height: 2.5.h),
                     TextButton(
                         onPressed: () =>

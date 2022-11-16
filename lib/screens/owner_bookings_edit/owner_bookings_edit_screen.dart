@@ -16,7 +16,7 @@ class OwnerBookingsEditScreen extends StatelessWidget {
       child: Scaffold(
           appBar: CustomAppBar(
             onBackButtonPressed: () => Navigator.pop(context),
-            title: 'Detalles del cuidador',
+            title: 'Editar reserva',
           ),
           body: Column(
             mainAxisAlignment: MainAxisAlignment.start,
