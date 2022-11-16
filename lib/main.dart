@@ -21,6 +21,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
+import 'bloc/caregiver_services_form_cubit/caregiver_services_form_cubit.dart';
 import 'bloc/log_in_cubit/log_in_cubit.dart';
 import 'bloc/user_data_cubit/user_data_cubit.dart';
 import 'bloc/verification_code_cubit/verifiaction_code_cubit.dart';
@@ -56,7 +57,8 @@ class MyApp extends StatelessWidget {
         BlocProvider<BottomNavBarCubit>(
             create: (BuildContext context) => BottomNavBarCubit()),
         BlocProvider<AddPetCubit>(
-            create: (BuildContext context) => AddPetCubit()),
+          create: (BuildContext context) => AddPetCubit()
+        ),
       ],
       child: Sizer(
           builder: (context, orientation, deviceType) => MaterialApp(
