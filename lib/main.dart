@@ -8,6 +8,7 @@ import 'package:fielamigo_app/screens/login/login_screen.dart';
 import 'package:fielamigo_app/screens/onboarding/onboarding_screen.dart';
 import 'package:fielamigo_app/screens/owner_add_pet/owner_add_pet.dart';
 import 'package:fielamigo_app/screens/owner_bookings/owner_bookings_screen.dart';
+import 'package:fielamigo_app/screens/owner_bookings_edit/owner_bookings_edit_screen.dart';
 import 'package:fielamigo_app/screens/owner_home/owner_home_screen.dart';
 import 'package:fielamigo_app/screens/owner_pets/owner_pets_screen.dart';
 import 'package:fielamigo_app/screens/payment_methods/payment_methods_screen.dart';
@@ -45,52 +46,55 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<SignUpCubit>(
-          create: (BuildContext context) => SignUpCubit()
-        ),
+            create: (BuildContext context) => SignUpCubit()),
         BlocProvider<VerificationCodeCubit>(
-          create: (BuildContext context) => VerificationCodeCubit()
-        ),
+            create: (BuildContext context) => VerificationCodeCubit()),
         BlocProvider<UserDataCubit>(
-          create: (BuildContext context) => UserDataCubit()
-        ),
+            create: (BuildContext context) => UserDataCubit()),
         BlocProvider<LogInCubit>(
-          create: (BuildContext context) => LogInCubit()
-        ),
+            create: (BuildContext context) => LogInCubit()),
         BlocProvider<BottomNavBarCubit>(
-          create: (BuildContext context) => BottomNavBarCubit()
-        ),
+            create: (BuildContext context) => BottomNavBarCubit()),
         BlocProvider<AddPetCubit>(
-          create: (BuildContext context) => AddPetCubit()
-        ),
+            create: (BuildContext context) => AddPetCubit()),
       ],
       child: Sizer(
-        builder: (context, orientation, deviceType) => MaterialApp(
-          theme: GlobalTheme.globalTheme,
-          initialRoute: '/',
-          routes: {
-            '/': (context) => showHome
+          builder: (context, orientation, deviceType) => MaterialApp(
+                  theme: GlobalTheme.globalTheme,
+                  initialRoute: '/',
+                  routes: {
+                    '/': (context) => showHome
                         ? const WelcomeScreen()
                         : const OnboardingScreen(),
-            '/welcome': (context) => const WelcomeScreen(),
-            '/sign-up': (context) => const SignUpScreen(),
-            '/log-in': (context) => const LoginScreen(),
-            '/verification-code': (context) => const VerificationCodeScreen(),
-            '/owner/home': (context) => const OwnerHomeScreen(),
-            '/owner/bookings': (context) => const OwnerBookingsScreen(),
-            '/owner/boarding': (context) => const BoardingFormScreen(),
-            '/owner/pets': (context) => const OwnerPetsScreen(),
-            '/owner/pets/new': (context) => const OwnerAddPetScreen(),
-            '/owner/profile': (context) => const ProfileScreen(),
-            '/profile/personal-information': (context) => const ProfilePersonalInformationScreen(),
-            '/profile/address': (context) => const ProfileUserAddressScreen(),
-            '/profile/payment-methods': (context) => const PaymentMethodsScreen(),
-            '/payment-methods/add': (context) => const AddPaymentMethodScreen(),
-            '/search-results': (context) => const SearchResultsScreen(),
-            '/user-form': (context) => const UserFormScreen(),
-            '/caregiver/home': ((context) => CaregiverHomeScreen()), //TODO change this
-          }
-        )
-      ),
+                    '/welcome': (context) => const WelcomeScreen(),
+                    '/sign-up': (context) => const SignUpScreen(),
+                    '/log-in': (context) => const LoginScreen(),
+                    '/verification-code': (context) =>
+                        const VerificationCodeScreen(),
+                    '/owner/home': (context) => const OwnerHomeScreen(),
+                    '/owner/bookings': (context) => const OwnerBookingsScreen(),
+                    '/owner/bookings/edit': (context) =>
+                        const OwnerBookingsEditScreen(
+                          service: 'Entrenamiento',
+                          userId: 1,
+                        ),
+                    '/owner/boarding': (context) => const BoardingFormScreen(),
+                    '/owner/pets': (context) => const OwnerPetsScreen(),
+                    '/owner/pets/new': (context) => const OwnerAddPetScreen(),
+                    '/owner/profile': (context) => const ProfileScreen(),
+                    '/profile/personal-information': (context) =>
+                        const ProfilePersonalInformationScreen(),
+                    '/profile/address': (context) =>
+                        const ProfileUserAddressScreen(),
+                    '/profile/payment-methods': (context) =>
+                        const PaymentMethodsScreen(),
+                    '/payment-methods/add': (context) =>
+                        const AddPaymentMethodScreen(),
+                    '/search-results': (context) => const SearchResultsScreen(),
+                    '/user-form': (context) => const UserFormScreen(),
+                    '/caregiver/home': ((context) =>
+                        CaregiverHomeScreen()), //TODO change this
+                  })),
     );
   }
 }

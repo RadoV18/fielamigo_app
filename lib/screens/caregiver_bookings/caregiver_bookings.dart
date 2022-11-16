@@ -28,7 +28,13 @@ class OwnerBookings extends StatelessWidget {
           child: ListView.builder(
             itemCount: 10,
             itemBuilder: (context, index) => Card(
-              child: BookingListTile(index: index, serviceType: "Paseo", dogName: "Atom", ownerName: "Ignacio Illanes", startingDate: "13/09/2022", endingDate: "27/09/2022"),
+              child: BookingListTile(
+                  index: index,
+                  serviceType: "Paseo",
+                  dogName: "Atom",
+                  ownerName: "Ignacio Illanes",
+                  startingDate: "13/09/2022",
+                  endingDate: "27/09/2022"),
             ),
           ),
         ),
