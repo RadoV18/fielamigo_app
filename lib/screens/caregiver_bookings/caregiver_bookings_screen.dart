@@ -15,6 +15,24 @@ class CaregiverBookingsScreen extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
+                /* Two ElevatedButtons in row */
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, "/caregiver/bookings/new");
+                      },
+                      child: const Text("Solicitudes Nuevas"),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, "/caregiver/home");
+                      },
+                      child: const Text("Reservas Completadas"),
+                    ),
+                  ],
+                ),
                 const SizedBox(height: 5),
                 BookingListTile(
                   index: 0,
@@ -37,7 +55,17 @@ class CaregiverBookingsScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 5),
                 BookingListTile(
-                  index: 1,
+                  index: 2,
+                  serviceType: "Paseo",
+                  dogName: "Atom",
+                  stateIcon: "cancel",
+                  ownerName: "Ignacio Illanes",
+                  startingDate: "15/10/2022",
+                  endingDate: "15/12/2022",
+                ),
+                const SizedBox(height: 5),
+                BookingListTile(
+                  index: 3,
                   serviceType: "Paseo",
                   dogName: "Atom",
                   stateIcon: "cancel",

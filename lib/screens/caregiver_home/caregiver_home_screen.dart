@@ -1,6 +1,5 @@
 import 'package:circular_bottom_navigation/tab_item.dart';
 import 'package:fielamigo_app/screens/caregiver_bookings/caregiver_bookings_screen.dart';
-import 'package:fielamigo_app/screens/caregiver_bookings/caregiver_bookings_screen.dart';
 import 'package:fielamigo_app/screens/caregiver_test/c_test.dart';
 import 'package:fielamigo_app/widgets/navigation.dart';
 import 'package:flutter/material.dart';

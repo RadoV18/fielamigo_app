@@ -37,7 +37,7 @@ class OwnerBookingsScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 5),
                 BookingListTile(
-                  index: 1,
+                  index: 2,
                   serviceType: "Entrenamiento",
                   dogName: "Atom",
                   stateIcon: "cancel",

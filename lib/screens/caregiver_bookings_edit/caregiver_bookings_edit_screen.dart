@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import '../../widgets/biography_card.dart';
 import '../../widgets/custom_app_bar.dart';
 
-class OwnerBookingsEditScreen extends StatelessWidget {
+class CaregiverBookingsEditScreen extends StatelessWidget {
   final int userId;
   final String service;
 
-  const OwnerBookingsEditScreen(
+  const CaregiverBookingsEditScreen(
       {super.key, required this.userId, required this.service});
 
   @override
@@ -16,7 +16,7 @@ class OwnerBookingsEditScreen extends StatelessWidget {
       child: Scaffold(
           appBar: CustomAppBar(
             onBackButtonPressed: () => Navigator.pop(context),
-            title: 'Editar reserva - $service',
+            title: "Editar reserva - $service",
           ),
           body: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -35,7 +35,6 @@ class OwnerBookingsEditScreen extends StatelessWidget {
                   Navigator.pushNamed(context, '/');
                 },
               ),
-              /* two buttons in column with the background blue */
               Container(
                 width: MediaQuery.of(context).size.width,
                 height: 200,
@@ -51,12 +50,6 @@ class OwnerBookingsEditScreen extends StatelessWidget {
                               context, "/", (_) => false);
                         },
                         child: const Text("Cancelar reservas")),
-                    ElevatedButton(
-                        onPressed: () {
-                          Navigator.pushNamedAndRemoveUntil(
-                              context, "/", (_) => false);
-                        },
-                        child: const Text("Solicitar cambio de fecha")),
                   ],
                 ),
               ),
