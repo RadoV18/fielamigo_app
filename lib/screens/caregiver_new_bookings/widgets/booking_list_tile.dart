@@ -98,8 +98,7 @@ class BookingListTile extends StatelessWidget {
         ]),
         IconButton(
             onPressed: () {
-              Navigator.pushNamedAndRemoveUntil(
-                  context, "/caregiver/home", (_) => false);
+              Navigator.pushNamed(context, "/caregiver/bookings/request");
             },
             icon: const Icon(Icons.help, size: 30))
       ]),

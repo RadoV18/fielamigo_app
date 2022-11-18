@@ -28,18 +28,27 @@ class BoardingFormScreen extends StatelessWidget {
                     child: Column(
                       children: const [
                         BoardingDescription(),
-                        SizedBox(height: 20,),
+                        SizedBox(
+                          height: 20,
+                        ),
                         BoardingDateRange(),
-                        SizedBox(height: 20,),
+                        SizedBox(
+                          height: 20,
+                        ),
                         BoardingLocation(),
-                        SizedBox(height: 20,),
+                        SizedBox(
+                          height: 20,
+                        ),
                         BoardingPets(),
                       ],
                     ),
                   ),
-                  const SizedBox(height: 20,),
+                  const SizedBox(
+                    height: 20,
+                  ),
                   ElevatedButton(
-                    onPressed: () => Navigator.pushNamed(context, '/search-results'),
+                    onPressed: () =>
+                        Navigator.pushNamed(context, '/search-results'),
                     child: const Text('Buscar alojamiento'),
                   ),
                 ],

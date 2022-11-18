@@ -3,6 +3,7 @@ import 'package:fielamigo_app/bloc/bottom_navbar_cubit/bottom_navbar_cubit.dart'
 import 'package:fielamigo_app/bloc/sign_up_cubit/sign_up_cubit.dart';
 import 'package:fielamigo_app/screens/add_payment_method/add_payment_method_screen.dart';
 import 'package:fielamigo_app/screens/boarding_form/boarding_form_screen.dart';
+import 'package:fielamigo_app/screens/caregiver_booking_request/caregiver_booking_request_screen.dart';
 import 'package:fielamigo_app/screens/caregiver_bookings_edit/caregiver_bookings_edit_screen.dart';
 import 'package:fielamigo_app/screens/caregiver_home/caregiver_home_screen.dart';
 import 'package:fielamigo_app/screens/caregiver_new_bookings/caregiver_new_bookings_screen.dart';
@@ -19,6 +20,7 @@ import 'package:fielamigo_app/screens/profile_personal_information/profile_perso
 import 'package:fielamigo_app/screens/profile_user_address/profile_user_address.dart';
 import 'package:fielamigo_app/screens/search_results/search_results_screen.dart';
 import 'package:fielamigo_app/screens/user_form_screen/user_form_screen.dart';
+import 'package:fielamigo_app/widgets/pet_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -104,6 +106,10 @@ class MyApp extends StatelessWidget {
                           service: 'Paseo',
                           userId: 1,
                         ),
+                    '/caregiver/bookings/request': ((context) =>
+                        const CaregiverBookingRequestScreen()),
+                    '/owner/pets/info': ((context) =>
+                        const PetInfo()),
                   })),
     );
   }

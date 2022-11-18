@@ -94,11 +94,11 @@ class PetCard extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {
-              print('edit pet');
+              Navigator.pushNamed(context, "/owner/pets/info");
             },
             icon: const Icon(
-              Icons.edit,
-              color: Colors.grey,
+              Icons.info,
+              color: Color.fromARGB(255, 37, 37, 37),
               size: 30
             )
           )
