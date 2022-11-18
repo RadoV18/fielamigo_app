@@ -138,7 +138,8 @@ class CaregiverBookingRequestScreen extends StatelessWidget {
                                 border: OutlineInputBorder(),
                                 contentPadding: EdgeInsets.all(10),
                                 helperText: 'Notas del dueño',
-                                hintText: 'Sim es inquieto al salir a la calle',
+                                hintText:
+                                    'Fido es inquieto al salir a la calle',
                                 isDense: true,
                                 hintStyle: TextStyle(
                                   fontSize: 17,

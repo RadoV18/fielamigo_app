@@ -1,12 +1,9 @@
 import 'package:fielamigo_app/bloc/add_pet_cubit/add_pet_cubit.dart';
-import 'package:fielamigo_app/screens/owner_add_pet/widgets/breed_autocomplete.dart';
-import 'package:fielamigo_app/widgets/custom_image_picker.dart';
-import 'package:fielamigo_app/screens/owner_add_pet/widgets/male_female_options.dart';
 import 'package:fielamigo_app/widgets/custom_app_bar.dart';
-import 'package:fielamigo_app/widgets/custom_date_picker.dart';
+import 'package:fielamigo_app/widgets/pet_description.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fielamigo_app/screens/owner_add_pet/widgets/dog_size_options.dart';
+import 'package:sizer/sizer.dart';
 
 class PetInfo extends StatelessWidget {
   const PetInfo({super.key});
@@ -17,7 +14,7 @@ class PetInfo extends StatelessWidget {
         resizeToAvoidBottomInset: true,
         appBar: CustomAppBar(
           onBackButtonPressed: () => Navigator.pop(context),
-          title: 'Agregar Mascota',
+          title: 'Información de mascota',
         ),
         body: BlocBuilder<AddPetCubit, AddPetState>(
           builder: (context, state) {
@@ -37,88 +34,76 @@ class PetInfo extends StatelessWidget {
                             const SizedBox(
                               height: 20,
                             ),
-                            CustomImagePicker(
-                              imagePath: state.image?.path ?? "",
-                              onImageSelected: (image) =>
-                                  context.read<AddPetCubit>().setImage(image),
-                            ),
+                            Container(
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: const Color(0xff047b5b), width: 3),
+                                  borderRadius: BorderRadius.circular(30.h),
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(30.h),
+                                  child: Image.network(
+                                      "https://www.elmueble.com/medio/2022/09/05/perro-cachorro_82dd9cd3_900x900.jpg"),
+                                )),
                             const SizedBox(
                               height: 20,
                             ),
-                            TextField(
-                              decoration: const InputDecoration(
-                                labelText: "Nombre",
-                              ),
-                              onChanged: (value) =>
-                                  context.read<AddPetCubit>().setName(value),
+                            const Text(
+                                style: TextStyle(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                "Fido"),
+                            const SizedBox(
+                              height: 5,
                             ),
+                            const Text(
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                                "1 año"),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            const Text(
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                                "Golden"),
                             const SizedBox(
                               height: 20,
                             ),
-                            const BreedAutocomplete(),
+                            const PetDescription(),
                             const SizedBox(
-                              height: 20,
-                            ),
-                            CustomDatePicker(
-                              label: "Fecha de nacimiento",
-                              onDateChanged: (String date) {
-                                context.read<AddPetCubit>().setBirthDate(date);
-                              },
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            const MaleFemaleOptions(),
-                            const Divider(
-                              thickness: 1,
-                              height: 30,
-                              color: Color(0xFFBDBDBD),
-                            ),
-                            const DogSizeOptions(),
-                            const SizedBox(
-                              height: 20,
+                              height: 5,
                             ),
                             Row(
                               children: [
                                 Checkbox(
-                                  value: context
-                                      .read<AddPetCubit>()
-                                      .state
-                                      .isSterilized,
-                                  onChanged: (bool? value) {
-                                    context
-                                        .read<AddPetCubit>()
-                                        .setIsSterilized(value!);
-                                  },
+                                  value: true,
+                                  onChanged: (bool? value) {},
                                 ),
-                                const Text("Esterilizado."),
+                                const Text("Esterilizado"),
                               ],
                             ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            TextField(
+                            const TextField(
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                contentPadding: EdgeInsets.all(10),
+                                helperText: 'Notas del dueño',
+                                hintText: 'Fido es inquieto al salir de casa',
+                                isDense: true,
+                                hintStyle: TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black,
+                                ),
+                                isCollapsed: false,
+                              ),
                               maxLines: 5,
-                              decoration: const InputDecoration(
-                                labelText: "Notas",
-                                hintText:
-                                    "Agrega algún detalle sobre tu mascota.",
-                              ),
-                              onChanged: (value) =>
-                                  context.read<AddPetCubit>().setNotes(value),
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 10),
-                              ),
-                              onPressed: () {
-                                context.read<AddPetCubit>().save();
-                              },
-                              child: const Text("Guardar Mascota"),
+                              readOnly: true,
                             ),
                             const SizedBox(
                               height: 20,

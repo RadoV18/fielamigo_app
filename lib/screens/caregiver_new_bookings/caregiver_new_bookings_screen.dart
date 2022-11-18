@@ -22,7 +22,7 @@ class CaregiverNewBookingsScreen extends StatelessWidget {
                   BookingListTile(
                     index: 0,
                     serviceType: "Paseo",
-                    dogName: "Sim",
+                    dogName: "Fido",
                     stateIcon: "pets",
                     ownerName: "Ricardo Vaquera",
                     startingDate: "14/09/2022",
@@ -32,7 +32,7 @@ class CaregiverNewBookingsScreen extends StatelessWidget {
                   BookingListTile(
                     index: 1,
                     serviceType: "Entrenamiento",
-                    dogName: "Fido",
+                    dogName: "Atom",
                     stateIcon: "pets",
                     ownerName: "Ignacio Illanes",
                     startingDate: "15/10/2022",
