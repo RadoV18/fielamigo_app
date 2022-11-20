@@ -20,6 +20,7 @@ class PetDescription extends StatelessWidget {
               ),
               onPressed: () {},
             )),
+        SizedBox(width: 1.h),
         Expanded(
           flex: 1,
           child: CustomRadioButton(

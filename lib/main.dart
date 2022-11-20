@@ -5,6 +5,7 @@ import 'package:fielamigo_app/screens/add_payment_method/add_payment_method_scre
 import 'package:fielamigo_app/screens/boarding_form/boarding_form_screen.dart';
 import 'package:fielamigo_app/screens/caregiver_booking_request/caregiver_booking_request_screen.dart';
 import 'package:fielamigo_app/screens/caregiver_bookings_edit/caregiver_bookings_edit_screen.dart';
+import 'package:fielamigo_app/screens/caregiver_completed_bookings/caregiver_completed_bookings_screen.dart';
 import 'package:fielamigo_app/screens/caregiver_home/caregiver_home_screen.dart';
 import 'package:fielamigo_app/screens/caregiver_new_bookings/caregiver_new_bookings_screen.dart';
 import 'package:fielamigo_app/screens/login/login_screen.dart';
@@ -108,8 +109,9 @@ class MyApp extends StatelessWidget {
                         ),
                     '/caregiver/bookings/request': ((context) =>
                         const CaregiverBookingRequestScreen()),
-                    '/owner/pets/info': ((context) =>
-                        const PetInfo()),
+                    '/caregiver/bookings/completed': ((context) =>
+                        const CaregiverCompletedBookingsScreen()),
+                    '/owner/pets/info': ((context) => const PetInfo()),
                   })),
     );
   }

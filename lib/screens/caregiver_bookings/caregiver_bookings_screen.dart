@@ -15,7 +15,6 @@ class CaregiverBookingsScreen extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                /* Two ElevatedButtons in row */
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -27,7 +26,7 @@ class CaregiverBookingsScreen extends StatelessWidget {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, "/caregiver/home");
+                        Navigator.pushNamed(context, "/caregiver/bookings/completed");
                       },
                       child: const Text("Reservas Completadas"),
                     ),
