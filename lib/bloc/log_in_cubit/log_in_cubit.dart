@@ -8,6 +8,7 @@ import 'package:formz/formz.dart';
 import '../../data/models/auth_dto.dart';
 import '../../data/models/email.dart';
 import '../../data/models/password.dart';
+import '../../utils/token_utils.dart';
 import '../page_status.dart';
 
 part 'log_in_state.dart';
@@ -52,13 +53,18 @@ class LogInCubit extends Cubit<LogInState> {
 
     try {
       AuthDto authDto = await _logInRepository.logIn(logInDto);
-      emit(state.copyWith(
-        status: PageStatus.success
-      ));
+      
       // store token in secure storage
       FlutterSecureStorage storage = const FlutterSecureStorage();
       storage.write(key: "token", value: authDto.token!);
       storage.write(key: "refresh", value: authDto.refreshToken!);
+
+      bool isOwner = TokenUtils.checkIsOwner(authDto.token!);
+
+      emit(state.copyWith(
+        status: PageStatus.success,
+        isOwner: isOwner
+      ));
     } on Exception catch (e) {
       emit(state.copyWith(
         status: PageStatus.error

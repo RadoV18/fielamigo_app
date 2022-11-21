@@ -26,10 +26,14 @@ class LoginScreen extends StatelessWidget {
               isDismissible: false
             );
           } else if (state.status == PageStatus.success) {
-            // TODO: check if the user is a pet owner or a pet sitter
+            
             Navigator.of(context, rootNavigator: true).pop();
+            if(state.isOwner) {
+              Navigator.of(context)
+                .pushNamedAndRemoveUntil('/owner/home', (Route<dynamic> route) => false);
+            }
             Navigator.of(context)
-              .pushNamedAndRemoveUntil('/owner/home', (Route<dynamic> route) => false);
+              .pushNamedAndRemoveUntil('/caregiver/home', (Route<dynamic> route) => false);
             context.read<LogInCubit>().reset();
           } else if (state.status == PageStatus.error) {
             Navigator.of(context, rootNavigator: true).pop();
