@@ -1,13 +1,17 @@
 import 'package:fielamigo_app/bloc/log_in_cubit/log_in_cubit.dart';
+import 'package:fielamigo_app/screens/owner_home/owner_home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../bloc/bottom_navbar_cubit/bottom_navbar_cubit.dart';
 import '../../bloc/page_status.dart';
+import '../../utils/token_utils.dart';
 import '../../utils/ui_utils.dart';
 import '../../widgets/email_input.dart';
 import '../../widgets/password_input.dart';
+import '../caregiver_home/caregiver_home_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -18,7 +22,7 @@ class LoginScreen extends StatelessWidget {
       create: (BuildContext context) => LogInCubit(),
       child: BlocConsumer<LogInCubit, LogInState>(
         listenWhen:(previous, current) => previous.status != current.status,
-        listener: (context, state) {
+        listener: (context, state) async {
           if (state.status == PageStatus.loading) {
             UiUtils.showAlertDialog(
               context,
@@ -29,12 +33,26 @@ class LoginScreen extends StatelessWidget {
           } else if (state.status == PageStatus.success) {
             context.read<BottomNavBarCubit>().reset();
             Navigator.of(context, rootNavigator: true).pop();
+
+            FlutterSecureStorage storage = const FlutterSecureStorage();
+            String? token = await storage.read(key: "token");
+            String? firstName = TokenUtils.getFirstName(token);
+            Navigator.popUntil(context, (Route<dynamic> route) => false);
+            
             if(state.isOwner) {
-              Navigator.of(context)
-                .pushNamedAndRemoveUntil('/owner/home', (Route<dynamic> route) => false);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => OwnerHomeScreen(firstName: firstName)
+                )
+              );
             } else {
-              Navigator.of(context)
-                .pushNamedAndRemoveUntil('/caregiver/home', (Route<dynamic> route) => false);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CaregiverHomeScreen(firstName: firstName)
+                )
+              );
             }
             context.read<LogInCubit>().reset();
           } else if (state.status == PageStatus.error) {

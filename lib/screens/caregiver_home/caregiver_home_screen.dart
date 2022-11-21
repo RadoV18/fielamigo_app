@@ -5,7 +5,13 @@ import 'package:fielamigo_app/widgets/navigation.dart';
 import 'package:flutter/material.dart';
 
 class CaregiverHomeScreen extends StatelessWidget {
-  CaregiverHomeScreen({super.key});
+  final String? firstName;
+
+  CaregiverHomeScreen({
+    super.key,
+    this.firstName,
+  });
+
   List<TabItem> tabItems = List.of([
     TabItem(Icons.calendar_month_outlined, "Reservas", Colors.red),
     TabItem(Icons.message, "Mensajes", Colors.orange),

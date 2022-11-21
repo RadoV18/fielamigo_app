@@ -1,7 +1,6 @@
 
 import 'package:fielamigo_app/data/models/create_user_res_dto.dart';
 
-import '../models/response_dto.dart';
 import '../models/user_dto.dart';
 import '../provider/auth.dart';
 import '../provider/user.dart';

@@ -7,24 +7,25 @@ import 'package:fielamigo_app/widgets/service_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
-import '../../widgets/bottom_navigation_bar_owner.dart';
 import '../caregiver_test/c_test.dart';
 
 class OwnerHomeScreen extends StatelessWidget {
-  const OwnerHomeScreen({super.key});
+  final String? firstName;
 
-  static const List<Widget> screens = [
-    OwnerBookingsScreen(),
-    CareTest(
-      st: "Dos",
-    ),
-    HomeScreen(),
-    OwnerPetsScreen(),
-    ProfileScreen()
-  ];
+  const OwnerHomeScreen({super.key, this.firstName});
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> screens = [
+      const OwnerBookingsScreen(),
+      const CareTest(
+        st: "Dos",
+      ),
+      HomeScreen(firstName: firstName),
+      const OwnerPetsScreen(),
+      const ProfileScreen()
+    ];
+
     return Navigation(
       startingIndex: 2,
       tabItems: [
@@ -41,7 +42,9 @@ class OwnerHomeScreen extends StatelessWidget {
 
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  final String? firstName;
+
+  const HomeScreen({super.key, this.firstName});
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +53,7 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              "Bienvenido, {dueño}",
+              firstName != null ? "Hola, $firstName" : "Bienvenido a FielAmigo",
               style: TextStyle(
                 fontSize: 20.sp,
                 fontWeight: FontWeight.bold,
