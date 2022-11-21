@@ -30,6 +30,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 import 'bloc/log_in_cubit/log_in_cubit.dart';
 import 'bloc/user_data_cubit/user_data_cubit.dart';
+import 'bloc/user_info_cubit/user_info_cubit.dart';
 import 'bloc/verification_code_cubit/verifiaction_code_cubit.dart';
 import 'screens/sign_up/sign_up_screen.dart';
 import 'screens/verification_code/verification_code_screen.dart';
@@ -73,6 +74,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider<UserInfoCubit>(
+          create: (context) => UserInfoCubit()..init(),
+        ),
         BlocProvider<SignUpCubit>(
             create: (BuildContext context) => SignUpCubit()),
         BlocProvider<UserDataCubit>(

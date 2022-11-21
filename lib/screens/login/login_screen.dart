@@ -1,4 +1,5 @@
 import 'package:fielamigo_app/bloc/log_in_cubit/log_in_cubit.dart';
+import 'package:fielamigo_app/bloc/user_info_cubit/user_info_cubit.dart';
 import 'package:fielamigo_app/screens/owner_home/owner_home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,22 +36,30 @@ class LoginScreen extends StatelessWidget {
             Navigator.of(context, rootNavigator: true).pop();
 
             FlutterSecureStorage storage = const FlutterSecureStorage();
+
             String? token = await storage.read(key: "token");
-            String? firstName = TokenUtils.getFirstName(token);
+            String? firstName = TokenUtils.getFirstName(token!);
+            String? lastName = TokenUtils.getLastName(token);
+            int? userId = TokenUtils.getUserId(token);
+
+            context.read<UserInfoCubit>().setUserInfo(
+              userId, firstName, lastName
+            );
+
             Navigator.popUntil(context, (Route<dynamic> route) => false);
             
             if(state.isOwner) {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => OwnerHomeScreen(firstName: firstName)
+                  builder: (context) => OwnerHomeScreen()
                 )
               );
             } else {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => CaregiverHomeScreen(firstName: firstName)
+                  builder: (context) => CaregiverHomeScreen()
                 )
               );
             }

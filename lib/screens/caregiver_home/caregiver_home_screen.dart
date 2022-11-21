@@ -5,14 +5,15 @@ import 'package:fielamigo_app/widgets/navigation.dart';
 import 'package:flutter/material.dart';
 
 class CaregiverHomeScreen extends StatelessWidget {
-  final String? firstName;
 
-  CaregiverHomeScreen({
+
+  const CaregiverHomeScreen({
     super.key,
-    this.firstName,
   });
 
-  List<TabItem> tabItems = List.of([
+  @override
+  Widget build(BuildContext context) {
+    List<TabItem> tabItems = List.of([
     TabItem(Icons.calendar_month_outlined, "Reservas", Colors.red),
     TabItem(Icons.message, "Mensajes", Colors.orange),
     TabItem(Icons.home, "Inicio", Colors.blue),
@@ -35,9 +36,6 @@ class CaregiverHomeScreen extends StatelessWidget {
       st: "Cinco",
     ),
   ];
-
-  @override
-  Widget build(BuildContext context) {
     return Navigation(startingIndex: 2, tabItems: tabItems, screens: screens);
   }
 }

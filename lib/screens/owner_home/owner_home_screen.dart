@@ -5,25 +5,26 @@ import 'package:fielamigo_app/screens/profile/profile_screen.dart';
 import 'package:fielamigo_app/widgets/navigation.dart';
 import 'package:fielamigo_app/widgets/service_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
+import '../../bloc/user_info_cubit/user_info_cubit.dart';
 import '../caregiver_test/c_test.dart';
 
 class OwnerHomeScreen extends StatelessWidget {
-  final String? firstName;
 
-  const OwnerHomeScreen({super.key, this.firstName});
+  const OwnerHomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> screens = [
-      const OwnerBookingsScreen(),
-      const CareTest(
+    List<Widget> screens = const [
+      OwnerBookingsScreen(),
+      CareTest(
         st: "Dos",
       ),
-      HomeScreen(firstName: firstName),
-      const OwnerPetsScreen(),
-      const ProfileScreen()
+      HomeScreen(),
+      OwnerPetsScreen(),
+      ProfileScreen()
     ];
 
     return Navigation(
@@ -48,87 +49,92 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Center(
-        child: Column(
-          children: [
-            Text(
-              firstName != null ? "Hola, $firstName" : "Bienvenido a FielAmigo",
-              style: TextStyle(
-                fontSize: 20.sp,
-                fontWeight: FontWeight.bold,
-              ),
+    return BlocBuilder<UserInfoCubit, UserInfoState>(
+      builder: (context, state) {
+        print("${state.userId} ${state.firstName} ${state.lastName}");
+        return SafeArea(
+          child: Center(
+            child: Column(
+              children: [
+                Text(
+                  state.firstName != null ? "Hola, ${state.firstName}" : "Bienvenido a FielAmigo",
+                  style: TextStyle(
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  "¿Qué necesita tu perro?",
+                  style: TextStyle(
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 10),
+                      ServiceButton(
+                        text: "Alojamiento",
+                        route: "/owner/boarding",
+                        icon: SvgPicture.asset(
+                          "assets/icons/ic_boarding.svg",
+                          height: 8.h,
+                        )
+                      ),
+                      const SizedBox(height: 10),
+                      ServiceButton(
+                        text: "Paseo",
+                        route: "/owner/walking",
+                        icon: SvgPicture.asset(
+                          "assets/icons/ic_dog_walk.svg",
+                          height: 8.h,
+                        )
+                      ),
+                      const SizedBox(height: 10),
+                      ServiceButton(
+                        text: "Entrenamiento",
+                        route: "/owner/training",
+                        icon: SvgPicture.asset(
+                          "assets/icons/ic_training.svg",
+                          height: 8.h,
+                        )
+                      ),
+                      const SizedBox(height: 10),
+                      ServiceButton(
+                        text: "Cuidado",
+                        route: "/owner/nursing",
+                        icon: SvgPicture.asset(
+                          "assets/icons/ic_nursing.svg",
+                          height: 8.h,
+                        )
+                      ),
+                      const SizedBox(height: 10),
+                      ServiceButton(
+                        text: "Seguros",
+                        route: "/owner/insurance",
+                        icon: SvgPicture.asset(
+                          "assets/icons/ic_insurance.svg",
+                          height: 8.h,
+                        )
+                      ),
+                      const SizedBox(height: 10),
+                      ServiceButton(
+                        text: "Veterinarias",
+                        route: "/vets",
+                        icon: SvgPicture.asset(
+                          "assets/icons/ic_vet.svg",
+                          height: 8.h,
+                        )
+                      ),
+                    ]
+                  ),
+                )
+              ]
             ),
-            Text(
-              "¿Qué necesita tu perro?",
-              style: TextStyle(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Expanded(
-              child: Column(
-                children: [
-                  const SizedBox(height: 10),
-                  ServiceButton(
-                    text: "Alojamiento",
-                    route: "/owner/boarding",
-                    icon: SvgPicture.asset(
-                      "assets/icons/ic_boarding.svg",
-                      height: 8.h,
-                    )
-                  ),
-                  const SizedBox(height: 10),
-                  ServiceButton(
-                    text: "Paseo",
-                    route: "/owner/walking",
-                    icon: SvgPicture.asset(
-                      "assets/icons/ic_dog_walk.svg",
-                      height: 8.h,
-                    )
-                  ),
-                  const SizedBox(height: 10),
-                  ServiceButton(
-                    text: "Entrenamiento",
-                    route: "/owner/training",
-                    icon: SvgPicture.asset(
-                      "assets/icons/ic_training.svg",
-                      height: 8.h,
-                    )
-                  ),
-                  const SizedBox(height: 10),
-                  ServiceButton(
-                    text: "Cuidado",
-                    route: "/owner/nursing",
-                    icon: SvgPicture.asset(
-                      "assets/icons/ic_nursing.svg",
-                      height: 8.h,
-                    )
-                  ),
-                  const SizedBox(height: 10),
-                  ServiceButton(
-                    text: "Seguros",
-                    route: "/owner/insurance",
-                    icon: SvgPicture.asset(
-                      "assets/icons/ic_insurance.svg",
-                      height: 8.h,
-                    )
-                  ),
-                  const SizedBox(height: 10),
-                  ServiceButton(
-                    text: "Veterinarias",
-                    route: "/vets",
-                    icon: SvgPicture.asset(
-                      "assets/icons/ic_vet.svg",
-                      height: 8.h,
-                    )
-                  ),
-                ]
-              ),
-            )
-          ]
-        ),
-      ),
+          ),
+        );
+      }
     );
   }
 }

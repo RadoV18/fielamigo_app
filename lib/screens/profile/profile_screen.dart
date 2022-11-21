@@ -1,6 +1,8 @@
+import 'package:fielamigo_app/bloc/user_info_cubit/user_info_cubit.dart';
 import 'package:fielamigo_app/screens/profile/widgets/profile_card.dart';
 import 'package:fielamigo_app/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'widgets/profile_option.dart';
@@ -30,9 +32,7 @@ class ProfileScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                   // User profile picture and name
-                  const ProfileCard(
-                    // profilePictureUrl: profilePictureUrl, from token
-                  ),
+                  const ProfileCard(),
                   const Divider(
                     color: Color(0xFFBDBDBD),
                     height: 20,
@@ -79,6 +79,7 @@ class ProfileScreen extends StatelessWidget {
                       FlutterSecureStorage storage = const FlutterSecureStorage();
                       storage.delete(key: "token");
                       storage.delete(key: "refresh");
+                      context.read<UserInfoCubit>().clear();
                       Navigator.pushNamedAndRemoveUntil(context, '/welcome', (Route<dynamic> route) => false);
                     }
                   ),

@@ -3,8 +3,11 @@ import 'package:jwt_decode/jwt_decode.dart';
 
 class TokenUtils {
 
-  static int getUserId(String token) {
-    return int.parse(Jwt.parseJwt(token)['sub']);
+  static int? getUserId(String? token) {
+    if(token != null) {
+      return int.parse(Jwt.parseJwt(token)['sub']);
+    }
+    return null;
   }
 
   static bool checkIsOwner(String token) {
@@ -15,9 +18,16 @@ class TokenUtils {
     return !Jwt.isExpired(token);
   }
 
-  static String? getFirstName(token) {
+  static String? getFirstName(String? token) {
     if (token != null) {
       return Jwt.parseJwt(token)['firstName'];
+    }
+    return null;
+  }
+
+  static String? getLastName(String? token) {
+    if (token != null) {
+      return Jwt.parseJwt(token)['lastName'];
     }
     return null;
   }
