@@ -6,6 +6,7 @@ import 'package:http_parser/http_parser.dart';
 
 import '../models/create_user_res_dto.dart';
 import '../models/response_dto.dart';
+import '../models/user_details_res_dto.dart';
 import '../models/user_dto.dart';
 import 'api.dart';
 
@@ -72,6 +73,33 @@ class UserProvider {
       print("user details submitted succesfully");
     } else {
       throw Exception('Failed to submit user details');
+    }
+  }
+
+  Future<UserDetailsResDto> getUserDetails(String token) async {
+    UserDetailsResDto result;
+
+    final response = await http.get(
+      Uri.parse("$_url/details"),
+      headers: <String, String> {
+        'Authorization': 'Bearer $token'
+      },
+    );
+
+    if(response.statusCode == 200) {
+      print("user details fetched succesfully");
+
+      ResponseDto backendResponse = ResponseDto.fromJson(jsonDecode(response.body));
+      if(backendResponse.succesful) {
+        result = UserDetailsResDto.fromJson(backendResponse.data);
+        return result;
+      } else {
+        throw Exception(backendResponse.message);
+      }
+    } else if(response.statusCode == 404) {
+      return UserDetailsResDto();
+    } else {
+      throw Exception('Failed to get user details');
     }
   }
 } 

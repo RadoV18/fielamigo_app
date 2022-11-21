@@ -5,6 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../../data/models/user_details_req_dto.dart';
+import '../../data/models/user_details_res_dto.dart';
 import '../../data/repository/user_details_repository.dart';
 import '../../utils/token_utils.dart';
 import '../page_status.dart';
@@ -15,6 +16,24 @@ class UserDetailsCubit extends Cubit<UserDetailsState> {
   final _userDetailsRepository = UserDetailsRepository();
 
   UserDetailsCubit() : super(const UserDetailsState());
+
+  void fetchData() async {
+    emit(state.copyWith(status: PageStatus.fetching));
+    String? token = await TokenUtils.getToken();
+    if (token != null) {
+      UserDetailsResDto result = await _userDetailsRepository.getUserDetails(token);
+      emit(state.copyWith(
+        status: PageStatus.initial,
+        imageUrl: result.imageUrl,
+        name: result.firstName,
+        lastName: result.lastName,
+        phoneNumber: result.phoneNumber,
+        birthDate: result.birthDate
+      ));
+    } else {
+      emit(state.copyWith(status: PageStatus.error));
+    }    
+  }
 
   void setImage(File? image) {
     emit(state.copyWith(image: image));

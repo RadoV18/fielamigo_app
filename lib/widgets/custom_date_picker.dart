@@ -6,14 +6,16 @@ class CustomDatePicker extends StatefulWidget {
   final bool enabled;
   final DateTime? firstDate;
   final DateTime? lastDate;
-  
+  final String? initialValue;
+    
   const CustomDatePicker({
     super.key,
     required this.label,
     required this.onDateChanged,
     this.enabled = true,
     this.firstDate,
-    this.lastDate
+    this.lastDate,
+    this.initialValue
   });
   
 
@@ -26,6 +28,15 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
 
   @override
   Widget build(BuildContext context) {
+    // if there is an initial value
+    if (widget.initialValue != null) {
+      int year = int.parse(widget.initialValue!.substring(0, 4));
+      int month = int.parse(widget.initialValue!.substring(5, 7));
+      int day = int.parse(widget.initialValue!.substring(8, 10));
+      String dateValue = '$day/$month/$year';
+      dateController.text = dateValue;
+    }
+
     // change the date format to dd/mm/yyyy
     if(dateController.text != '' && !dateController.text.contains("/")) {
       widget.onDateChanged(dateController.text);

@@ -10,12 +10,14 @@ class CustomImagePicker extends StatelessWidget {
   final String imagePath;
   final Function(File?) onImageSelected;
   final bool enabled;
+  final String? imageUrl;
 
   const CustomImagePicker({
     super.key,
     required this.onImageSelected,
     required this.imagePath,
     this.enabled = true,
+    this.imageUrl
   });
 
   @override
@@ -45,16 +47,18 @@ class CustomImagePicker extends StatelessWidget {
               ),
               child: Align(
                 alignment: Alignment.center,
-                child: imagePath == "" ? 
-                  Icon(
-                    Icons.camera_alt,
-                    size: 10.h,
-                    color: Colors.grey[400],
-                  ) :
-                  Image.file(
-                    File(imagePath),
-                    fit: BoxFit.cover,
-                  ),
+                child: imageUrl != null && imageUrl != "" && imagePath == "" ?
+                  Image.network(imageUrl!, fit: BoxFit.cover)
+                : imagePath == "" ? 
+                    Icon(
+                      Icons.camera_alt,
+                      size: 10.h,
+                      color: Colors.grey[400],
+                    ) :
+                    Image.file(
+                      File(imagePath),
+                      fit: BoxFit.cover,
+                    ),
               ),
             ),
           ),

@@ -2,6 +2,7 @@ part of 'user_details_cubit.dart';
 
 class UserDetailsState extends Equatable {
   final File? image;
+  final String imageUrl;
   final String name;
   final String lastName;
   final String phoneNumber;
@@ -10,6 +11,7 @@ class UserDetailsState extends Equatable {
 
   const UserDetailsState({
     this.image,
+    this.imageUrl = "",
     this.name = "",
     this.lastName = "",
     this.phoneNumber = "",
@@ -19,6 +21,7 @@ class UserDetailsState extends Equatable {
 
   UserDetailsState copyWith({
     File? image,
+    String? imageUrl,
     String? name,
     String? lastName,
     String? phoneNumber,
@@ -27,6 +30,7 @@ class UserDetailsState extends Equatable {
   }) {
     return UserDetailsState(
       image: image ?? this.image,
+      imageUrl: imageUrl ?? this.imageUrl,
       name: name ?? this.name,
       lastName: lastName ?? this.lastName,
       phoneNumber: phoneNumber ?? this.phoneNumber,
@@ -38,6 +42,7 @@ class UserDetailsState extends Equatable {
   @override
   List<Object?> get props => [
     image,
+    imageUrl,
     name,
     lastName,
     phoneNumber,
