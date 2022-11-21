@@ -1,3 +1,4 @@
+import 'package:fielamigo_app/screens/caregiver_details/widgets/caregiver_profile.dart';
 import 'package:flutter/material.dart';
 
 import '../../widgets/biography_card.dart';
@@ -53,7 +54,7 @@ class CaregiverDetailsScreen extends StatelessWidget {
               flex: 3,
               child: TabBarView(
                 children: [
-                  Text("Perfil"),
+                  CaregiverProfile(),
                   Text("Servicios"),
                   Text("Reseñas"),
                 ],

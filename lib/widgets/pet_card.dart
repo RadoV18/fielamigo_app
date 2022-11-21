@@ -4,7 +4,7 @@ class PetCard extends StatelessWidget {
   final String name;
   final String breed;
   final String size;
-  final String age;
+  final int age;
   final String imageUrl;
 
   const PetCard({
@@ -81,7 +81,7 @@ class PetCard extends StatelessWidget {
                       const Icon(Icons.pets, size: 14),
                       const SizedBox(width: 10,),
                       Text(
-                        age,
+                        '${age.toString()} años',
                         style: const TextStyle(
                           fontSize: 14,
                         ),

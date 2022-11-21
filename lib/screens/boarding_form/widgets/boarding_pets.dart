@@ -19,7 +19,9 @@ class BoardingPets extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ),
           ),
-          PetList(),
+          Expanded(
+            child: PetList()
+          ),
         ],
       ),
     );

@@ -32,7 +32,7 @@ class OwnerPetsScreen extends StatelessWidget {
                         name: "Toffee",
                         breed: "Chihuahua",
                         size: "Pequeño",
-                        age: "6 años",
+                        age: 6,
                         imageUrl: "https://e7.pngegg.com/pngimages/872/773/png-clipart-toms-dog-asdfmovie5-theme-the-living-tombstone-dog-of-wisdom-remix-feat-joe-gran-blue-version-tongue-carnivoran-toy-dog-thumbnail.png"
                       ),
                       SizedBox(height: 5),
@@ -40,7 +40,7 @@ class OwnerPetsScreen extends StatelessWidget {
                         name: "Toffee",
                         breed: "Chihuahua",
                         size: "Pequeño",
-                        age: "6 años",
+                        age: 6,
                         imageUrl: "https://e7.pngegg.com/pngimages/872/773/png-clipart-toms-dog-asdfmovie5-theme-the-living-tombstone-dog-of-wisdom-remix-feat-joe-gran-blue-version-tongue-carnivoran-toy-dog-thumbnail.png"
                       ),
                       SizedBox(height: 5),
@@ -48,7 +48,7 @@ class OwnerPetsScreen extends StatelessWidget {
                         name: "Toffee",
                         breed: "Chihuahua",
                         size: "Pequeño",
-                        age: "6 años",
+                        age: 6,
                         imageUrl: "https://e7.pngegg.com/pngimages/872/773/png-clipart-toms-dog-asdfmovie5-theme-the-living-tombstone-dog-of-wisdom-remix-feat-joe-gran-blue-version-tongue-carnivoran-toy-dog-thumbnail.png"
                       ),
                     ],
