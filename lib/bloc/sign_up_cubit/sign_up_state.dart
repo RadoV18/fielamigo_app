@@ -7,7 +7,8 @@ class SignUpState extends Equatable {
   final bool isOwner;
   final bool isCaregiver;
   final String passwordStrength;
-  final FormzStatus status;
+  final PageStatus status;
+  final FormzStatus formStatus;
   
   const SignUpState({
     this.email = const Email.pure(),
@@ -16,7 +17,8 @@ class SignUpState extends Equatable {
     this.isOwner = false,
     this.isCaregiver = false,
     this.passwordStrength = '',
-    this.status = FormzStatus.pure
+    this.status = PageStatus.initial,
+    this.formStatus = FormzStatus.pure
   });
 
   SignUpState copyWith({
@@ -26,7 +28,8 @@ class SignUpState extends Equatable {
     bool? isOwner,
     bool? isCaregiver,
     String? passwordStrength,
-    FormzStatus? status
+    PageStatus? status,
+    FormzStatus? formStatus
   }) => SignUpState(
     email: email ?? this.email,
     password: password ?? this.password,
@@ -34,7 +37,8 @@ class SignUpState extends Equatable {
     isOwner: isOwner ?? this.isOwner,
     isCaregiver: isCaregiver ?? this.isCaregiver,
     passwordStrength: passwordStrength ?? this.passwordStrength,
-    status: status ?? this.status
+    status: status ?? this.status,
+    formStatus: formStatus ?? this.formStatus
   );
   
   @override
@@ -45,6 +49,7 @@ class SignUpState extends Equatable {
     isOwner,
     isCaregiver,
     passwordStrength,
-    status
+    status,
+    formStatus
   ];
 }

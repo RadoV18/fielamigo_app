@@ -7,4 +7,8 @@ class BottomNavBarCubit extends Cubit<BottomNavBarState> {
   void setIndex(int index) {
     emit(BottomNavBarState(currentIndex: index));
   }
+
+  void reset() {
+    emit(BottomNavBarState());
+  }
 }

@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../bloc/page_status.dart';
 import '../../bloc/sign_up_cubit/sign_up_cubit.dart';
 import '../../data/models/email.dart';
 import '../../data/models/password.dart';
+import '../../utils/ui_utils.dart';
 import 'widgets/account_type_selector.dart';
 import '../../widgets/confirm_password_input.dart';
 import '../../widgets/email_input.dart';
@@ -18,7 +20,29 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SignUpCubit, SignUpState>(
+    return BlocConsumer<SignUpCubit, SignUpState>(
+      listenWhen: (previous, current) => previous.status != current.status,
+      listener: (context, state) {
+        if(state.status == PageStatus.loading) {
+          UiUtils.showAlertDialog(
+            context,
+            message: 'Creando cuenta...',
+            isDismissible: false,
+            hasCircularProgressIndicator: true,
+          );
+        } else if(state.status == PageStatus.success) {
+          Navigator.of(context, rootNavigator: true).pop();
+          Navigator.pushNamed(context, "/verification-code");
+        } else if(state.status == PageStatus.error) {
+          Navigator.of(context, rootNavigator: true).pop();
+          UiUtils.showAlertDialog(
+            context,
+            title: "Error",
+            message: "Error al registrar el usuario",
+            isDismissible: true
+          );
+        }
+      },
       buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
         Email email = context.read<SignUpCubit>().state.email;

@@ -1,11 +1,14 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:formz/formz.dart';
 
+import '../../data/models/create_user_res_dto.dart';
 import '../../data/models/email.dart';
 import '../../data/models/password.dart';
 import '../../data/models/user_dto.dart';
 import '../../data/repository/sign_up_repository.dart';
+import '../page_status.dart';
 
 part 'sign_up_state.dart';
 
@@ -19,14 +22,15 @@ class SignUpCubit extends Cubit<SignUpState> {
     isOwner: false,
     isCaregiver: false,
     passwordStrength: '',
-    status: FormzStatus.pure,
+    status: PageStatus.initial,
+    formStatus: FormzStatus.pure,
   ));
 
   void setEmail(String email) {
     final newEmail = Email.dirty(email);
     emit(state.copyWith(
       email: newEmail,
-      status: Formz.validate([newEmail, state.password, state.confirmPassword])
+      formStatus: Formz.validate([newEmail, state.password, state.confirmPassword])
     ));
   }
 
@@ -34,7 +38,7 @@ class SignUpCubit extends Cubit<SignUpState> {
     final newPassword = Password.dirty(password);
     emit(state.copyWith(
       password: newPassword,
-      status: Formz.validate([state.email, newPassword, state.confirmPassword])
+      formStatus: Formz.validate([state.email, newPassword, state.confirmPassword])
     ));
   }
 
@@ -42,7 +46,7 @@ class SignUpCubit extends Cubit<SignUpState> {
     final newConfirmPassword = Password.dirty(confirmPassword);
     emit(state.copyWith(
       confirmPassword: newConfirmPassword,
-      status: Formz.validate([state.email, state.password, newConfirmPassword])
+      formStatus: Formz.validate([state.email, state.password, newConfirmPassword])
     ));
   }
 
@@ -80,13 +84,34 @@ class SignUpCubit extends Cubit<SignUpState> {
     ));
   }
 
-  void submit() {
+  Future<void> submit() async {
+    emit(state.copyWith(
+      status: PageStatus.loading
+    ));
     UserDto user = UserDto(
       email: state.email.value,
       password: state.password.value,
       isOwner: state.isOwner,
     );
-    // TODO: uncomment when backend is ready
-    // _signUpRepository.signUp(user);
+    try {
+      CreateUserResDto response = await _signUpRepository.signUp(user);
+      if(response.cookie != null) {
+        FlutterSecureStorage storage = const FlutterSecureStorage();
+        storage.write(key: "cookie", value: response.cookie);
+        emit(state.copyWith(
+          status: PageStatus.success
+        ));
+      } else {
+        emit(state.copyWith(
+          status: PageStatus.error
+        ));
+        throw Exception('Failed to create user');
+      }
+    } on Exception catch (e) {
+      emit(state.copyWith(
+        status: PageStatus.error
+      ));
+      print(e);
+    }
   }
 }

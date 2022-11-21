@@ -34,7 +34,7 @@ class BiographyCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-        color: Color(0xff3a5080),
+        color: Color(0xff047b5b),
       ),
       padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
       child: Row(
@@ -155,6 +155,14 @@ class BiographyCard extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: onContactPressed,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xff4b67a6),
+                  elevation: 10.0,
+                  side: const BorderSide(
+                    color: Colors.white,
+                    width: 1.0
+                  )
+                ),
                 child: Text("Contactar a $firstName"),
               )
             ],
