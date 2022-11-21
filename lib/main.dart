@@ -54,8 +54,6 @@ class MyApp extends StatelessWidget {
             create: (BuildContext context) => SignUpCubit()),
         BlocProvider<UserDataCubit>(
             create: (BuildContext context) => UserDataCubit()),
-        BlocProvider<LogInCubit>(
-            create: (BuildContext context) => LogInCubit()),
         BlocProvider<BottomNavBarCubit>(
             create: (BuildContext context) => BottomNavBarCubit()),
         BlocProvider<AddPetCubit>(

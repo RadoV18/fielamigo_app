@@ -18,9 +18,10 @@ class AuthProvider {
       },
       body: jsonEncode(loginDto.toJson()),
     );
+    ResponseDto backendResponse = ResponseDto.fromJson(jsonDecode(response.body));
 
     if (response.statusCode == 200) {
-      return AuthDto.fromJson(jsonDecode(response.body));
+      return AuthDto.fromJson(backendResponse.data);
     } else {
       throw Exception('Failed to login');
     }
