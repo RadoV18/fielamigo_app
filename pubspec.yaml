@@ -51,6 +51,7 @@ dependencies:
   flutter_svg: ^1.1.6
   flutter_rating_bar: ^4.0.1
   carousel_slider: ^4.1.1
+  flutter_secure_storage: ^6.0.0
 
 dev_dependencies:
   flutter_test:

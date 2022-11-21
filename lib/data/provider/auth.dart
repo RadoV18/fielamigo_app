@@ -3,6 +3,8 @@ import 'package:http/http.dart' as http;
 
 import '../models/auth_dto.dart';
 import '../models/log_in_dto.dart';
+import '../models/response_dto.dart';
+import '../models/verification_code_req_dto.dart';
 import './api.dart';
 
 class AuthProvider {
@@ -24,19 +26,23 @@ class AuthProvider {
     }
   }
 
-  Future<bool> sendVerificationCode(int code) async {
+  Future<bool> sendVerificationCode(int code, String cookie) async {
+    VerificationCodeReqDto req = VerificationCodeReqDto(code: code, cookie: cookie);
+
     final response = await http.post(
-      Uri.parse('$_url/email-verification-code'),
+      Uri.parse('$_url/verification-code'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
-      body: jsonEncode({"code": code})
+      body: jsonEncode(req.toJson())
     );
+
+    ResponseDto backendResponse = ResponseDto.fromJson(jsonDecode(response.body));
 
     if(response.statusCode == 200) {
       return true;
     } else {
-      return false;
+      throw Exception(backendResponse.message);
     }
   }
 }

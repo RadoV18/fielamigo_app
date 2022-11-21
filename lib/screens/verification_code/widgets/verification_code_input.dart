@@ -45,6 +45,7 @@ Widget numberInput(BuildContext context, bool isFirst, bool isLast) {
           context.read<VerificationCodeCubit>().deleteNumber();
           if(isFirst) {
             FocusScope.of(context).unfocus();
+            context.read<VerificationCodeCubit>().clearNumber();
           } else {
             FocusScope.of(context).previousFocus();
           }

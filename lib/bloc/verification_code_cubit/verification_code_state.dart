@@ -2,25 +2,25 @@ part of 'verifiaction_code_cubit.dart';
 
 class VerificationCodeState extends Equatable {
   final int verificationCode;
-  final bool isValid;
+  final PageStatus status;
 
   const VerificationCodeState({
     this.verificationCode = 0,
-    this.isValid = false
+    this.status = PageStatus.initial
   });
 
   VerificationCodeState copyWith({
     int? verificationCode,
-    bool? isValid
+    PageStatus? status
   }) =>
     VerificationCodeState(
       verificationCode: verificationCode ?? this.verificationCode,
-      isValid: isValid ?? this.isValid
+      status: status ?? this.status
     );
 
   @override
   List<Object?> get props => [
     verificationCode,
-    isValid
+    status
   ];
 }

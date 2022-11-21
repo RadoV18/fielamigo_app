@@ -15,7 +15,7 @@ class OnePet extends StatelessWidget {
               name: "Fido",
               breed: "Golden",
               size: "Pequeño",
-              age: "1 año",
+              age: 1,
               imageUrl:
                   "https://www.elmueble.com/medio/2022/09/05/perro-cachorro_82dd9cd3_900x900.jpg"),
         ],

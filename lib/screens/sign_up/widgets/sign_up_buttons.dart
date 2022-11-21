@@ -17,7 +17,6 @@ class SignUpButtons extends StatelessWidget {
             onPressed: () {
               // TODO send request
               context.read<SignUpCubit>().submit();
-              Navigator.pushNamed(context, "/verification-code");
             },
             child: const Text("Crear Cuenta")
           )
