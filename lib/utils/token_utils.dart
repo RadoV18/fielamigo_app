@@ -9,4 +9,8 @@ class TokenUtils {
   static bool checkIsOwner(String token) {
     return Jwt.parseJwt(token)['isOwner'] == true;
   }
+
+  static bool isTokenValid(String token) {
+    return !Jwt.isExpired(token);
+  }
 }

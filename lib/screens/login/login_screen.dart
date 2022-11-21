@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../bloc/bottom_navbar_cubit/bottom_navbar_cubit.dart';
 import '../../bloc/page_status.dart';
 import '../../utils/ui_utils.dart';
 import '../../widgets/email_input.dart';
@@ -26,14 +27,15 @@ class LoginScreen extends StatelessWidget {
               isDismissible: false
             );
           } else if (state.status == PageStatus.success) {
-            
+            context.read<BottomNavBarCubit>().reset();
             Navigator.of(context, rootNavigator: true).pop();
             if(state.isOwner) {
               Navigator.of(context)
                 .pushNamedAndRemoveUntil('/owner/home', (Route<dynamic> route) => false);
+            } else {
+              Navigator.of(context)
+                .pushNamedAndRemoveUntil('/caregiver/home', (Route<dynamic> route) => false);
             }
-            Navigator.of(context)
-              .pushNamedAndRemoveUntil('/caregiver/home', (Route<dynamic> route) => false);
             context.read<LogInCubit>().reset();
           } else if (state.status == PageStatus.error) {
             Navigator.of(context, rootNavigator: true).pop();

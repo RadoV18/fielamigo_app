@@ -21,9 +21,11 @@ import 'package:fielamigo_app/screens/profile_personal_information/profile_perso
 import 'package:fielamigo_app/screens/profile_user_address/profile_user_address.dart';
 import 'package:fielamigo_app/screens/search_results/search_results_screen.dart';
 import 'package:fielamigo_app/screens/user_form_screen/user_form_screen.dart';
+import 'package:fielamigo_app/utils/token_utils.dart';
 import 'package:fielamigo_app/widgets/pet_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 import 'bloc/log_in_cubit/log_in_cubit.dart';
@@ -38,13 +40,34 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
   final bool showHome = prefs.getBool("showWelcome") ?? false;
-  runApp(MyApp(showHome: showHome));
+
+  FlutterSecureStorage storage = const FlutterSecureStorage();
+  final bool hasToken = await storage.containsKey(key: "token");
+  bool redirectToHomeScreen = false;
+  bool isOwner = false;
+  if(hasToken) {
+    String? token = await storage.read(key: "token");
+    redirectToHomeScreen = TokenUtils.isTokenValid(token!);
+    isOwner = TokenUtils.checkIsOwner(token);
+  }
+  runApp(MyApp(
+    showHome: showHome,
+    redirectToHomeScreen: redirectToHomeScreen,
+    isOwner: isOwner,
+  ));
 }
 
 class MyApp extends StatelessWidget {
   final bool showHome;
+  final bool redirectToHomeScreen;
+  final bool isOwner;
 
-  const MyApp({Key? key, required this.showHome}) : super(key: key);
+  const MyApp({
+    Key? key,
+    required this.showHome,
+    required this.redirectToHomeScreen,
+    required this.isOwner,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +85,8 @@ class MyApp extends StatelessWidget {
       child: Sizer(
           builder: (context, orientation, deviceType) => MaterialApp(
                   theme: GlobalTheme.globalTheme,
-                  initialRoute: '/',
+                  initialRoute: redirectToHomeScreen ?
+                    isOwner ? '/owner/home' : '/caregiver/home' : '/',
                   routes: {
                     '/': (context) => showHome
                         ? const WelcomeScreen()
