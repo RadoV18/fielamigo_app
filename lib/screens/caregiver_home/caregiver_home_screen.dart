@@ -1,9 +1,13 @@
 import 'package:circular_bottom_navigation/tab_item.dart';
 import 'package:fielamigo_app/screens/caregiver_bookings/caregiver_bookings_screen.dart';
-import 'package:fielamigo_app/screens/caregiver_test/c_test.dart';
 import 'package:fielamigo_app/widgets/navigation.dart';
 import 'package:flutter/material.dart';
 
+import '../caregiver_completed_bookings/caregiver_completed_bookings_screen.dart';
+import '../caregiver_new_bookings/caregiver_new_bookings_screen.dart';
+import '../profile/profile_screen.dart';
+
+// ignore: must_be_immutable
 class CaregiverHomeScreen extends StatelessWidget {
   CaregiverHomeScreen({super.key});
   List<TabItem> tabItems = List.of([
@@ -15,19 +19,11 @@ class CaregiverHomeScreen extends StatelessWidget {
   ]);
 
   List<Widget> screens = [
+    const CaregiverNewBookingsScreen(),
+    const CaregiverNewBookingsScreen(),
     const CaregiverBookingsScreen(),
-    const CareTest(
-      st: "Dos",
-    ),
-    const CareTest(
-      st: "Tres",
-    ),
-    const CareTest(
-      st: "Cuatro",
-    ),
-    const CareTest(
-      st: "Cinco",
-    ),
+    const CaregiverCompletedBookingsScreen(),
+    const ProfileScreen(),
   ];
 
   @override

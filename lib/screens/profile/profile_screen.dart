@@ -1,9 +1,6 @@
 import 'package:fielamigo_app/screens/profile/widgets/profile_card.dart';
 import 'package:fielamigo_app/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
-
-import '../../widgets/bottom_navigation_bar_owner.dart';
 import 'widgets/profile_option.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -20,83 +17,82 @@ class ProfileScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        const CustomAppBar(
-          showLeading: false,
-          title: 'Mi Perfil'
-        ),
+        const CustomAppBar(showLeading: false, title: 'Mi Perfil'),
         SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column (
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                  // User profile picture and name
-                  const ProfileCard(
-                    // profilePictureUrl: profilePictureUrl, from token
+            child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              // User profile picture and name
+              const ProfileCard(
+                  // profilePictureUrl: profilePictureUrl, from token
                   ),
-                  const Divider(
-                    color: Color(0xFFBDBDBD),
-                    height: 20,
-                    thickness: 1,
-                  ),
-                  // Personal information option
-                  ProfileOption(
-                    icon: Icons.person,
-                    text: 'Datos Personales',
-                    onPressed: () => Navigator.pushNamed(context, '/profile/personal-information'),
-                  ),
-                  const Divider(
-                    color: Color(0xFFBDBDBD),
-                    height: 20,
-                    thickness: 1,
-                  ),
-                  // Address option
-                  ProfileOption(
-                    icon: Icons.location_pin,
-                    text: 'Dirección',
-                    onPressed: () => Navigator.pushNamed(context, '/profile/address'),
-                  ),
-                  const Divider(
-                    color: Color(0xFFBDBDBD),
-                    height: 20,
-                    thickness: 1,
-                  ),
-                  // Payment methods option
-                  ProfileOption(
-                    icon: Icons.credit_card,
-                    text: 'Métodos de Pago',
-                    onPressed: () => Navigator.pushNamed(context, '/profile/payment-methods'),
-                  ),
-                  const Divider(
-                    color: Color(0xFFBDBDBD),
-                    height: 20,
-                    thickness: 1,
-                  ),
-                  // Change account option or become a caregiver option
-                  ProfileOption(
-                    icon: Icons.account_circle,
-                    text: 'Cambiar de Cuenta',
-                    onPressed: () => Navigator.pushNamed(context, '/profile/change-account'),
-                  ),
-                  const Divider(
-                    color: Color(0xFFBDBDBD),
-                    height: 20,
-                    thickness: 1,
-                  ),
-                  // Log out option
-                  ProfileOption(
-                    icon: Icons.logout,
-                    text: 'Cerrar Sesión',
-                    // TODO: handle log out
-                    onPressed: () => Navigator.pushNamed(context, '/login'),
-                  ),
-              ],
-            ),
-          )
-        )
+              const Divider(
+                color: Color(0xFFBDBDBD),
+                height: 20,
+                thickness: 1,
+              ),
+              // Personal information option
+              ProfileOption(
+                icon: Icons.person,
+                text: 'Datos Personales',
+                onPressed: () => Navigator.pushNamed(
+                    context, '/profile/personal-information'),
+              ),
+              const Divider(
+                color: Color(0xFFBDBDBD),
+                height: 20,
+                thickness: 1,
+              ),
+              // Address option
+              ProfileOption(
+                icon: Icons.location_pin,
+                text: 'Dirección',
+                onPressed: () =>
+                    Navigator.pushNamed(context, '/profile/address'),
+              ),
+              const Divider(
+                color: Color(0xFFBDBDBD),
+                height: 20,
+                thickness: 1,
+              ),
+              // Payment methods option
+              ProfileOption(
+                icon: Icons.credit_card,
+                text: 'Métodos de Pago',
+                onPressed: () =>
+                    Navigator.pushNamed(context, '/profile/payment-methods'),
+              ),
+              const Divider(
+                color: Color(0xFFBDBDBD),
+                height: 20,
+                thickness: 1,
+              ),
+              // Change account option or become a caregiver option
+              ProfileOption(
+                icon: Icons.account_circle,
+                text: 'Cambiar de Cuenta',
+                onPressed: () =>
+                    Navigator.pushNamed(context, '/profile/change-account'),
+              ),
+              const Divider(
+                color: Color(0xFFBDBDBD),
+                height: 20,
+                thickness: 1,
+              ),
+              // Log out option
+              ProfileOption(
+                icon: Icons.logout,
+                text: 'Cerrar Sesión',
+                // TODO: handle log out
+                onPressed: () => Navigator.pushNamed(context, '/login'),
+              ),
+            ],
+          ),
+        ))
       ],
     );
-
 
     // return Scaffold(
     //   resizeToAvoidBottomInset: true,
