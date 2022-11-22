@@ -68,9 +68,8 @@ class DogProvider {
       }
     );
 
-    ResponseDto backendResponse = ResponseDto.fromJson(jsonDecode(response.body));
-
     if(response.statusCode == 200) {
+      ResponseDto backendResponse = ResponseDto.fromJson(jsonDecode(response.body));
       return backendResponse.data.map<DogResDto>((json) => DogResDto.fromJson(json)).toList();
     } else {
       throw Exception('Failed to load dogs');
@@ -87,9 +86,8 @@ class DogProvider {
       }
     );
 
-    ResponseDto backendResponse = ResponseDto.fromJson(jsonDecode(response.body));
-
     if(response.statusCode == 200) {
+      ResponseDto backendResponse = ResponseDto.fromJson(jsonDecode(response.body));
       return backendResponse.data.map<DogResDto>((json) => DogResDto.fromJson(json)).toList();
     } else {
       throw Exception('Failed to load dogs');
