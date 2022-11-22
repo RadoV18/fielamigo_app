@@ -63,7 +63,8 @@ class DogProvider {
     final response = await http.get(
       Uri.parse(_url),
       headers: {
-        'Authorization': 'Bearer $token'
+        'Authorization': 'Bearer $token',
+        'Accept': 'application/json; charset=UTF-8',
       }
     );
 
@@ -75,6 +76,26 @@ class DogProvider {
       throw Exception('Failed to load dogs');
     }    
   }
+
+  // GET /dogs/caregiver/{caregiverId}
+  Future<List<DogResDto>> getDogsByCaregiverId(String token, int id) async {
+    final response = await http.get(
+      Uri.parse("$_url/caregiver/$id"),
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Accept': 'application/json; charset=UTF-8',
+      }
+    );
+
+    ResponseDto backendResponse = ResponseDto.fromJson(jsonDecode(response.body));
+
+    if(response.statusCode == 200) {
+      return backendResponse.data.map<DogResDto>((json) => DogResDto.fromJson(json)).toList();
+    } else {
+      throw Exception('Failed to load dogs');
+    }
+  }
+
 }
 
 // for testing purposes only
@@ -99,7 +120,9 @@ void main() async {
   );
 
   // dogProvider.addDog(dog, image, token);
-  List<DogResDto> dogs = await dogProvider.getAllDogs(token);
+  // List<DogResDto> dogs = await dogProvider.getAllDogs(token);
+  List<DogResDto> dogs = await dogProvider.getDogsByCaregiverId(token, 3);
+
   print(dogs.length);
   // print every dog
   dogs.forEach((dog) {
