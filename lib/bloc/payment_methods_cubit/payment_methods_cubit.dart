@@ -17,7 +17,7 @@ class PaymentMethodsCubit extends Cubit<PaymentMethodsState> {
       //TODO: implement token authentication? maybe?
 
       // gets payment methods from provider
-      final paymentMethods = await PaymentMethodProvider().getPaymentMethodsTest(); //TODO: change this after testing payment methods
+      final paymentMethods = await PaymentMethodProvider().getPaymentMethods(); //TODO: change this after testing payment methods
 
       // sets state to loaded
       emit(PaymentMethodsLoaded(paymentMethods: paymentMethods, pageStatus: PageStatus.success));
