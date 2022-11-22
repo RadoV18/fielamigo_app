@@ -7,6 +7,7 @@ class AddPetState extends Equatable {
   final String birthDate;
   final bool isMale;
   final bool isFemale;
+  final int breedId;
   final bool isSmall;
   final bool isMedium;
   final bool isLarge;
@@ -20,6 +21,7 @@ class AddPetState extends Equatable {
     this.birthDate = '',
     this.isMale = false,
     this.isFemale = false,
+    this.breedId = -1,
     this.isSmall = false,
     this.isMedium = false,
     this.isLarge = false,
@@ -34,6 +36,7 @@ class AddPetState extends Equatable {
     String? birthDate,
     bool? isMale,
     bool? isFemale,
+    int? breedId,
     bool? isSmall,
     bool? isMedium,
     bool? isLarge,
@@ -46,6 +49,7 @@ class AddPetState extends Equatable {
     birthDate: birthDate ?? this.birthDate,
     isMale: isMale ?? this.isMale,
     isFemale: isFemale ?? this.isFemale,
+    breedId: breedId ?? this.breedId,
     isSmall: isSmall ?? this.isSmall,
     isMedium: isMedium ?? this.isMedium,
     isLarge: isLarge ?? this.isLarge,
@@ -61,6 +65,7 @@ class AddPetState extends Equatable {
     birthDate,
     isMale,
     isFemale,
+    breedId,
     isSmall,
     isMedium,
     isLarge,

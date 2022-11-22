@@ -1,10 +1,12 @@
-import '../models/new_pet_dto.dart';
-import '../provider/pet.dart';
+import 'dart:io';
+
+import '../models/dog_req_dto.dart';
+import '../provider/dog.dart';
 
 class AddPetRepository {
-  final PetProvider _petProvider = PetProvider();
+  final DogProvider _dogProvider = DogProvider();
 
-  Future<NewPetDto> addPet(NewPetDto newPetDto) {
-    return _petProvider.addPet(newPetDto);
+  Future<void> addPet(DogReqDto newPetDto, File? image, String token) async {
+    return _dogProvider.addDog(newPetDto, image, token);
   }
 }

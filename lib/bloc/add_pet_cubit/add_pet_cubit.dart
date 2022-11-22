@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:fielamigo_app/data/repository/add_pet_repository.dart';
 
-import '../../data/models/new_pet_dto.dart';
+import '../../data/models/dog_req_dto.dart';
 
 part 'add_pet_state.dart';
 
@@ -104,18 +104,15 @@ class AddPetCubit extends Cubit<AddPetState> {
     bool isMale = state.isMale;
     int size = state.isSmall ? 1 : state.isMedium ? 2 : 3;
 
-    NewPetDto newPetDto = NewPetDto(
-      // TODO: get user id from auth token
-      userId: '1',
+    DogReqDto newPetDto = DogReqDto(
       name: state.name,
-      breed: state.breed,
+      breed: state.breedId,
       birthDate: state.birthDate,
       isMale: isMale,
       size: size,
       isSterilized: state.isSterilized,
       notes: state.notes,
-      image: state.image!
     );
-    _addPetRepository.addPet(newPetDto);
+    // _addPetRepository.addPet(newPetDto);
   }
 }
