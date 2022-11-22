@@ -42,7 +42,7 @@ class UserProvider {
   Future<void> submitUserDetails(UserDetailsReqDto req, File? image, String token) async {
     var request = http.MultipartRequest("POST", Uri.parse("$_url/details"))
       ..headers.addAll({
-        'Content-Type': 'multipart/forn-data',
+        'Content-Type': 'multipart/form-data',
         'Authorization': 'Bearer $token'
       });
 

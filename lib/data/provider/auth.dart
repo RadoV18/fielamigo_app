@@ -10,6 +10,7 @@ import './api.dart';
 class AuthProvider {
   final String _url = "${Api.url}/auth";
 
+  // POST /auth/login
   Future<AuthDto> login(LogInDto loginDto) async {
     final response = await http.post(
       Uri.parse(_url),
@@ -27,6 +28,7 @@ class AuthProvider {
     }
   }
 
+  // POST /auth/verification-code
   Future<bool> sendVerificationCode(int code, String cookie) async {
     VerificationCodeReqDto req = VerificationCodeReqDto(code: code, cookie: cookie);
 
