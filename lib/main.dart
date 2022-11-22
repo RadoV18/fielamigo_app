@@ -1,5 +1,6 @@
 import 'package:fielamigo_app/bloc/add_pet_cubit/add_pet_cubit.dart';
 import 'package:fielamigo_app/bloc/bottom_navbar_cubit/bottom_navbar_cubit.dart';
+import 'package:fielamigo_app/bloc/payment_methods_cubit/payment_methods_cubit.dart';
 import 'package:fielamigo_app/bloc/sign_up_cubit/sign_up_cubit.dart';
 import 'package:fielamigo_app/screens/add_payment_method/add_payment_method_screen.dart';
 import 'package:fielamigo_app/screens/boarding_form/boarding_form_screen.dart';
@@ -81,6 +82,7 @@ class MyApp extends StatelessWidget {
             create: (BuildContext context) => BottomNavBarCubit()),
         BlocProvider<AddPetCubit>(
             create: (BuildContext context) => AddPetCubit()),
+        BlocProvider<PaymentMethodsCubit>(create: (BuildContext context) => PaymentMethodsCubit()..init()),
       ],
       child: Sizer(
           builder: (context, orientation, deviceType) => MaterialApp(
