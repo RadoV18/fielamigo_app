@@ -1,20 +1,20 @@
 import 'dart:io';
 
-class BioDto {
+class BioReqDto {
   final String bio;
   final List<String> experience;
   final List<String> houseFeatures;
 
 
 
-  BioDto({
+  BioReqDto({
     required this.bio,
     required this.experience,
     required this.houseFeatures,
   });
 
-  factory BioDto.fromJson(Map<String, dynamic> json) {
-    return BioDto(
+  factory BioReqDto.fromJson(Map<String, dynamic> json) {
+    return BioReqDto(
       bio: json['bio'],
       experience: json['experience'].cast<String>(),
       houseFeatures: json['houseFeatures'].cast<String>(),

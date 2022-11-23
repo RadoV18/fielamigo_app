@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:fielamigo_app/bloc/bio_features_cubit/bio_features_cubit.dart';
 
-import '../models/bio_dto.dart';
+import '../models/bio_req_dto.dart';
 import 'package:http/http.dart' as http;
 
 import 'api.dart';

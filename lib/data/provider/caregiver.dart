@@ -1,7 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:fielamigo_app/data/models/caregiver_booked_dates_dto.dart';
+import 'package:http_parser/http_parser.dart';
 
+import '../models/bio_req_dto.dart';
 import '../models/caregiver_card_dto.dart';
 import 'package:http/http.dart' as http;
 import '../models/response_dto.dart';
@@ -129,13 +132,57 @@ class CaregiverProvider {
     }
   }
 
+  // POST /caregivers/pictures
+  Future<void> uploadPicture(String token, File? image) async {
+    if(image == null) {
+      throw Exception('Image is null');
+    }
+
+    var request = http.MultipartRequest("POST", Uri.parse("$_url/pictures"))
+    ..headers.addAll({
+      'Content-Type': 'multipart/form-data',
+      'Authorization': 'Bearer $token'
+    });
+
+    request.files.add(
+      http.MultipartFile.fromBytes(
+        'image',
+        image.readAsBytesSync(),
+        filename: image.path.split('/').last,
+        contentType: MediaType('image', image.path.split(".").last == "jpg" ? "jpeg" : image.path.split(".").last),
+      )
+    );
+
+    var response = await request.send();
+
+    if(response.statusCode != 201) {
+      print(response.statusCode);
+      throw Exception('Failed to upload picture');
+    }
+  }
+
+  postCaregiverNewBio(String token, BioReqDto req) async {
+    final response = await http.post(
+      Uri.parse("$_url/bio-details"),
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json;charset=UTF-8'
+      },
+      body: jsonEncode(req.toJson())
+    );
+
+    if(response.statusCode != 201) {
+      throw Exception('Failed to post caregiver new bio');
+    }
+  }
+
 }
 
 // For testing purposes only
 void main() async {
   CaregiverProvider caregiverProvider = CaregiverProvider();
 
-  String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzNCIsImZpcnN0TmFtZSI6Ik1vYmlsZSB0ZXN0IDIiLCJsYXN0TmFtZSI6InRlc3RldCIsImlzT3duZXIiOnRydWUsInJvbGVzIjpbIkdFVF9DSVRJRVMiLCJHRVRfQ09VTlRSSUVTIiwiR0VUX0JSRUVEUyIsIlVQREFURV9QUk9GSUxFIiwiU0VORF9NRVNTQUdFIiwiR0VUX0RPR19CWV9JRCIsIkdFVF9PV05FUl9CT09LSU5HUyIsIkFERF9QQVlNRU5UX01FVEhPRCIsIlZJRVdfVkVURVJJTkFSSUVTIiwiQlVZX0lOU1VSQU5DRSIsIkdFVF9JTlNVUkFOQ0VfUExBTlMiLCJHRVRfUkVWSUVXUyIsIkdFVF9QUk9GSUxFIiwiQk9PS19OVVJTSU5HIiwiU0VBUkNIX05VUlNJTkciLCJCT09LX1RSQUlOSU5HIiwiU0VBUkNIX1RSQUlOSU5HIiwiQk9PS19XQUxLSU5HIiwiU0VBUkNIX1dBTEtJTkciLCJCT09LX0JPQVJESU5HIiwiU0VBUkNIX0JPQVJESU5HIiwiQUREX0RPRyIsIkdFVF9ET0dTIl0sImlzcyI6ImZpZWxhbWlnbyIsImNhcmVnaXZlcklkIjotMSwiZXhwIjoxNjY5MjQzMTMyLCJ1c2VySWQiOjM0fQ.jJaFtSr5-_CgpZixf8wD5zIfnYJtB7HS6tuz76okZUk";
+  String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3NyIsImlzT3duZXIiOmZhbHNlLCJyb2xlcyI6WyJHRVRfQ0lUSUVTIiwiR0VUX0NPVU5UUklFUyIsIlVQREFURV9QUk9GSUxFIiwiU0VORF9NRVNTQUdFIiwiRklOSVNIX0JPT0tJTkciLCJHRVRfRE9HX0JZX0lEIiwiUkVKRUNUX0JPT0tJTkciLCJDT05GSVJNX0JPT0tJTkciLCJHRVRfQ0FSRUdJVkVSX0JPT0tJTkdTIiwiQUREX0hPVVNFX0RFVEFJTFMiLCJBRERfRVhQRVJJRU5DRSIsIlVQREFURV9OVVJTSU5HIiwiVVBEQVRFX1dBTEtJTkciLCJVUERBVEVfVFJBSU5JTkciLCJVUERBVEVfQk9BUkRJTkciLCJDUkVBVEVfTlVSU0lORyIsIkNSRUFURV9XQUxLSU5HIiwiQ1JFQVRFX1RSQUlOSU5HIiwiQ1JFQVRFX0JPQVJESU5HIiwiVVBEQVRFX0JPT0tJTkciLCJDQU5DRUxfQk9PS0lORyIsIkdFVF9SRVZJRVdTIiwiR0VUX1BST0ZJTEUiLCJHRVRfRE9HUyJdLCJpc3MiOiJmaWVsYW1pZ28iLCJjYXJlZ2l2ZXJJZCI6OSwiZXhwIjoxNjY5MjQ2NDY4LCJ1c2VySWQiOjc3fQ.xrPnHp1vP_Z0UbZkxI2L23vAmIp6oZZjyRSVpitFtCM";
   int id = 3;
 
   // List<CaregiverCardDto> caregivers = await caregiverProvider.searchBoarding(token, "2021-11-15T00:00", "2021-11-18T00:00", 2, 336);
@@ -145,9 +192,26 @@ void main() async {
 
   // print(await caregiverProvider.getCaregiverBio(token, id));
 
-  // print(await caregiverProvider.getCaregiverPictures(token, 2));
+  // print(await caregiverProvider.getCaregiverPictures(token, 9));
   // print(await caregiverProvider.getCaregiverExperience(token, 2));
   // CaregiverBookedDatesDto res = await caregiverProvider.getCaregiverBookedDates(token, 2, 11, 2022);
-  List<String> res = await caregiverProvider.getHouseDetails(token, 2);
-  print(res);
+  // List<String> res = await caregiverProvider.getHouseDetails(token, 2);
+  // File image = File("C:/Users/Radomir/Desktop/test_img/img.jpg");
+  // await caregiverProvider.uploadPicture(token, image);
+
+  BioReqDto req = BioReqDto(
+    bio: "bio from frontend",
+    experience: [
+      "experience from frontend 1",
+      "experience from frontend 2",
+      "experience from frontend 3"
+    ],
+    houseFeatures: [
+      "house features from frontend 1",
+      "house features from frontend 2",
+      "house features from frontend 3"
+    ]
+  );
+
+  await caregiverProvider.postCaregiverNewBio(token, req);
 }
