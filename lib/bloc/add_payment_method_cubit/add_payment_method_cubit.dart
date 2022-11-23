@@ -14,8 +14,18 @@ class AddPaymentMethodCubit extends Cubit<AddPaymentMethodState> {
       String expirationDate, String cvv) async {
     emit(const AddPaymentMethodLoading());
 
+    int month = int.parse(expirationDate.substring(0, 2));
+    int year = int.parse(expirationDate.substring(3));
+
+    year += 2000;
+
+    DateTime expiration = DateTime(year, month);
+    cardNumber = cardNumber.replaceAll(" ", "");
     PaymentMethodReqDto paymentMethodReqDto = PaymentMethodReqDto(
-        name: cardHolder, numbers: cardNumber, expirationDate: expirationDate);
+      name: cardHolder,
+      numbers: cardNumber,
+      expirationDate: expiration
+    );
 
     try {
       await PaymentMethodProvider().addPaymentMethod(paymentMethodReqDto);

@@ -8,6 +8,7 @@ class UiUtils {
     required String message,
     required bool isDismissible,
     bool hasCircularProgressIndicator = false,
+    Function()? onOkButtonPressed,
   }) async {
     return showDialog<void>(
       context: context,
@@ -29,10 +30,10 @@ class UiUtils {
           ),
           actions: <Widget>[
             isDismissible ? TextButton(
-              child: const Text('OK'),
-              onPressed: () {
+              onPressed: onOkButtonPressed ?? () {
                 Navigator.of(context).pop();
               },
+              child: const Text('OK'),
             ) : Container()
           ],
         );

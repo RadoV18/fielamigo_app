@@ -1,7 +1,7 @@
 class PaymentMethodReqDto {
   String name;
   String numbers;
-  String expirationDate;
+  DateTime expirationDate;
 
   PaymentMethodReqDto({
     required this.name,
@@ -13,7 +13,15 @@ class PaymentMethodReqDto {
     return {
       'name': name,
       'numbers': numbers,
-      'expirationDate': expirationDate,
+      'expirationDate': expirationDate.toIso8601String()
     };
+  }
+
+  factory PaymentMethodReqDto.fromJson(Map<String, dynamic> json) {
+    return PaymentMethodReqDto(
+      name: json['name'],
+      numbers: json['numbers'],
+      expirationDate: json['expirationDate'],
+    );
   }
 }

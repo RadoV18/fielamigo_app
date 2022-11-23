@@ -1,7 +1,10 @@
 import 'package:fielamigo_app/bloc/payment_methods_cubit/payment_methods_cubit.dart';
+import 'package:fielamigo_app/screens/add_payment_method/card_month_input_formatter.dart';
+import 'package:fielamigo_app/screens/add_payment_method/card_number_input_formatter.dart';
 import 'package:fielamigo_app/utils/ui_utils.dart';
 import 'package:fielamigo_app/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../bloc/add_payment_method_cubit/add_payment_method_cubit.dart';
@@ -49,6 +52,10 @@ class AddPaymentMethodScreen extends StatelessWidget {
                           context,
                           message: "Success",
                           isDismissible: true,
+                          onOkButtonPressed: () {
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                          }
                         );
                       } else if (state is AddPaymentMethodError) {
                         // return const Center(
@@ -77,23 +84,11 @@ class AddPaymentMethodScreen extends StatelessWidget {
                       _expirationDateController.text,
                       _cvvController.text);
                   await context.read<PaymentMethodsCubit>().init();
-                  Navigator.pop(context); //forces payment methods screen to refresh
                 },
                 child: const Text('Guardar'),
               ),
             ]),
-      ),
-
-      // CustomScrollView(
-      //   slivers: [
-      //     SliverFillRemaining(
-      //       child: Padding(
-      //         padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-      //         child:
-      //       ),
-      //     )
-      //   ],
-      // )
+      )
     );
   }
 }
@@ -105,42 +100,54 @@ Widget PaymentMethodForm(
     TextEditingController cvvController) {
   return Column(
     children: [
-      TextField(
+      TextFormField(
         controller: cardNumberController,
+        inputFormatters: [
+          FilteringTextInputFormatter.digitsOnly,
+          LengthLimitingTextInputFormatter(16),
+          CardNumberInputFormatter()
+        ],
         keyboardType: TextInputType.number,
         decoration: const InputDecoration(
           labelText: 'Número de tarjeta',
           hintText: '**** **** **** ****',
         ),
-        // TODO: change to cubit
-        onChanged: (value) => print(value),
       ),
       TextField(
         controller: cardHolderController,
         decoration: const InputDecoration(
           labelText: 'Nombre en la tarjeta',
         ),
-        onChanged: (value) => print(value),
       ),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
             flex: 4,
-            child: TextField(
+            child: TextFormField(
               controller: expirationDateController,
+              keyboardType: TextInputType.number,
+              inputFormatters: [
+                FilteringTextInputFormatter.digitsOnly,
+                LengthLimitingTextInputFormatter(5),
+                CardMonthInputFormatter()
+              ],
               decoration: const InputDecoration(
                 labelText: 'Fecha de expiración',
                 hintText: 'mm/aa',
               ),
-              onChanged: (value) => print(value),
             ),
           ),
           const SizedBox(width: 20),
           Expanded(
             flex: 3,
-            child: TextField(
+            child: TextFormField(
               controller: cvvController,
+              keyboardType: TextInputType.number,
+              inputFormatters: [
+                FilteringTextInputFormatter.digitsOnly,
+                LengthLimitingTextInputFormatter(4),
+              ],
               decoration: const InputDecoration(
                 labelText: 'CVV',
                 hintText: '***',

@@ -9,23 +9,23 @@ import 'package:http/http.dart' as http;
 import 'api.dart';
 
 class PaymentMethodProvider {
-  final String _url = Api.url;
+  final String _url = "${Api.url}/payment-methods";
 
   Future<void> addPaymentMethod(PaymentMethodReqDto paymentMethodReqDto) async {
     FlutterSecureStorage flutterSecureStorage = const FlutterSecureStorage();
     final String? token = await flutterSecureStorage.read(key: "token");
-
+    print("asdf");
     final response = await http.post(
-      Uri.parse('$_url/payment-methods'),
+      Uri.parse(_url),
       headers: {
         'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',
-        'Accept': 'application/json'
       },
       body: jsonEncode(paymentMethodReqDto.toJson()),
     );
-
+    print("defg");
     if (response.statusCode != 201) {
+      print(response.statusCode);
       throw Exception('Failed to add payment method');
     }
   }
