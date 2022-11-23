@@ -111,13 +111,31 @@ class CaregiverProvider {
       throw Exception('Failed to get caregiver booked dates');
     }
   }
+
+  // GET/caregivers/{id}/house-details
+  Future<List<String>> getHouseDetails(String token, int id) async {
+    final response = await http.get(
+      Uri.parse("$_url/$id/house-details"),
+      headers: {
+        'Authorization': 'Bearer $token'
+      }
+    );
+
+    if(response.statusCode == 200) {
+      ResponseDto backendResponse = ResponseDto.fromJson(jsonDecode(response.body));
+      return backendResponse.data.map<String>((json) => json.toString()).toList();
+    } else {
+      throw Exception('Failed to get caregiver house details');
+    }
+  }
+
 }
 
 // For testing purposes only
 void main() async {
   CaregiverProvider caregiverProvider = CaregiverProvider();
 
-  String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzNCIsImZpcnN0TmFtZSI6Ik1vYmlsZSB0ZXN0IDIiLCJsYXN0TmFtZSI6InRlc3RldCIsImlzT3duZXIiOnRydWUsInJvbGVzIjpbIkdFVF9DSVRJRVMiLCJHRVRfQ09VTlRSSUVTIiwiR0VUX0JSRUVEUyIsIlVQREFURV9QUk9GSUxFIiwiU0VORF9NRVNTQUdFIiwiR0VUX0RPR19CWV9JRCIsIkdFVF9PV05FUl9CT09LSU5HUyIsIkFERF9QQVlNRU5UX01FVEhPRCIsIlZJRVdfVkVURVJJTkFSSUVTIiwiQlVZX0lOU1VSQU5DRSIsIkdFVF9JTlNVUkFOQ0VfUExBTlMiLCJHRVRfUkVWSUVXUyIsIkdFVF9QUk9GSUxFIiwiQk9PS19OVVJTSU5HIiwiU0VBUkNIX05VUlNJTkciLCJCT09LX1RSQUlOSU5HIiwiU0VBUkNIX1RSQUlOSU5HIiwiQk9PS19XQUxLSU5HIiwiU0VBUkNIX1dBTEtJTkciLCJCT09LX0JPQVJESU5HIiwiU0VBUkNIX0JPQVJESU5HIiwiQUREX0RPRyIsIkdFVF9ET0dTIl0sImlzcyI6ImZpZWxhbWlnbyIsImNhcmVnaXZlcklkIjotMSwiZXhwIjoxNjY5MTY0MzUyLCJ1c2VySWQiOjM0fQ.nvrVBOkGMwj-FNNWsmVVCuV7k4E9-vtSoeKlqJrOBbY";
+  String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzNCIsImZpcnN0TmFtZSI6Ik1vYmlsZSB0ZXN0IDIiLCJsYXN0TmFtZSI6InRlc3RldCIsImlzT3duZXIiOnRydWUsInJvbGVzIjpbIkdFVF9DSVRJRVMiLCJHRVRfQ09VTlRSSUVTIiwiR0VUX0JSRUVEUyIsIlVQREFURV9QUk9GSUxFIiwiU0VORF9NRVNTQUdFIiwiR0VUX0RPR19CWV9JRCIsIkdFVF9PV05FUl9CT09LSU5HUyIsIkFERF9QQVlNRU5UX01FVEhPRCIsIlZJRVdfVkVURVJJTkFSSUVTIiwiQlVZX0lOU1VSQU5DRSIsIkdFVF9JTlNVUkFOQ0VfUExBTlMiLCJHRVRfUkVWSUVXUyIsIkdFVF9QUk9GSUxFIiwiQk9PS19OVVJTSU5HIiwiU0VBUkNIX05VUlNJTkciLCJCT09LX1RSQUlOSU5HIiwiU0VBUkNIX1RSQUlOSU5HIiwiQk9PS19XQUxLSU5HIiwiU0VBUkNIX1dBTEtJTkciLCJCT09LX0JPQVJESU5HIiwiU0VBUkNIX0JPQVJESU5HIiwiQUREX0RPRyIsIkdFVF9ET0dTIl0sImlzcyI6ImZpZWxhbWlnbyIsImNhcmVnaXZlcklkIjotMSwiZXhwIjoxNjY5MjQzMTMyLCJ1c2VySWQiOjM0fQ.jJaFtSr5-_CgpZixf8wD5zIfnYJtB7HS6tuz76okZUk";
   int id = 3;
 
   // List<CaregiverCardDto> caregivers = await caregiverProvider.searchBoarding(token, "2021-11-15T00:00", "2021-11-18T00:00", 2, 336);
@@ -129,5 +147,7 @@ void main() async {
 
   // print(await caregiverProvider.getCaregiverPictures(token, 2));
   // print(await caregiverProvider.getCaregiverExperience(token, 2));
-  CaregiverBookedDatesDto res = await caregiverProvider.getCaregiverBookedDates(token, 2, 11, 2022);
+  // CaregiverBookedDatesDto res = await caregiverProvider.getCaregiverBookedDates(token, 2, 11, 2022);
+  List<String> res = await caregiverProvider.getHouseDetails(token, 2);
+  print(res);
 }
