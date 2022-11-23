@@ -57,11 +57,21 @@ class ProfileScreen extends StatelessWidget {
                     thickness: 1,
                   ),
                   // Payment methods option
-                  ProfileOption(
-                    icon: Icons.credit_card,
-                    text: 'Métodos de Pago',
-                    onPressed: () => Navigator.pushNamed(context, '/profile/payment-methods'),
-                  ),
+                  BlocBuilder<UserInfoCubit, UserInfoState>(builder: (context, state) {
+                    if(state.isOwner){
+                      return ProfileOption(
+                        icon: Icons.credit_card,
+                        text: 'Métodos de Pago',
+                        onPressed: () => Navigator.pushNamed(context, '/profile/payment-methods'),
+                      );
+                    } else {
+                      return ProfileOption(
+                        icon: Icons.perm_device_information,
+                        text: 'Biografía',
+                        onPressed: () => Navigator.pushNamed(context, '/caregiver/biography'),
+                      );
+                    }
+                  }),
                   const Divider(
                     color: Color(0xFFBDBDBD),
                     height: 20,

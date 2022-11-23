@@ -24,7 +24,7 @@ class EmailInputFb1 extends StatelessWidget {
             title,
             style: TextStyle(
                 fontSize: 4.w,
-                fontWeight: FontWeight.normal,
+                fontWeight: FontWeight.bold,
                 color: Colors.black.withOpacity(.9)),
           ),
           const SizedBox(

@@ -7,13 +7,14 @@ import '../../utils/token_utils.dart';
 part 'user_info_state.dart';
 
 class UserInfoCubit extends Cubit<UserInfoState> {
-  UserInfoCubit() : super(const UserInfoState());
+  UserInfoCubit() : super(const UserInfoState(isOwner: false));
 
-  void setUserInfo(int? userId, String? firstName, String? lastName) {
+  void setUserInfo(int? userId, String? firstName, String? lastName, bool isOwner) {
     emit(UserInfoState(
       userId: userId,
       firstName: firstName,
       lastName: lastName,
+      isOwner: isOwner,
     ));
   }
 
@@ -23,15 +24,17 @@ class UserInfoCubit extends Cubit<UserInfoState> {
     int? userId = TokenUtils.getUserId(token);
     String? firstName = TokenUtils.getFirstName(token);
     String? lastName = TokenUtils.getLastName(token);
+    bool? isOwner = TokenUtils.checkIsOwner(token!);
     emit(UserInfoState(
       userId: userId,
       firstName: firstName,
       lastName: lastName,
+      isOwner: isOwner,
     ));
   }
 
   void clear() {
-    emit(const UserInfoState());
+    emit(const UserInfoState(isOwner: false));
   }
 
 }

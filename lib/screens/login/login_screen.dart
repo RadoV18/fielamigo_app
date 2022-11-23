@@ -41,9 +41,10 @@ class LoginScreen extends StatelessWidget {
             String? firstName = TokenUtils.getFirstName(token!);
             String? lastName = TokenUtils.getLastName(token);
             int? userId = TokenUtils.getUserId(token);
+            bool? isOwner = TokenUtils.checkIsOwner(token);
 
             context.read<UserInfoCubit>().setUserInfo(
-              userId, firstName, lastName
+              userId, firstName, lastName, isOwner
             );
 
             Navigator.popUntil(context, (Route<dynamic> route) => false);
