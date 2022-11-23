@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:fielamigo_app/data/models/payment_method_dto.dart';
 import 'package:fielamigo_app/data/models/payment_method_req_dto.dart';
@@ -40,7 +41,7 @@ class PaymentMethodProvider {
     String? token = await storage.read(key: "token");
 
     final response = await http.get(
-      Uri.parse('$_url/payment-methods'),
+      Uri.parse(_url), 
       headers: {
         'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',
