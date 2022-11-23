@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-class EmailInputFb1 extends StatelessWidget {
+class LargeTextInput extends StatelessWidget {
   final TextEditingController inputController;
 
   final String title;
   final String hintText;
 
-  const EmailInputFb1({Key? key,required this.inputController, required this.title, required this.hintText}) : super(key: key);
+  const LargeTextInput({Key? key,required this.inputController, required this.title, required this.hintText}) : super(key: key);
   
 
   @override
@@ -31,7 +31,7 @@ class EmailInputFb1 extends StatelessWidget {
             height: 8,
           ),
           Container(
-            height: 50,
+            height: 200,
             decoration: BoxDecoration(boxShadow: [
               BoxShadow(
                   offset: const Offset(12, 26),
@@ -44,7 +44,11 @@ class EmailInputFb1 extends StatelessWidget {
               onChanged: (value) {
                 //Do something wi
               },
-              keyboardType: TextInputType.number,
+              keyboardType: TextInputType.multiline,
+              maxLines: null,
+              expands: true,
+              textAlign: TextAlign.start,
+              textAlignVertical: TextAlignVertical.top,
               style: const TextStyle(fontSize: 14, color: Colors.black),
               decoration: InputDecoration(
                 // prefixIcon: Icon(Icons.email),
@@ -53,7 +57,7 @@ class EmailInputFb1 extends StatelessWidget {
                 hintText: hintText,
                 hintStyle: TextStyle(color: Colors.grey.withOpacity(.75)),
                 contentPadding:
-                    const EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 20.0),
                 border: const OutlineInputBorder(
                   borderSide: BorderSide(color: primaryColor, width: 1.0),
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),

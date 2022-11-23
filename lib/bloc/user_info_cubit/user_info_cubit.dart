@@ -7,9 +7,9 @@ import '../../utils/token_utils.dart';
 part 'user_info_state.dart';
 
 class UserInfoCubit extends Cubit<UserInfoState> {
-  UserInfoCubit() : super(const UserInfoState());
+  UserInfoCubit() : super(const UserInfoState(isOwner: false));
 
-  void setUserInfo(int? userId, String? firstName, String? lastName, bool? isOwner) {
+  void setUserInfo(int? userId, String? firstName, String? lastName, bool isOwner) {
     emit(UserInfoState(
       userId: userId,
       firstName: firstName,
@@ -34,7 +34,7 @@ class UserInfoCubit extends Cubit<UserInfoState> {
   }
 
   void clear() {
-    emit(const UserInfoState());
+    emit(const UserInfoState(isOwner: false));
   }
 
 }

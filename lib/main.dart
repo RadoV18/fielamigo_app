@@ -5,6 +5,7 @@ import 'package:fielamigo_app/bloc/payment_methods_cubit/payment_methods_cubit.d
 import 'package:fielamigo_app/bloc/sign_up_cubit/sign_up_cubit.dart';
 import 'package:fielamigo_app/screens/add_payment_method/add_payment_method_screen.dart';
 import 'package:fielamigo_app/screens/boarding_form/boarding_form_screen.dart';
+import 'package:fielamigo_app/screens/caregiver_biography/caregiver_biography_screen.dart';
 import 'package:fielamigo_app/screens/caregiver_booking_request/caregiver_booking_request_screen.dart';
 import 'package:fielamigo_app/screens/caregiver_bookings_edit/caregiver_bookings_edit_screen.dart';
 import 'package:fielamigo_app/screens/caregiver_completed_bookings/caregiver_completed_bookings_screen.dart';
@@ -125,7 +126,8 @@ class MyApp extends StatelessWidget {
                     '/search-results': (context) => const SearchResultsScreen(),
                     '/user-form': (context) => const UserFormScreen(),
                     '/caregiver/home': ((context) =>
-                        CaregiverHomeScreen()), //TODO change this
+                        const CaregiverHomeScreen()), //TODO change this
+                    '/caregiver/biography': (context) => CaregiverBiographyScreen(),
                     '/caregiver/bookings/new': ((context) =>
                         const CaregiverNewBookingsScreen()),
                     '/caregiver/bookings/edit': (context) =>
