@@ -4,6 +4,7 @@ import 'package:fielamigo_app/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import '../../bloc/profile_picture_cubit/profile_picture_cubit.dart';
 import 'widgets/profile_option.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -16,84 +17,89 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        const CustomAppBar(showLeading: false, title: 'Mi Perfil'),
-        SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column (
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                  // User profile picture and name
-                  const ProfileCard(),
-                  const Divider(
-                    color: Color(0xFFBDBDBD),
-                    height: 20,
-                    thickness: 1,
-                  ),
-                  // Personal information option
-                  ProfileOption(
-                    icon: Icons.person,
-                    text: 'Datos Personales',
-                    onPressed: () => Navigator.pushNamed(context, '/profile/personal-information'),
-                  ),
-                  const Divider(
-                    color: Color(0xFFBDBDBD),
-                    height: 20,
-                    thickness: 1,
-                  ),
-                  // Address option
-                  ProfileOption(
-                    icon: Icons.location_pin,
-                    text: 'Dirección',
-                    onPressed: () => Navigator.pushNamed(context, '/profile/address'),
-                  ),
-                  const Divider(
-                    color: Color(0xFFBDBDBD),
-                    height: 20,
-                    thickness: 1,
-                  ),
-                  // Payment methods option
-                  BlocBuilder<UserInfoCubit, UserInfoState>(builder: (context, state) {
-                    if(state.isOwner){
-                      return ProfileOption(
-                        icon: Icons.credit_card,
-                        text: 'Métodos de Pago',
-                        onPressed: () => Navigator.pushNamed(context, '/profile/payment-methods'),
-                      );
-                    } else {
-                      return ProfileOption(
-                        icon: Icons.perm_device_information,
-                        text: 'Biografía',
-                        onPressed: () => Navigator.pushNamed(context, '/caregiver/biography'),
-                      );
-                    }
-                  }),
-                  const Divider(
-                    color: Color(0xFFBDBDBD),
-                    height: 20,
-                    thickness: 1,
-                  ),
-                  // Log out option
-                  ProfileOption(
-                    icon: Icons.logout,
-                    text: 'Cerrar Sesión',
-                    onPressed: () {
-                      FlutterSecureStorage storage = const FlutterSecureStorage();
-                      storage.delete(key: "token");
-                      storage.delete(key: "refresh");
-                      context.read<UserInfoCubit>().clear();
-                      Navigator.pushNamedAndRemoveUntil(context, '/welcome', (Route<dynamic> route) => false);
-                    }
-                  ),
-              ],
-            ),
+    return BlocBuilder<ProfilePictureCubit, ProfilePictureState>(
+      buildWhen:(previous, current) => previous.imageUrl != current.imageUrl,
+      builder: (context, state) => Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          const CustomAppBar(showLeading: false, title: 'Mi Perfil'),
+          SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column (
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                    // User profile picture and name
+                    ProfileCard(
+                      profilePictureUrl: state.imageUrl,
+                    ),
+                    const Divider(
+                      color: Color(0xFFBDBDBD),
+                      height: 20,
+                      thickness: 1,
+                    ),
+                    // Personal information option
+                    ProfileOption(
+                      icon: Icons.person,
+                      text: 'Datos Personales',
+                      onPressed: () => Navigator.pushNamed(context, '/profile/personal-information'),
+                    ),
+                    const Divider(
+                      color: Color(0xFFBDBDBD),
+                      height: 20,
+                      thickness: 1,
+                    ),
+                    // Address option
+                    ProfileOption(
+                      icon: Icons.location_pin,
+                      text: 'Dirección',
+                      onPressed: () => Navigator.pushNamed(context, '/profile/address'),
+                    ),
+                    const Divider(
+                      color: Color(0xFFBDBDBD),
+                      height: 20,
+                      thickness: 1,
+                    ),
+                    // Payment methods option
+                    BlocBuilder<UserInfoCubit, UserInfoState>(builder: (context, state) {
+                      if(state.isOwner){
+                        return ProfileOption(
+                          icon: Icons.credit_card,
+                          text: 'Métodos de Pago',
+                          onPressed: () => Navigator.pushNamed(context, '/profile/payment-methods'),
+                        );
+                      } else {
+                        return ProfileOption(
+                          icon: Icons.perm_device_information,
+                          text: 'Biografía',
+                          onPressed: () => Navigator.pushNamed(context, '/caregiver/biography'),
+                        );
+                      }
+                    }),
+                    const Divider(
+                      color: Color(0xFFBDBDBD),
+                      height: 20,
+                      thickness: 1,
+                    ),
+                    // Log out option
+                    ProfileOption(
+                      icon: Icons.logout,
+                      text: 'Cerrar Sesión',
+                      onPressed: () {
+                        FlutterSecureStorage storage = const FlutterSecureStorage();
+                        storage.delete(key: "token");
+                        storage.delete(key: "refresh");
+                        context.read<UserInfoCubit>().clear();
+                        Navigator.pushNamedAndRemoveUntil(context, '/welcome', (Route<dynamic> route) => false);
+                      }
+                    ),
+                ],
+              ),
+            )
           )
-        )
-      ],
+        ],
+      ),
     );
 
     // return Scaffold(

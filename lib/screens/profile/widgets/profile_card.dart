@@ -5,9 +5,11 @@ import 'package:sizer/sizer.dart';
 import '../../../bloc/user_info_cubit/user_info_cubit.dart';
 
 class ProfileCard extends StatefulWidget {
+  final String? profilePictureUrl;
 
   const ProfileCard({
     super.key,
+    this.profilePictureUrl,
   });
 
   @override
@@ -15,7 +17,6 @@ class ProfileCard extends StatefulWidget {
 }
 
 class _ProfileCardState extends State<ProfileCard> {
-  String? profilePictureUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -37,10 +38,10 @@ class _ProfileCardState extends State<ProfileCard> {
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8.h),
-                child: profilePictureUrl != null ?
+                child: widget.profilePictureUrl != null ?
                   // If the user has a profile picture, show it
                   Image.network(
-                    profilePictureUrl!,
+                    widget.profilePictureUrl!,
                     width: 8.h,
                     height: 8.h,
                     fit: BoxFit.cover,

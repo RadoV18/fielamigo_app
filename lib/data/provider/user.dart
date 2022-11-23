@@ -102,4 +102,31 @@ class UserProvider {
       throw Exception('Failed to get user details');
     }
   }
+
+  Future<String?> getProfilePicture(String token, int userId) async {
+    String? result = null;
+    
+    final response = http.get(
+      Uri.parse("$_url/$userId/profile-picture"),
+      headers: {
+        'Authorization': 'Bearer $token'
+      }
+    );
+
+    if((await response).statusCode == 200) {
+      print("profile picture fetched succesfully");
+
+      ResponseDto backendResponse = ResponseDto.fromJson(jsonDecode((await response).body));
+      if(backendResponse.succesful) {
+        result = backendResponse.data;
+        return result;
+      } else {
+        throw Exception(backendResponse.message);
+      }
+    } else if((await response).statusCode == 404) {
+      return null;
+    } else {
+      throw Exception('Failed to get profile picture');
+    }
+  }
 } 

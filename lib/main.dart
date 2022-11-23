@@ -2,6 +2,7 @@ import 'package:fielamigo_app/bloc/add_payment_method_cubit/add_payment_method_c
 import 'package:fielamigo_app/bloc/add_pet_cubit/add_pet_cubit.dart';
 import 'package:fielamigo_app/bloc/bottom_navbar_cubit/bottom_navbar_cubit.dart';
 import 'package:fielamigo_app/bloc/payment_methods_cubit/payment_methods_cubit.dart';
+import 'package:fielamigo_app/bloc/profile_picture_cubit/profile_picture_cubit.dart';
 import 'package:fielamigo_app/bloc/sign_up_cubit/sign_up_cubit.dart';
 import 'package:fielamigo_app/screens/add_payment_method/add_payment_method_screen.dart';
 import 'package:fielamigo_app/screens/boarding_form/boarding_form_screen.dart';
@@ -79,6 +80,9 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider<UserInfoCubit>(
           create: (context) => UserInfoCubit()..init(),
+        ),
+        BlocProvider<ProfilePictureCubit>(
+          create: (context) => ProfilePictureCubit()..init(),
         ),
         BlocProvider<SignUpCubit>(
             create: (BuildContext context) => SignUpCubit()),
