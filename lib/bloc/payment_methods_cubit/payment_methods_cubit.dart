@@ -14,7 +14,6 @@ class PaymentMethodsCubit extends Cubit<PaymentMethodsState> {
     // sets state to loading
     emit(const PaymentMethodsLoading());
     try {
-      //TODO: implement token authentication? maybe?
 
       // gets payment methods from provider
       final paymentMethods = await PaymentMethodProvider().getPaymentMethods(); //TODO: change this after testing payment methods
@@ -25,5 +24,7 @@ class PaymentMethodsCubit extends Cubit<PaymentMethodsState> {
       // sets state to error if there is an exception
       emit(PaymentMethodsError(errorMessage: e.toString()));
     }
+
+    return;
   }
 }

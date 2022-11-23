@@ -1,3 +1,4 @@
+import 'package:fielamigo_app/bloc/add_payment_method_cubit/add_payment_method_cubit.dart';
 import 'package:fielamigo_app/bloc/add_pet_cubit/add_pet_cubit.dart';
 import 'package:fielamigo_app/bloc/bottom_navbar_cubit/bottom_navbar_cubit.dart';
 import 'package:fielamigo_app/bloc/payment_methods_cubit/payment_methods_cubit.dart';
@@ -87,6 +88,7 @@ class MyApp extends StatelessWidget {
         BlocProvider<AddPetCubit>(
             create: (BuildContext context) => AddPetCubit()),
         BlocProvider<PaymentMethodsCubit>(create: (BuildContext context) => PaymentMethodsCubit()..init()),
+        BlocProvider(create: (BuildContext context) => AddPaymentMethodCubit()),
       ],
       child: Sizer(
           builder: (context, orientation, deviceType) => MaterialApp(
@@ -119,8 +121,7 @@ class MyApp extends StatelessWidget {
                         const ProfileUserAddressScreen(),
                     '/profile/payment-methods': (context) =>
                         const PaymentMethodsScreen(),
-                    '/payment-methods/add': (context) =>
-                        const AddPaymentMethodScreen(),
+                    '/payment-methods/add': (context) => AddPaymentMethodScreen(),
                     '/search-results': (context) => const SearchResultsScreen(),
                     '/user-form': (context) => const UserFormScreen(),
                     '/caregiver/home': ((context) =>

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:fielamigo_app/data/models/payment_method_dto.dart';
+import 'package:fielamigo_app/data/models/payment_method_req_dto.dart';
 import 'package:fielamigo_app/data/models/response_dto.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
@@ -9,6 +10,25 @@ import 'api.dart';
 
 class PaymentMethodProvider {
   final String _url = Api.url;
+
+  Future<void> addPaymentMethod(PaymentMethodReqDto paymentMethodReqDto) async {
+    FlutterSecureStorage flutterSecureStorage = const FlutterSecureStorage();
+    final String? token = await flutterSecureStorage.read(key: "token");
+
+    final response = await http.post(
+      Uri.parse('$_url/payment-methods'),
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: jsonEncode(paymentMethodReqDto.toJson()),
+    );
+
+    if (response.statusCode != 201) {
+      throw Exception('Failed to add payment method');
+    }
+  }
 
   // GET /payment-methods
   //Gets all the payment methods of the user in a List
@@ -22,7 +42,7 @@ class PaymentMethodProvider {
     final response = await http.get(
       Uri.parse('$_url/payment-methods'),
       headers: {
-        'Authorization': 'Bearer $token', 
+        'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',
       },
     );
@@ -33,7 +53,6 @@ class PaymentMethodProvider {
       ResponseDto backendResponse = ResponseDto.fromJson(data);
 
       if (backendResponse.succesful) {
-
         // put response data into List
         paymentMethods = backendResponse.data
             .map<PaymentMethodDto>((json) => PaymentMethodDto.fromJson(json))
