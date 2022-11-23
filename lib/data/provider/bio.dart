@@ -10,10 +10,14 @@ import 'api.dart';
 class BioProvider {
   final String _url = "${Api.url}/caregiver";
   static Future<FeatureDto> getBioFeatures() async {
-    FeatureDto featureDto = FeatureDto();
+    FeatureDto featureDto = FeatureDto(
+
+    );
     // final response = await http.get('${Api.url}/bio');
     return featureDto;
   }
+
+  static addBioFeatures(String bio, List<String> experiences, List<String> houseFeatures) {} // POST TO BACKEND
 }
 
 //TODO: RADO - make backend request

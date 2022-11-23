@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 
-class Features extends StatelessWidget {
+class Experience extends StatelessWidget {
   final String title;
   final String buttonString;
 
-  const Features({super.key, required this.title, required this.buttonString});
+  const Experience({super.key, required this.title, required this.buttonString});
 
   @override
   Widget build(BuildContext context) {
@@ -74,9 +74,9 @@ class Features extends StatelessWidget {
                 );
               } else if (state is BioFeaturesLoaded) {
                 return ListView.builder(
-                  itemCount: state.houseFeatures.length,
+                  itemCount: state.experiences.length,
                   itemBuilder: (context, index) =>
-                      FeatureItem(feature: state.houseFeatures[index]),
+                      FeatureItem(feature: state.experiences[index]),
                 );
               } else {
                 return const Center(
