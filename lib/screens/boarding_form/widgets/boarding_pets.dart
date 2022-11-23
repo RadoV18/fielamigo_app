@@ -7,23 +7,17 @@ class BoardingPets extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      flex: 2,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          Text(
-            "¿Quiénes se alojarán?",
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
-            ),
+    return Column(
+      children: const [
+        Text(
+          "¿Quiénes se alojarán?",
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
           ),
-          Expanded(
-            child: PetList()
-          ),
-        ],
-      ),
+        ),
+        PetList(),
+      ],
     );
   }
 }

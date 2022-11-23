@@ -11,51 +11,41 @@ class BoardingFormScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: CustomAppBar(
         onBackButtonPressed: () => Navigator.pop(context),
         title: 'Alojamiento para perros',
       ),
-      body: CustomScrollView(
-        slivers: [
-          SliverFillRemaining(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Flexible(
-                    fit: FlexFit.loose,
-                    child: Column(
-                      children: const [
-                        BoardingDescription(),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        BoardingDateRange(),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        BoardingLocation(),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        BoardingPets(),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  ElevatedButton(
-                    onPressed: () =>
-                        Navigator.pushNamed(context, '/search-results'),
-                    child: const Text('Buscar alojamiento'),
-                  ),
-                ],
-              ),
+      body: SingleChildScrollView(
+        child:
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+            child: Column(
+              children: [
+                const BoardingDescription(),
+                const SizedBox(
+                  height: 20,
+                ),
+                const BoardingDateRange(),
+                const SizedBox(
+                  height: 20,
+                ),
+                const BoardingLocation(),
+                const SizedBox(
+                  height: 20,
+                ),
+                const BoardingPets(),
+                const SizedBox(
+                  height: 20,
+                ),
+                ElevatedButton(
+                  onPressed: () =>
+                      Navigator.pushNamed(context, '/search-results'),
+                  child: const Text('Buscar alojamiento'),
+                ),
+              ],
             ),
           )
-        ],
       ),
     );
   }
