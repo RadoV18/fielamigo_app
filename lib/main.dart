@@ -2,6 +2,7 @@ import 'package:fielamigo_app/bloc/add_payment_method_cubit/add_payment_method_c
 import 'package:fielamigo_app/bloc/add_pet_cubit/add_pet_cubit.dart';
 import 'package:fielamigo_app/bloc/bio_features_cubit/bio_features_cubit.dart';
 import 'package:fielamigo_app/bloc/bottom_navbar_cubit/bottom_navbar_cubit.dart';
+import 'package:fielamigo_app/bloc/caregiver_services_form_cubit/caregiver_services_form_cubit.dart';
 import 'package:fielamigo_app/bloc/payment_methods_cubit/payment_methods_cubit.dart';
 import 'package:fielamigo_app/bloc/profile_picture_cubit/profile_picture_cubit.dart';
 import 'package:fielamigo_app/bloc/sign_up_cubit/sign_up_cubit.dart';
@@ -14,6 +15,7 @@ import 'package:fielamigo_app/screens/caregiver_bookings_edit/caregiver_bookings
 import 'package:fielamigo_app/screens/caregiver_completed_bookings/caregiver_completed_bookings_screen.dart';
 import 'package:fielamigo_app/screens/caregiver_home/caregiver_home_screen.dart';
 import 'package:fielamigo_app/screens/caregiver_new_bookings/caregiver_new_bookings_screen.dart';
+import 'package:fielamigo_app/screens/caregiver_services_form/caregiver_services_form.dart';
 import 'package:fielamigo_app/screens/login/login_screen.dart';
 import 'package:fielamigo_app/screens/onboarding/onboarding_screen.dart';
 import 'package:fielamigo_app/screens/owner_add_pet/owner_add_pet.dart';
@@ -87,6 +89,7 @@ class MyApp extends StatelessWidget {
         BlocProvider<ProfilePictureCubit>(
           create: (context) => ProfilePictureCubit()..init(),
         ),
+        BlocProvider(create: (context) => CaregiverServicesFormCubit()),
         BlocProvider<BoardingCubit>(
           create: (context) => BoardingCubit(),
         ),
@@ -147,6 +150,7 @@ class MyApp extends StatelessWidget {
                           service: 'Paseo',
                           userId: 1,
                         ),
+                    '/caregiver/services-form': (context) => const CareGiverServicesFormScreen(),
                     '/caregiver/bookings/request': ((context) =>
                         const CaregiverBookingRequestScreen()),
                     '/caregiver/bookings/completed': ((context) =>

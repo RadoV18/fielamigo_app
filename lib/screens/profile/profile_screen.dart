@@ -75,14 +75,20 @@ class ProfileScreen extends StatelessWidget {
                           context, '/profile/payment-methods'),
                     );
                   } else {
-                    return ProfileOption(
-                      icon: Icons.perm_device_information,
-                      text: 'Biografía',
-                      onPressed: () {
-                        context.read<BioFeaturesCubit>().clear();
-                        Navigator.pushNamed(context, '/caregiver/biography');
-                        context.read<BioFeaturesCubit>().init();
-                      },
+                    return Column(
+                      children: [
+                        ProfileOption(
+                          icon: Icons.perm_device_information,
+                          text: 'Biografía',
+                          onPressed: () {
+                            context.read<BioFeaturesCubit>().clear();
+                            Navigator.pushNamed(context, '/caregiver/biography');
+                            context.read<BioFeaturesCubit>().init();
+                          },
+                        ),  
+
+                        ProfileOption(icon: Icons.settings, text:"Editar servicios", onPressed: () => Navigator.pushNamed(context, '/caregiver/services-form'))
+                      ],  
                     );
                   }
                 }),

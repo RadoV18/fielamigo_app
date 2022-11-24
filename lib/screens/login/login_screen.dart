@@ -110,15 +110,15 @@ class LoginScreen extends StatelessWidget {
                               context.read<LogInCubit>().submit();
                             },
                             child: const Text("Iniciar sesión")),
-                        ElevatedButton(
-                            //TODO: remove after testing
-                            onPressed: () {
-                              context.read<LogInCubit>().submit();
-                              // TODO: check if user is logged in
-                              Navigator.pushNamedAndRemoveUntil(
-                                  context, "/caregiver/home", (_) => false);
-                            },
-                            child: const Text("Caregiver Test")),
+                        // ElevatedButton(
+                        //     //TODO: remove after testing
+                        //     onPressed: () {
+                        //       context.read<LogInCubit>().submit();
+                        //       // TODO: check if user is logged in
+                        //       Navigator.pushNamedAndRemoveUntil(
+                        //           context, "/caregiver/home", (_) => false);
+                        //     },
+                        //     child: const Text("Caregiver Test")),
                         SizedBox(height: 2.5.h),
                         TextButton(
                             onPressed: () =>
