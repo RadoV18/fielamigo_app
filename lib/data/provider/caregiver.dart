@@ -13,10 +13,10 @@ import 'api.dart';
 class CaregiverProvider {
 
   // TODO: uncomment to use with Flutter
-  // final String _url = "${Api.url}/caregivers";
+  final String _url = "${Api.url}/caregivers";
 
   // testing url
-  final String _url = "http://localhost:8080/api/v1/caregivers";
+  // final String _url = "http://localhost:8080/api/v1/caregivers";
 
   // GET /caregivers/boarding - Search
   Future<List<CaregiverCardDto>> searchBoarding(

@@ -23,6 +23,9 @@ class LargeTextInput extends StatelessWidget {
     const accentColor = Color(0xffffffff);
     const errorColor = Color(0xffEF4444);
 
+    if(bioText.isNotEmpty) { //checks whether the bioText has already been filled before
+      inputController.text = bioText;
+    }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

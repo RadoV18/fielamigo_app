@@ -6,10 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../bloc/caregiver_services_form_cubit/caregiver_services_form_cubit.dart';
 import '../../widgets/experience_widget.dart';
-import '../caregiver_services_form/widgets/slider.dart';
-import '../caregiver_services_form/widgets/text_input.dart';
+import 'widgets/photo_grid.dart';
 
 class CaregiverBiographyScreen extends StatelessWidget {
   final TextEditingController _bioController = TextEditingController();
@@ -61,7 +59,7 @@ class CaregiverBiographyScreen extends StatelessWidget {
                 const SizedBox(
                   height: 30,
                 ),
-                const Text("HERE GOES IMAGE UPLOAD"),
+                const PhotoGrid(),
                 const SizedBox(
                   height: 30,
                 ),
