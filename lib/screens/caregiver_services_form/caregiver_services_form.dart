@@ -40,7 +40,7 @@ class CareGiverServicesFormScreen extends StatelessWidget {
                   text: "Alojamiento",
                   iconPath: "assets/icons/ic_home_access_pet_parent.svg",
                   subtitle:
-                      "Si decides alojar, pos MODO SEXO 1",
+                      "Si decides alojar, debes cuidar de los perros en tu casa.",
                   isAlreadyCompleted: state.hasBoardingConfiguration ? true : false,
                   onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=> BoardingForm())),
                 ),
@@ -54,7 +54,7 @@ class CareGiverServicesFormScreen extends StatelessWidget {
                   text: "Paseo",
                   iconPath: "assets/icons/ic_dog_for_walk.svg",
                   subtitle:
-                      "Si decides pasear, pos MODO SEXO 2",
+                      "Si decides pasear, debes llevar a los perros a pasear por las areas que tu designas.",
                   isAlreadyCompleted: state.hasWalkingConfiguration ? true : false,
                   onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=> WalkingForm())),
                 ),
@@ -68,7 +68,7 @@ class CareGiverServicesFormScreen extends StatelessWidget {
                   text: "Entrenamiento",
                   iconPath: "assets/icons/ic_service_training_placeholder.svg",
                   subtitle:
-                      "Si decides entrenar, pos MODO SEXO 3",
+                      "Si decides entrenar, puedes ofrecer clases de entrenamiento a domicilio o en tu casa.",
                   isAlreadyCompleted: state.hasTrainingConfiguration ? true : false,
                   onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=> TrainingForm())),
                 ),
@@ -82,7 +82,7 @@ class CareGiverServicesFormScreen extends StatelessWidget {
                   text: "Cuidado",
                   iconPath: "assets/icons/ic_drop_in_service_tile.svg",
                   subtitle:
-                      "Si decides cuidar, pos MODO SEXO 4",
+                      "Si decides cuidar, puedes ofrecer el servicio en tu casa o a domicilio.",
                   isAlreadyCompleted: state.hasNursingConfiguration ? true : false,
                   onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context)=> NursingForm())),
                 ),
