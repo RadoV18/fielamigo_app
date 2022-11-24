@@ -10,6 +10,13 @@ class TokenUtils {
     return null;
   }
 
+  static int? getCaregiverId(String? token) {
+    if(token != null) {
+      return int.parse(Jwt.parseJwt(token)['caregiverId']);
+    }
+    return null;
+  }
+
   static bool checkIsOwner(String token) {
     return Jwt.parseJwt(token)['isOwner'] == true;
   }
@@ -32,7 +39,7 @@ class TokenUtils {
     return null;
   }
 
-  static Future<String?> getToken() async {
+  static Future<String?> getToken(String s) async {
     FlutterSecureStorage storage = const FlutterSecureStorage();
     return await storage.read(key: "token");
   }
