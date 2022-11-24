@@ -36,21 +36,15 @@ class AddPaymentMethodScreen extends StatelessWidget {
                   BlocConsumer<AddPaymentMethodCubit, AddPaymentMethodState>(
                     listener: (context, state) {
                       if (state == const AddPaymentMethodLoading()) {
-                        // return const Center(
-                        //   child: CircularProgressIndicator(),
-                        // );
                         UiUtils.showAlertDialog(context,
                             message: "Cargando...",
                             isDismissible: false,
                             hasCircularProgressIndicator: true); // loading
                       } else if (state is AddPaymentMethodSuccess) {
-                        // return const Center(
-                        //   child: Text("Tarjeta agregada con éxito"),
-                        // );
                         Navigator.pop(context, true);
                         UiUtils.showAlertDialog(
                           context,
-                          message: "Success",
+                          message: "Tarjeta agregada con éxito",
                           isDismissible: true,
                           onOkButtonPressed: () {
                             Navigator.pop(context);
@@ -58,12 +52,9 @@ class AddPaymentMethodScreen extends StatelessWidget {
                           }
                         );
                       } else if (state is AddPaymentMethodError) {
-                        // return const Center(
-                        //   child: Text("Error al agregar tarjeta"),
-                        // );
                         Navigator.pop(context, true);
                         UiUtils.showAlertDialog(context,
-                            message: "Error", isDismissible: false);
+                            message: "Error desconocido.", isDismissible: false);
                       }
                     },
                     builder: (context, state) {

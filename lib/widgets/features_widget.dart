@@ -1,8 +1,11 @@
 import 'package:fielamigo_app/bloc/bio_features_cubit/bio_features_cubit.dart';
+import 'package:fielamigo_app/bloc/page_status.dart';
 import 'package:fielamigo_app/screens/caregiver_biography/widgets/list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
+
+import '../screens/caregiver_biography/widgets/alert_dialog.dart';
 
 class Features extends StatelessWidget {
   final String title;
@@ -43,9 +46,9 @@ class Features extends StatelessWidget {
                         RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(5)),
                       )),
-                  onPressed: () {
-                    //TODO: make this button work
-                  },
+                  onPressed: () => showDialog(
+                      context: context,
+                      builder: (context) => const CustomAlert(title: "Añadir Experiencia")),
                   child: Text(
                     '$buttonString +',
                     style:
@@ -56,7 +59,7 @@ class Features extends StatelessWidget {
           height: 8,
         ),
         Container(
-          height: 50,
+          height: 100,
           decoration: BoxDecoration(boxShadow: [
             BoxShadow(
                 offset: const Offset(12, 26),
@@ -64,27 +67,24 @@ class Features extends StatelessWidget {
                 spreadRadius: 0,
                 color: Colors.grey.withOpacity(.1)),
           ]),
-          child: BlocProvider(
-            create: (context) => BioFeaturesCubit()..init(),
-            child: BlocBuilder<BioFeaturesCubit, BioFeaturesState>(
-                builder: (context, state) {
-              if (state is BioFeaturesLoading) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else if (state is BioFeaturesLoaded) {
-                return ListView.builder(
-                  itemCount: state.houseFeatures.length,
-                  itemBuilder: (context, index) =>
-                      FeatureItem(feature: state.houseFeatures[index]),
-                );
-              } else {
-                return const Center(
-                  child: Text('Error'),
-                );
-              }
-            }),
-          ),
+          child: BlocBuilder<BioFeaturesCubit, BioFeaturesState>(
+              builder: (context, state) {
+            if (state.pageStatus == PageStatus.loading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (state.pageStatus == PageStatus.success) {
+              return ListView.builder(
+                itemCount: state.houseFeatures.length,
+                itemBuilder: (context, index) =>
+                    FeatureItem(feature: state.houseFeatures[index]),
+              );
+            } else {
+              return const Center(
+                child: Text('Error'),
+              );
+            }
+          }),
         ),
       ],
     );

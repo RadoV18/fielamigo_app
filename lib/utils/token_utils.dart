@@ -1,11 +1,19 @@
+import 'dart:developer';
+
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:jwt_decode/jwt_decode.dart';
 
 class TokenUtils {
-
   static int? getUserId(String? token) {
     if(token != null) {
       return int.parse(Jwt.parseJwt(token)['sub']);
+    }
+    return null;
+  }
+
+  static int? getCaregiverId(String? token) {
+    if (token != null) {
+      return Jwt.parseJwt(token)['caregiverId'];
     }
     return null;
   }

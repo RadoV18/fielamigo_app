@@ -43,7 +43,7 @@ class PaymentMethodsScreen extends StatelessWidget {
                                 child: PaymentMethodCard(
                                   cardNumber: '**** **** **** ${state.paymentMethods![index].lastDigits}',
                                   cardType: 'Visa',
-                                  expirationDate: '12/22',
+                                  expirationDate: state.paymentMethods![index].getExpirationDate(),
                                 ),
                               ),
                               

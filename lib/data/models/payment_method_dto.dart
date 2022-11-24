@@ -19,4 +19,9 @@ class PaymentMethodDto {
       name: json['name'],
     );
   }
+
+  String getExpirationDate() {
+    String expDate = expirationDate;
+    return '${expDate.substring(5, 7)}/${expDate.substring(2, 4)}';
+  }
 }
