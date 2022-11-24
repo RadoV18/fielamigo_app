@@ -95,6 +95,23 @@ class DogProvider {
     }
   }
 
+  // GET /dogs/{dogId}
+  Future<DogResDto> getDogById(String token, int id) async {
+    final response = await http.get(
+      Uri.parse("$_url/$id"),
+      headers: {
+        'Authorization': 'Bearer $token'
+      }
+    );
+
+    if(response.statusCode == 200) {
+      ResponseDto backendResponse = ResponseDto.fromJson(jsonDecode(response.body));
+      return DogResDto.fromJson(backendResponse.data);
+    } else {
+      throw Exception('Failed to load dog');
+    }
+  }
+
 }
 
 // for testing purposes only

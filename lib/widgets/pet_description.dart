@@ -4,7 +4,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
 
 class PetDescription extends StatelessWidget {
-  const PetDescription({super.key});
+  final bool isMale;
+  final String size;
+
+  const PetDescription({
+    super.key,
+    required this.isMale,
+    required this.size,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,9 +20,9 @@ class PetDescription extends StatelessWidget {
         Expanded(
             flex: 1,
             child: CustomRadioButton(
-              text: "Macho",
+              text: isMale ? "Macho" : "Hembra",
               icon: SvgPicture.asset(
-                "assets/icons/ic_dog_male.svg",
+                isMale ? "assets/icons/ic_dog_male.svg" : "assets/icons/ic_dog_female.svg",
                 height: 40,
               ),
               onPressed: () {},
@@ -24,9 +31,13 @@ class PetDescription extends StatelessWidget {
         Expanded(
           flex: 1,
           child: CustomRadioButton(
-            text: "Pequeño",
+            text: size == "Pequeño" ? "Pequeño" : size == "Mediano" ? "Mediano" : "Grande",
             icon: SvgPicture.asset(
-              "assets/icons/ic_dog_size_sm.svg",
+              size == "Pequeño"
+                  ? "assets/icons/ic_dog_size_sm.svg"
+                  : size == "Mediano"
+                      ? "assets/icons/ic_dog_size_md.svg"
+                      : "assets/icons/ic_dog_size_xl.svg",
               height: 40,
             ),
             onPressed: () {},

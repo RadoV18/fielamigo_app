@@ -5,6 +5,9 @@ class DogResDto {
   DateTime? birthDate;
   String? size;
   String? breed;
+  String? notes;
+  bool isSterilized;
+  bool isMale;
   String? imageUrl;
 
   DogResDto({
@@ -14,6 +17,9 @@ class DogResDto {
     this.birthDate,
     this.size,
     this.breed,
+    this.notes,
+    this.isSterilized = false,
+    this.isMale = true,
     this.imageUrl,
   });
 
@@ -24,6 +30,8 @@ class DogResDto {
     birthDate: DateTime.parse(json["birthDate"]),
     size: json["size"],
     breed: json["breed"],
+    notes: json["notes"],
+    isSterilized: json["isSterilized"] ?? false,
     imageUrl: json["imageUrl"],
   );
 
@@ -34,6 +42,8 @@ class DogResDto {
     "birthDate": birthDate!.toIso8601String(),
     "size": size,
     "breed": breed,
+    "notes": notes,
+    "isSterilized": isSterilized,
     "imageUrl": imageUrl,
   };
 }

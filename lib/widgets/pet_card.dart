@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/boarding_cubit/boarding_cubit.dart';
 import '../data/models/dog_res_dto.dart';
+import 'pet_info.dart';
 
 class PetCard extends StatefulWidget {
   final int dogId;
@@ -148,7 +149,9 @@ class _PetCardState extends State<PetCard> {
             },
           ) : IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, "/owner/pets/info");
+              Navigator.push(context, MaterialPageRoute(builder: (context) => PetInfo(
+                dogId: widget.dogId,
+              )));
             },
             icon: const Icon(
               Icons.info,
