@@ -9,7 +9,7 @@ class PetCard extends StatefulWidget {
   final String breed;
   final String size;
   final int age;
-  final String imageUrl;
+  final String? imageUrl;
   final bool isSelectable;
 
   const PetCard({
@@ -19,7 +19,7 @@ class PetCard extends StatefulWidget {
     required this.breed,
     required this.size,
     required this.age,
-    required this.imageUrl,
+    this.imageUrl,
     this.isSelectable = false
     // this.onSelectable;
   });
@@ -33,6 +33,7 @@ class _PetCardState extends State<PetCard> {
 
   @override
   Widget build(BuildContext context) {
+    print(widget.imageUrl);
     return Container(
       width: MediaQuery.of(context).size.width * 0.95,
       height: 85,
@@ -54,22 +55,29 @@ class _PetCardState extends State<PetCard> {
         children: [
           Row(
             children: [
-              Card(
-                clipBehavior: Clip.antiAlias,
-                elevation: 4.0,
-                shape: const CircleBorder(
-                  side: BorderSide(
-                    color: Color(0xff047b5b),
-                    width: 2.0,
+              SizedBox(
+                width: 70,
+                height: 70,
+                child: Card(
+                  clipBehavior: Clip.antiAlias,
+                  elevation: 4.0,
+                  shape: const CircleBorder(
+                    side: BorderSide(
+                      color: Color(0xff047b5b),
+                      width: 2.0,
+                    ),
                   ),
+                  child: ClipRRect(
+                    child: widget.imageUrl != null ?
+                      Image.network(
+                        widget.imageUrl!,
+                        height: 70,
+                        width: 70,
+                        fit: BoxFit.cover
+                      ) :
+                      const Icon(Icons.pets, size: 50, color: Colors.grey),
+                  )
                 ),
-                child: ClipRRect(
-                  child: Image.network(
-                    widget.imageUrl,
-                    height: 70,
-                    fit: BoxFit.cover
-                    )
-                  ),
               ),
               const SizedBox(width: 15),
               Column(
@@ -87,14 +95,14 @@ class _PetCardState extends State<PetCard> {
                   Row(
                     children: [
                       Text(
-                        '${widget.breed} ${widget.size.toLowerCase()}',
+                        widget.breed,
                         style: const TextStyle(
                           fontSize: 14,
                         ),
                       ),
-                      const SizedBox(width: 10,),
+                      const SizedBox(width: 5,),
                       const Icon(Icons.pets, size: 14),
-                      const SizedBox(width: 10,),
+                      const SizedBox(width: 5,),
                       Text(
                         '${widget.age.toString()} años',
                         style: const TextStyle(

@@ -1,36 +1,66 @@
+import 'package:fielamigo_app/bloc/user_profile_page_cubit/user_profile_page_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../bloc/page_status.dart';
 import 'about_me.dart';
 import 'caregiver_experience.dart';
 import 'caregiver_pets.dart';
 import 'picture_carousel.dart';
 
 class CaregiverProfile extends StatelessWidget {
-  const CaregiverProfile({super.key});
+  final String firstName;
+
+  const CaregiverProfile({
+    super.key,
+    required this.firstName,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
-        child: Column(
-          children: const [
-            AboutMe(
-              firstName: "Juan",
-              text: "Me llamo Juan y me gustan tanto los animales que soy educador canino profesional, paseador y cuidador de perros. Además, soy voluntario en el centro de acogida de animales de compañía La Paz paseando a perros y mimando a gatos.\n\nNuestra familia peluda se compone de un perro y un gato, y anteriormente he tenido más perros. A mi mujer también le encantan todos los animales, así que vuestros peludos estarán siempre muy bien cuidados."
+    return BlocConsumer<UserProfilePageCubit, UserProfilePageState>(
+      listenWhen: (previous, current) => previous.status != current.status,
+      listener: (context, state) {},
+      builder: (context, state) {
+        if(state.status == PageStatus.fetching) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else {
+          return SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
+              child: Column(
+                children: [
+                  if(state.bio != null)
+                    AboutMe(
+                      firstName: firstName,
+                      text: state.bio!,
+                    ),                  
+                  const SizedBox(height: 20),
+                  if(state.images != null && state.images!.isNotEmpty)
+                    PictureCarousel(
+                      images: state.images!,
+                    ),
+                  const SizedBox(height: 20,),
+                  if(state.dogs != null)
+                    CaregiverPets(
+                      firstName: firstName,
+                      dogs: state.dogs!,
+                    ),
+                  const SizedBox(height: 20,),
+                  if(state.experience != null)
+                    CaregiverExperience(
+                      firstName: firstName,
+                      experience: state.experience!,
+                    ),
+                  const SizedBox(height: 20,)
+                ]
+              ),
             ),
-            SizedBox(height: 20),
-            PictureCarousel(),
-            SizedBox(height: 20,),
-            CaregiverPets(
-              firstName: "Juan",
-            ),
-            SizedBox(height: 20,),
-            CaregiverExperience(),
-            SizedBox(height: 20,)
-          ]
-        ),
-      ),
+          );
+        }
+      },
     );
   }
 }

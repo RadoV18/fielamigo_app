@@ -1,6 +1,8 @@
 import 'package:fielamigo_app/screens/caregiver_details/widgets/caregiver_profile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../bloc/user_profile_page_cubit/user_profile_page_cubit.dart';
 import '../../widgets/biography_card.dart';
 import '../../widgets/custom_app_bar.dart';
 
@@ -49,13 +51,13 @@ class CaregiverDetailsScreen extends StatelessWidget {
               userId: userId,
               firstName: firstName,
               lastName: lastName,
-              isVerified: true,
-              rating: 4.3,
-              reviewCount: 25,
-              zone: "Miraflores",
-              city: "La Paz",
+              isVerified: isVerified,
+              rating: rating,
+              reviewCount: reviewCount,
+              zone: zone,
+              city: city,
               onContactPressed: () {
-                Navigator.pushNamed(context, '/');
+                // Navigator.pushNamed(context, '/');
               },
             ),
             // tab bar
@@ -70,13 +72,16 @@ class CaregiverDetailsScreen extends StatelessWidget {
               ),
             ),
             // tab controller
-            const Flexible(
+            Flexible(
               flex: 3,
               child: TabBarView(
                 children: [
-                  CaregiverProfile(),
-                  Text("Servicios"),
-                  Text("Reseñas"),
+                  BlocProvider<UserProfilePageCubit>(
+                    create: (context) => UserProfilePageCubit()..init(userId),
+                    child: CaregiverProfile(firstName: firstName)
+                  ),
+                  const Text("Servicios"),
+                  const Text("Reseñas"),
                 ],
               ),
             )

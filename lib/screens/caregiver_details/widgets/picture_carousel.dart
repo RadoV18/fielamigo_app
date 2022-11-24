@@ -2,7 +2,12 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 class PictureCarousel extends StatelessWidget {
-  const PictureCarousel({super.key});
+  final List<String> images;
+
+  const PictureCarousel({
+    super.key,
+    required this.images,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,18 +19,13 @@ class PictureCarousel extends StatelessWidget {
         autoPlayAnimationDuration: const Duration(milliseconds: 1000),
         autoPlayCurve: Curves.fastOutSlowIn,
       ),
-      items: [
-        'https://picsum.photos/seed/1/400/300',
-        'https://picsum.photos/seed/2/400/300',
-        'https://picsum.photos/seed/3/400/300',
-        'https://picsum.photos/seed/4/400/300'
-      ].map((i) {
+      items: images.map((i) {
         return Builder(
           builder: (BuildContext context) {
             return Container(
               width: MediaQuery.of(context).size.width,
               margin: const EdgeInsets.symmetric(horizontal: 5.0),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Color(0xffe6e6e6)
               ),
               child: Image.network(i, fit: BoxFit.contain),

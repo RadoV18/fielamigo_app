@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../bloc/dog_cubit/dog_cubit.dart';
 import '../../../widgets/pet_list.dart';
 
 class BoardingPets extends StatelessWidget {
@@ -8,19 +10,22 @@ class BoardingPets extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: const [
-        Text(
+      children: [
+        const Text(
           "¿Quiénes se alojarán?",
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w600,
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
-        PetList(
-          isSelectable: true
+        BlocProvider<DogCubit>(
+          create: (context) => DogCubit()..init(),
+          child: const PetList(
+            isSelectable: true
+          ),
         ),
       ],
     );

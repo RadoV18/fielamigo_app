@@ -33,6 +33,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 import 'bloc/boarding_cubit/boarding_cubit.dart';
+import 'bloc/dog_cubit/dog_cubit.dart';
 import 'bloc/user_data_cubit/user_data_cubit.dart';
 import 'bloc/user_info_cubit/user_info_cubit.dart';
 import 'screens/sign_up/sign_up_screen.dart';
@@ -96,6 +97,7 @@ class MyApp extends StatelessWidget {
             create: (BuildContext context) => AddPetCubit()),
         BlocProvider<PaymentMethodsCubit>(create: (BuildContext context) => PaymentMethodsCubit()..init()),
         BlocProvider(create: (BuildContext context) => AddPaymentMethodCubit()),
+        BlocProvider<DogCubit>(create: (BuildContext context) => DogCubit()..init),
       ],
       child: Sizer(
           builder: (context, orientation, deviceType) => MaterialApp(

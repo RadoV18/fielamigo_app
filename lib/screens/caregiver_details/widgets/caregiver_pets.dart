@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 
+import '../../../data/models/dog_res_dto.dart';
+import '../../../widgets/pet_card.dart';
 import '../../../widgets/pet_list.dart';
 
 class CaregiverPets extends StatelessWidget {
   final String firstName;
+  final List<DogResDto> dogs;
 
   const CaregiverPets({
     super.key,
-    required this.firstName
+    required this.firstName,
+    this.dogs = const [],
   });
 
   @override
@@ -25,8 +29,26 @@ class CaregiverPets extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 10),
-        const PetList(
-          isScrollable: false
+        ListView.separated(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemBuilder: (context, index) {
+            return PetCard(
+              dogId: dogs[index].dogId!,
+              name: dogs[index].name!,
+              breed: dogs[index].breed!,
+              size: dogs[index].size!,
+              age: 3,
+              imageUrl: dogs[index].imageUrl,
+              isSelectable: false,
+            );
+          },
+          separatorBuilder: (context, index) {
+            return const SizedBox(
+              height: 10,
+            );
+          },
+          itemCount: dogs.length
         )
       ],
     );

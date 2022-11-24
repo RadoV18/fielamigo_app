@@ -51,7 +51,6 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<UserInfoCubit, UserInfoState>(
       builder: (context, state) {
-        print("${state.userId} ${state.firstName} ${state.lastName}");
         return SafeArea(
           child: Center(
             child: Column(

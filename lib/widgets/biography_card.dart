@@ -114,7 +114,7 @@ class BiographyCard extends StatelessWidget {
                   ),
                   const SizedBox(width: 5),
                   Text(
-                    rating.toString(),
+                    rating.toStringAsPrecision(3),
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 12,

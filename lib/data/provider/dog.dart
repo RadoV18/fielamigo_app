@@ -10,11 +10,10 @@ import '../models/response_dto.dart';
 import 'api.dart';
 
 class DogProvider {
-  // TODO: uncomment to use with Flutter
-  // final String _url = "${Api.url}/dogs";
+  final String _url = "${Api.url}/dogs";
 
   // testing url
-  final String _url = "http://localhost:8080/api/v1/dogs";
+  // final String _url = "http://localhost:8080/api/v1/dogs";
 
   // POST /dogs
   Future<void> addDog(DogReqDto data, File? image, String token) async {
@@ -48,6 +47,7 @@ class DogProvider {
     }
 
     var response = await request.send();
+    print("sending request");
 
     if(response.statusCode == 201) {
       print("dog created succesfully");
@@ -59,7 +59,7 @@ class DogProvider {
 
   // GET /dogs
   Future<List<DogResDto>> getAllDogs(String token) async {
-
+    print("getting all dogs");
     final response = await http.get(
       Uri.parse(_url),
       headers: {
@@ -69,6 +69,7 @@ class DogProvider {
     );
 
     if(response.statusCode == 200) {
+      print("dogs fetched succesfully");
       ResponseDto backendResponse = ResponseDto.fromJson(jsonDecode(response.body));
       return backendResponse.data.map<DogResDto>((json) => DogResDto.fromJson(json)).toList();
     } else {
