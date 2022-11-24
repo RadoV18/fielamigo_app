@@ -4,6 +4,7 @@ import 'package:fielamigo_app/data/models/caregiver_card_dto.dart';
 import 'package:fielamigo_app/data/repository/boarding_repository.dart';
 import 'package:fielamigo_app/utils/token_utils.dart';
 
+import '../../data/models/boarding_req_dto.dart';
 import '../../data/models/dog_res_dto.dart';
 import '../page_status.dart';
 
@@ -50,6 +51,12 @@ class BoardingCubit extends Cubit<BoardingState> {
   setEndingDate(DateTime? value) {
     emit(state.copyWith(
       endingDate: value
+    ));
+  }
+
+  void setBoardingServiceId(int? value) {
+    emit(state.copyWith(
+      boardingServiceId: value
     ));
   }
 
@@ -105,16 +112,39 @@ class BoardingCubit extends Cubit<BoardingState> {
     ));
   }
 
-  void confirm() {
+  void confirm() async {
     emit(state.copyWith(
       status: PageStatus.submitting
     ));
 
-    Future.delayed(const Duration(seconds: 3), () {
+    String? token = await TokenUtils.getToken();
+    if(token == null) {
+      print("error");
+      return;
+    }
+
+    BoardingReqDto req = BoardingReqDto(
+      boardingServiceId: state.boardingServiceId!,
+      startingDate: state.startingDate!,
+      endingDate: state.endingDate!,
+      includePickup: state.pickup,
+      notes: state.notes,
+      paymentMethodId: state.paymentMethod,
+      dogs: state.dogs.map((dog) => dog.dogId!).toList()
+    );
+
+    try {
+      await _boardingRepository.confirmBoarding(token, req);
       emit(state.copyWith(
         status: PageStatus.finished
       ));
-    });
+    } catch (e) {
+      print(e);
+      emit(state.copyWith(
+        status: PageStatus.error
+      ));
+      return;
+    }   
   }
 
 }

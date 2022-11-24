@@ -1,4 +1,5 @@
 class CaregiverCardDto {
+  int? boardingServiceId;
   int? caregiverId;
   String? firstName;
   String? lastName;
@@ -12,6 +13,7 @@ class CaregiverCardDto {
   bool? isVerified;
 
   CaregiverCardDto({
+    this.boardingServiceId,
     this.caregiverId,
     this.firstName,
     this.lastName,
@@ -26,6 +28,7 @@ class CaregiverCardDto {
   });
 
   factory CaregiverCardDto.fromJson(Map<String, dynamic> json) => CaregiverCardDto(
+    boardingServiceId: json["boardingServiceId"],
     caregiverId: json["caregiverId"],
     firstName: json["firstName"],
     lastName: json["lastName"],
@@ -40,6 +43,7 @@ class CaregiverCardDto {
   );
 
   Map<String, dynamic> toJson() => {
+    "boardingServiceId": boardingServiceId,
     "caregiverId": caregiverId,
     "firstName": firstName,
     "lastName": lastName,

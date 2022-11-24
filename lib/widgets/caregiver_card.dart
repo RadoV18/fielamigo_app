@@ -4,6 +4,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../screens/caregiver_details/caregiver_details_screen.dart';
 
 class CaregiverCard extends StatelessWidget {
+  final int boardingServiceId;
   final int userId;
   final String firstName;
   final String lastName;
@@ -20,6 +21,7 @@ class CaregiverCard extends StatelessWidget {
 
   const CaregiverCard({
     super.key,
+    required this.boardingServiceId,
     required this.userId,
     required this.firstName,
     required this.lastName,
@@ -39,6 +41,7 @@ class CaregiverCard extends StatelessWidget {
     return GestureDetector(
       onTap: () => Navigator.of(context).push(
         MaterialPageRoute(builder: (context) => CaregiverDetailsScreen(
+          boardingServiceId: boardingServiceId,
           userId: userId,
           firstName: firstName,
           lastName: lastName,

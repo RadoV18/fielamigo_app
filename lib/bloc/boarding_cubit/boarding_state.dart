@@ -1,6 +1,7 @@
 part of 'boarding_cubit.dart';
 
 class BoardingState extends Equatable {
+  final int? boardingServiceId;
   final List<DogResDto> dogs;
   final int? cityId;
   final DateTime? startingDate;
@@ -12,6 +13,7 @@ class BoardingState extends Equatable {
   final PageStatus status;
 
   const BoardingState({
+    this.boardingServiceId,
     required this.dogs,
     this.cityId,
     this.startingDate,
@@ -24,6 +26,7 @@ class BoardingState extends Equatable {
   });
 
   BoardingState copyWith({
+    int? boardingServiceId,
     List<DogResDto>? dogs,
     int? cityId,
     DateTime? startingDate,
@@ -35,6 +38,7 @@ class BoardingState extends Equatable {
     PageStatus? status,
   }) {
     return BoardingState(
+      boardingServiceId: boardingServiceId ?? this.boardingServiceId,
       dogs: dogs ?? this.dogs,
       cityId: cityId ?? this.cityId,
       startingDate: startingDate ?? this.startingDate,
@@ -49,6 +53,7 @@ class BoardingState extends Equatable {
 
   @override
   List<Object?> get props => [
+    boardingServiceId,
     dogs,
     cityId,
     startingDate,

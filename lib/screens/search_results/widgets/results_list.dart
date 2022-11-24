@@ -16,6 +16,7 @@ class ResultsList extends StatelessWidget {
         return ListView.separated(
           shrinkWrap: true,
           itemBuilder: (context, index) => CaregiverCard(
+              boardingServiceId: caregivers[index].boardingServiceId!,
               userId: caregivers[index].caregiverId!,
               firstName: caregivers[index].firstName!,
               lastName: caregivers[index].lastName!,

@@ -11,6 +11,7 @@ import '../../widgets/biography_card.dart';
 import '../../widgets/custom_app_bar.dart';
 
 class CaregiverDetailsScreen extends StatelessWidget {
+  final int boardingServiceId;
   final int userId;
   final String firstName;
   final String lastName;
@@ -26,6 +27,7 @@ class CaregiverDetailsScreen extends StatelessWidget {
 
   const CaregiverDetailsScreen({
     super.key,
+    required this.boardingServiceId,
     required this.userId,
     required this.firstName,
     required this.lastName,
@@ -63,7 +65,7 @@ class CaregiverDetailsScreen extends StatelessWidget {
               zone: zone,
               city: city,
               onContactPressed: () {
-                // difference between starting and ending date
+                context.read<BoardingCubit>().setBoardingServiceId(boardingServiceId);
                 DateTime startingDate = context.read<BoardingCubit>().state.startingDate!;
                 DateTime endingDate = context.read<BoardingCubit>().state.endingDate!;
                 int nightCount = endingDate.difference(startingDate).inDays;
