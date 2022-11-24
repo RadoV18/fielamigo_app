@@ -8,6 +8,7 @@ class CaregiverCardDto {
   int? reviewCount;
   double? rating;
   double? price;
+  double? pickupRate;
   bool? isVerified;
 
   CaregiverCardDto({
@@ -20,6 +21,7 @@ class CaregiverCardDto {
     this.reviewCount,
     this.rating,
     this.price,
+    this.pickupRate,
     this.isVerified,
   });
 
@@ -33,6 +35,7 @@ class CaregiverCardDto {
     reviewCount: json["reviewCount"],
     rating: json["rating"].toDouble(),
     price: json["price"].toDouble(),
+    pickupRate: json["pickupRate"].toDouble(),
     isVerified: json["isVerified"],
   );
 
@@ -46,6 +49,7 @@ class CaregiverCardDto {
     "reviewCount": reviewCount,
     "rating": rating,
     "price": price,
+    "pickupRate": pickupRate,
     "isVerified": isVerified,
   };
 }

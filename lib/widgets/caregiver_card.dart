@@ -11,6 +11,7 @@ class CaregiverCard extends StatelessWidget {
   final int reviewCount;
   final double rating;
   final double price;
+  final double pickupRate;
   final String zone;
   final String city;
   final String priceDetails;
@@ -26,6 +27,7 @@ class CaregiverCard extends StatelessWidget {
     this.reviewCount = 0,
     this.rating = 0,
     required this.price,
+    required this.pickupRate,
     required this.priceDetails,
     required this.zone,
     required this.city,
@@ -44,6 +46,7 @@ class CaregiverCard extends StatelessWidget {
           reviewCount: reviewCount,
           rating: rating,
           price: price,
+          pickupRate: pickupRate,
           priceDetails: priceDetails,
           zone: zone,
           city: city,

@@ -23,6 +23,7 @@ class ResultsList extends StatelessWidget {
               reviewCount: caregivers[index].reviewCount!,
               rating: caregivers[index].rating!,
               price: caregivers[index].price!,
+              pickupRate: caregivers[index].pickupRate!,
               zone: caregivers[index].zone!,
               city: caregivers[index].city!,
               priceDetails: "por noche",

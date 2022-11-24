@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/boarding_cubit/boarding_cubit.dart';
+import '../data/models/dog_res_dto.dart';
 
 class PetCard extends StatefulWidget {
   final int dogId;
@@ -11,6 +12,7 @@ class PetCard extends StatefulWidget {
   final int age;
   final String? imageUrl;
   final bool isSelectable;
+  final DateTime? birthDate;
 
   const PetCard({
     super.key,
@@ -18,6 +20,7 @@ class PetCard extends StatefulWidget {
     required this.name,
     required this.breed,
     required this.size,
+    this.birthDate,
     required this.age,
     this.imageUrl,
     this.isSelectable = false
@@ -123,7 +126,15 @@ class _PetCardState extends State<PetCard> {
             onChanged: (value) {
               if(value != null) {
                 if(value) {
-                  context.read<BoardingCubit>().addDog(widget.dogId);
+                  DogResDto dog = DogResDto(
+                    dogId: widget.dogId,
+                    name: widget.name,
+                    breed: widget.breed,
+                    size: widget.size,
+                    birthDate: widget.birthDate,
+                    imageUrl: widget.imageUrl
+                  );
+                  context.read<BoardingCubit>().addDog(dog);
                   setState(() {
                     isSelected = true;
                   });
@@ -133,7 +144,6 @@ class _PetCardState extends State<PetCard> {
                     isSelected = false;
                   });
                 }
-                
               }
             },
           ) : IconButton(

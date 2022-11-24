@@ -4,6 +4,7 @@ import 'package:fielamigo_app/data/models/caregiver_card_dto.dart';
 import 'package:fielamigo_app/data/repository/boarding_repository.dart';
 import 'package:fielamigo_app/utils/token_utils.dart';
 
+import '../../data/models/dog_res_dto.dart';
 import '../page_status.dart';
 
 part 'boarding_state.dart';
@@ -16,22 +17,22 @@ class BoardingCubit extends Cubit<BoardingState> {
 
   final BoardingRepository _boardingRepository = BoardingRepository();
 
-  void addDog(int dogId) {
-    List<int> dogs = [...state.dogs, dogId];
+  void addDog(DogResDto dog) {
+    List<DogResDto> dogs = [...state.dogs, dog];
     emit(state.copyWith(
       dogs: List.of(dogs)
     ));
   }
 
   void removeDog(int dogId) {
-    List<int> dogs = [...state.dogs, dogId];
+    List<DogResDto> dogs = state.dogs.where((dog) => dog.dogId != dogId).toList();
     emit(state.copyWith(
       dogs: List.of(dogs)
     ));
   }
 
   bool isDogSelected(int dogId) {
-    return state.dogs.contains(dogId);
+    return state.dogs.any((dog) => dog.dogId == dogId);
   }
 
   setCityId(int? value) {
@@ -49,6 +50,12 @@ class BoardingCubit extends Cubit<BoardingState> {
   setEndingDate(DateTime? value) {
     emit(state.copyWith(
       endingDate: value
+    ));
+  }
+
+  void setNotes(String value) {
+    emit(state.copyWith(
+      notes: value
     ));
   }
 
@@ -85,4 +92,11 @@ class BoardingCubit extends Cubit<BoardingState> {
       status: PageStatus.success
     ));
   }
+
+  void setPickup(bool value) {
+    emit(state.copyWith(
+      pickup: value
+    ));
+  }
+
 }

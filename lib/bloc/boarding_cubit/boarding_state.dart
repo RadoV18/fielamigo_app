@@ -1,11 +1,13 @@
 part of 'boarding_cubit.dart';
 
 class BoardingState extends Equatable {
-  final List<int> dogs;
+  final List<DogResDto> dogs;
   final int? cityId;
   final DateTime? startingDate;
   final DateTime? endingDate;
   final List<CaregiverCardDto> caregivers;
+  final bool pickup;
+  final String notes;
   final PageStatus status;
 
   const BoardingState({
@@ -14,15 +16,19 @@ class BoardingState extends Equatable {
     this.startingDate,
     this.endingDate,
     required this.caregivers,
+    this.pickup = false,
+    this.notes = '',
     this.status = PageStatus.initial,
   });
 
   BoardingState copyWith({
-    List<int>? dogs,
+    List<DogResDto>? dogs,
     int? cityId,
     DateTime? startingDate,
     DateTime? endingDate,
     List<CaregiverCardDto>? caregivers,
+    bool? pickup,
+    String? notes,
     PageStatus? status,
   }) {
     return BoardingState(
@@ -31,6 +37,8 @@ class BoardingState extends Equatable {
       startingDate: startingDate ?? this.startingDate,
       endingDate: endingDate ?? this.endingDate,
       caregivers: caregivers ?? this.caregivers,
+      pickup: pickup ?? this.pickup,
+      notes: notes ?? this.notes,
       status: status ?? this.status,
     );
   }
@@ -42,6 +50,8 @@ class BoardingState extends Equatable {
     startingDate,
     endingDate,
     caregivers,
+    pickup,
+    notes,
     status,
   ];
 }

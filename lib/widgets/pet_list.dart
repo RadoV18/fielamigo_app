@@ -76,6 +76,7 @@ class PetList extends StatelessWidget {
                 name: state.dogs[index].name!,
                 breed: state.dogs[index].breed!,
                 size: state.dogs[index].size!,
+                birthDate: state.dogs[index].birthDate!,
                 age: age,
                 imageUrl: state.dogs[index].imageUrl,
                 isSelectable: true,

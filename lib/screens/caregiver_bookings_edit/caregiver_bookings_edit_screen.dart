@@ -108,7 +108,7 @@ class CaregiverBookingsEditScreen extends StatelessWidget {
                       const SizedBox(
                         height: 20,
                       ),
-                      const BoardingPet(),
+                      //const BoardingPet(),
                       /* a flutter checkbox */
                       Row(
                         children: [
