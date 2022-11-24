@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 
+import '../screens/caregiver_biography/widgets/alert_dialog.dart';
+
 class Features extends StatelessWidget {
   final String title;
   final String buttonString;
@@ -44,9 +46,9 @@ class Features extends StatelessWidget {
                         RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(5)),
                       )),
-                  onPressed: () {
-                    //TODO: make this button work
-                  },
+                  onPressed: () => showDialog(
+                      context: context,
+                      builder: (context) => const CustomAlert(title: "Añadir Experiencia")),
                   child: Text(
                     '$buttonString +',
                     style:
@@ -57,7 +59,7 @@ class Features extends StatelessWidget {
           height: 8,
         ),
         Container(
-          height: 50,
+          height: 100,
           decoration: BoxDecoration(boxShadow: [
             BoxShadow(
                 offset: const Offset(12, 26),

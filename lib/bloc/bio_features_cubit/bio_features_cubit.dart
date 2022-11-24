@@ -52,6 +52,24 @@ class BioFeaturesCubit extends Cubit<BioFeaturesState> {
     emit(state.copyWith(bio: bio));
   }
 
+  void saveBio() async{
+    emit(state.copyWith(pageStatus: PageStatus.loading));
+    try {
+
+      final token = await TokenUtils.getToken();
+      final bioReq = BioReqDto(bio: state.bio, experience: [], houseFeatures: []);
+      _editBioRepository.postCaregiverBio(token!, bioReq);
+      emit(state.copyWith(pageStatus: PageStatus.success));
+    } catch (e) {
+      log(e.toString());
+      emit(state.copyWith(pageStatus: PageStatus.error));
+    }
+  }
+
+  void clear() {
+    emit(const BioFeaturesState());
+  }
+
   Future<void> setImagesReq() async {
     ImagePicker imagePicker = ImagePicker();
     List<XFile?> images = await imagePicker.pickMultiImage();
@@ -70,11 +88,27 @@ class BioFeaturesCubit extends Cubit<BioFeaturesState> {
     return;
   }
 
-  void setExperiences(List<String> experiences) {
+  List<String> getExperiences() {
+    return state.experiences;
+  }
+
+  void setExperiences({required List<String> experiences}) {
+    emit(state.copyWith(experiences: experiences));
+  }
+
+  void updateExperiences({required String experience}) {
+    final experiences = state.experiences;
+    experiences.add(experience);
     emit(state.copyWith(experiences: experiences));
   }
 
   void setHouseFeatures(List<String> houseFeatures) {
+    emit(state.copyWith(houseFeatures: houseFeatures));
+  }
+
+  void updateHouseFeatures(String houseFeature) {
+    final houseFeatures = state.houseFeatures;
+    houseFeatures.add(houseFeature);
     emit(state.copyWith(houseFeatures: houseFeatures));
   }
 

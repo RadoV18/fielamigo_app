@@ -11,7 +11,7 @@ class FeatureItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(feature),
+      title: Text('- $feature'),
       onTap: () {}, //TODO: handle removal
     );
   }

@@ -1,4 +1,5 @@
 import 'package:fielamigo_app/bloc/bio_features_cubit/bio_features_cubit.dart';
+import 'package:fielamigo_app/screens/caregiver_biography/widgets/alert_dialog.dart';
 import 'package:fielamigo_app/screens/caregiver_biography/widgets/list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -46,7 +47,9 @@ class Experience extends StatelessWidget {
                         RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(5)),
                       )),
-                  onPressed: () {}, //TODO: add functionality
+                  onPressed: () => showDialog(
+                      context: context,
+                      builder: (context) => const CustomAlert(title: "Añadir Experiencia", isExperienceWidget: true,)),
                   child: Text(
                     '$buttonString +',
                     style:
@@ -57,7 +60,7 @@ class Experience extends StatelessWidget {
           height: 8,
         ),
         Container(
-          height: 50,
+          height: 100,
           decoration: BoxDecoration(boxShadow: [
             BoxShadow(
                 offset: const Offset(12, 26),

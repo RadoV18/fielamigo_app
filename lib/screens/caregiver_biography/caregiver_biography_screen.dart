@@ -11,7 +11,6 @@ import '../../widgets/experience_widget.dart';
 import 'widgets/photo_grid.dart';
 
 class CaregiverBiographyScreen extends StatelessWidget {
-
   CaregiverBiographyScreen({Key? key}) : super(key: key);
 
   @override
@@ -92,9 +91,7 @@ class CaregiverBiographyScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(15)),
                             )),
                         onPressed: () {
-                          // context.read<BioFeaturesCubit>().setBio(_bioController.text);
-
-                          context.read<BioFeaturesCubit>().saveBioFeatures();
+                          context.read<BioFeaturesCubit>().saveBio();
                           Navigator.pop(context);
                         },
                         child: const Text(
