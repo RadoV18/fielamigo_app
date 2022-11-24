@@ -74,7 +74,7 @@ class BioFeaturesCubit extends Cubit<BioFeaturesState> {
     ImagePicker imagePicker = ImagePicker();
     List<XFile?> images = await imagePicker.pickMultiImage();
 
-    final String? token = await TokenUtils.getToken()!;
+    final String? token = await TokenUtils.getToken();
     images.forEach((image) async {
       final imageFile = File(image!.path);
 

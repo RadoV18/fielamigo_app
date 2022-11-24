@@ -12,11 +12,7 @@ import '../models/response_dto.dart';
 import 'api.dart';
 
 class CaregiverProvider {
-<<<<<<< HEAD
-
-=======
   // TODO: uncomment to use with Flutter
->>>>>>> 388f8c7e9d7a9d4623db9ccf620910044ec3f3ae
   final String _url = "${Api.url}/caregivers";
 
   // testing url
@@ -33,22 +29,6 @@ class CaregiverProvider {
     };
     print("about to send");
     final response = await http.get(
-<<<<<<< HEAD
-      Uri.parse("$_url/boarding?${Uri(queryParameters: queryParams).query}"),
-      headers: {
-        'Authorization': 'Bearer $token'
-      }
-    );
-    print("sent");
-    if(response.statusCode == 200) {
-      print("OK");
-      ResponseDto backendResponse = ResponseDto.fromJson(jsonDecode(response.body));
-      if(backendResponse.succesful) {
-        return backendResponse.data.map<CaregiverCardDto>((json) => CaregiverCardDto.fromJson(json)).toList();
-      } else {
-        throw Exception(backendResponse.message);
-      }
-=======
         Uri.parse("$_url/boarding?${Uri(queryParameters: queryParams).query}"),
         headers: {'Authorization': 'Bearer $token'});
 
@@ -58,7 +38,6 @@ class CaregiverProvider {
       return backendResponse.data
           .map<CaregiverCardDto>((json) => CaregiverCardDto.fromJson(json))
           .toList();
->>>>>>> 388f8c7e9d7a9d4623db9ccf620910044ec3f3ae
     } else {
       throw Exception('Failed to search boarding');
     }
@@ -191,12 +170,8 @@ class CaregiverProvider {
 void main() async {
   CaregiverProvider caregiverProvider = CaregiverProvider();
 
-<<<<<<< HEAD
-  String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3NyIsImlzT3duZXIiOmZhbHNlLCJyb2xlcyI6WyJHRVRfQ0lUSUVTIiwiR0VUX0NPVU5UUklFUyIsIlVQREFURV9QUk9GSUxFIiwiU0VORF9NRVNTQUdFIiwiRklOSVNIX0JPT0tJTkciLCJHRVRfRE9HX0JZX0lEIiwiUkVKRUNUX0JPT0tJTkciLCJDT05GSVJNX0JPT0tJTkciLCJHRVRfQ0FSRUdJVkVSX0JPT0tJTkdTIiwiQUREX0hPVVNFX0RFVEFJTFMiLCJBRERfRVhQRVJJRU5DRSIsIlVQREFURV9OVVJTSU5HIiwiVVBEQVRFX1dBTEtJTkciLCJVUERBVEVfVFJBSU5JTkciLCJVUERBVEVfQk9BUkRJTkciLCJDUkVBVEVfTlVSU0lORyIsIkNSRUFURV9XQUxLSU5HIiwiQ1JFQVRFX1RSQUlOSU5HIiwiQ1JFQVRFX0JPQVJESU5HIiwiVVBEQVRFX0JPT0tJTkciLCJDQU5DRUxfQk9PS0lORyIsIkdFVF9SRVZJRVdTIiwiR0VUX1BST0ZJTEUiLCJHRVRfRE9HUyJdLCJpc3MiOiJmaWVsYW1pZ28iLCJjYXJlZ2l2ZXJJZCI6OSwiZXhwIjoxNjY5MzE0OTY2LCJ1c2VySWQiOjc3fQ.la2VpgCSbmrUOCF7EbyWIvzO-QqCZ1psMCbeGzUaxng";
-=======
   String token =
       "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3NyIsImlzT3duZXIiOmZhbHNlLCJyb2xlcyI6WyJHRVRfQ0lUSUVTIiwiR0VUX0NPVU5UUklFUyIsIlVQREFURV9QUk9GSUxFIiwiU0VORF9NRVNTQUdFIiwiRklOSVNIX0JPT0tJTkciLCJHRVRfRE9HX0JZX0lEIiwiUkVKRUNUX0JPT0tJTkciLCJDT05GSVJNX0JPT0tJTkciLCJHRVRfQ0FSRUdJVkVSX0JPT0tJTkdTIiwiQUREX0hPVVNFX0RFVEFJTFMiLCJBRERfRVhQRVJJRU5DRSIsIlVQREFURV9OVVJTSU5HIiwiVVBEQVRFX1dBTEtJTkciLCJVUERBVEVfVFJBSU5JTkciLCJVUERBVEVfQk9BUkRJTkciLCJDUkVBVEVfTlVSU0lORyIsIkNSRUFURV9XQUxLSU5HIiwiQ1JFQVRFX1RSQUlOSU5HIiwiQ1JFQVRFX0JPQVJESU5HIiwiVVBEQVRFX0JPT0tJTkciLCJDQU5DRUxfQk9PS0lORyIsIkdFVF9SRVZJRVdTIiwiR0VUX1BST0ZJTEUiLCJHRVRfRE9HUyJdLCJpc3MiOiJmaWVsYW1pZ28iLCJjYXJlZ2l2ZXJJZCI6OSwiZXhwIjoxNjY5MjQ2NDY4LCJ1c2VySWQiOjc3fQ.xrPnHp1vP_Z0UbZkxI2L23vAmIp6oZZjyRSVpitFtCM";
->>>>>>> 388f8c7e9d7a9d4623db9ccf620910044ec3f3ae
   int id = 3;
 
   // List<CaregiverCardDto> caregivers = await caregiverProvider.searchBoarding(token, "2021-11-15T00:00", "2021-11-18T00:00", 2, 336);
