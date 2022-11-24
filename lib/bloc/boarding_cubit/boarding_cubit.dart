@@ -147,4 +147,24 @@ class BoardingCubit extends Cubit<BoardingState> {
     }   
   }
 
+  void orderBy(int value) {
+    List<CaregiverCardDto> caregivers = [...state.caregivers];
+    if(value == 1) {
+      // precio
+      // order caregivers by price
+      caregivers.sort((a, b) => a.price!.compareTo(b.price!));
+    } else if (value == 2) {
+      // calificacion
+      // order caregivers by rating
+      caregivers.sort((a, b) => b.rating!.compareTo(a.rating!));
+    } else if (value == 3) {
+      // zona
+      // order caregivers by zone
+      caregivers.sort((a, b) => a.zone!.compareTo(b.zone!));
+    }
+    emit(state.copyWith(
+      caregivers: List.of(caregivers)
+    ));
+  }
+
 }

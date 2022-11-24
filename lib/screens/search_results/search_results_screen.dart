@@ -18,6 +18,7 @@ class SearchResultsScreen extends StatelessWidget {
       ),
       body: BlocConsumer<BoardingCubit, BoardingState>(
         listener: (context, state) {},
+        buildWhen: (previous, current) => previous.caregivers != current.caregivers,
         builder: (context, state) => Column(
           children: const [
             // results bar

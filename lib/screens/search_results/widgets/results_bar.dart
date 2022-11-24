@@ -1,10 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ResultsBar extends StatelessWidget {
+import '../../../bloc/boarding_cubit/boarding_cubit.dart';
+import '../../../data/models/catalog_dto.dart';
+
+class ResultsBar extends StatefulWidget {
   const ResultsBar({super.key});
 
   @override
+  State<ResultsBar> createState() => _ResultsBarState();
+}
+
+class _ResultsBarState extends State<ResultsBar> {
+  int? selectedValue;
+
+  @override
   Widget build(BuildContext context) {
+    List<CatalogDto> options = [
+      CatalogDto(id: 1, name: "Precio"),
+      CatalogDto(id: 2, name: "Calificación"),
+      CatalogDto(id: 3, name: "Zona"),
+    ];
+
     return Column(
       children: [
         Padding(
@@ -17,16 +34,24 @@ class ResultsBar extends StatelessWidget {
                   const Icon(Icons.filter_alt_rounded),
                   const SizedBox(width: 10),
                   DropdownButton(
+                    value: selectedValue,
                     hint: const Text("Ordenar por..."),
-                    items: ['Precio', 'Calificación', 'Zona']
+                    items: options
                         .map(
                           (e) => DropdownMenuItem(
-                            child: Text(e),
-                            value: e,
+                            value: e.id,
+                            child: Text(e.name),
                           ),
                         )
                         .toList(),
-                    onChanged: (value) => print(value),
+                    onChanged: (value) {
+                      if(value != null) {
+                        context.read<BoardingCubit>().orderBy(int.parse(value.toString()));
+                        setState(() {
+                          selectedValue = int.parse(value.toString());
+                        });
+                      }
+                    },
                   ),
                 ],
               ),

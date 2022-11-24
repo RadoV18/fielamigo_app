@@ -11,6 +11,10 @@ class ResultsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<BoardingCubit, BoardingState>(
+      buildWhen: (previous, current) {
+        print("rebuild ${previous.caregivers != current.caregivers}");
+        return previous.caregivers != current.caregivers;
+      },
       builder: (context, state) {
         List<CaregiverCardDto> caregivers = state.caregivers;
         return ListView.separated(
