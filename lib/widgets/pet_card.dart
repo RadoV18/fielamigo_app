@@ -37,7 +37,6 @@ class _PetCardState extends State<PetCard> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.imageUrl);
     return Container(
       width: MediaQuery.of(context).size.width * 0.95,
       height: 85,
