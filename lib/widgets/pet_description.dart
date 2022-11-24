@@ -31,13 +31,13 @@ class PetDescription extends StatelessWidget {
         Expanded(
           flex: 1,
           child: CustomRadioButton(
-            text: size == "Pequeño" ? "Pequeño" : size == "Mediano" ? "Mediano" : "Grande",
+            text: size == "Grande" ? "Grande" : size == "Mediano" ? "Mediano" : "Pequeño",
             icon: SvgPicture.asset(
-              size == "Pequeño"
-                  ? "assets/icons/ic_dog_size_sm.svg"
+              size == "Grande"
+                  ? "assets/icons/ic_dog_size_xl.svg"
                   : size == "Mediano"
                       ? "assets/icons/ic_dog_size_md.svg"
-                      : "assets/icons/ic_dog_size_xl.svg",
+                      : "assets/icons/ic_dog_size_sm.svg",
               height: 40,
             ),
             onPressed: () {},

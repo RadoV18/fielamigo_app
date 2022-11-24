@@ -85,8 +85,12 @@ class ProfileScreen extends StatelessWidget {
                             Navigator.pushNamed(context, '/caregiver/biography');
                             context.read<BioFeaturesCubit>().init();
                           },
-                        ),  
-
+                        ), 
+                        const Divider(
+                          color: Color(0xFFBDBDBD),
+                          height: 20,
+                          thickness: 1,
+                        ),
                         ProfileOption(icon: Icons.settings, text:"Editar servicios", onPressed: () => Navigator.pushNamed(context, '/caregiver/services-form'))
                       ],  
                     );

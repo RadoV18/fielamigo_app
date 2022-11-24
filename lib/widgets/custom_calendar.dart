@@ -31,7 +31,6 @@ class _CustomCalendarState extends State<CustomCalendar> {
         firstDay: DateTime.now(),
         lastDay: DateTime.now().add(const Duration(days: 365)),
         onPageChanged: (focusedDay) {
-          print(focusedDay);
           context.read<UserServicesCubit>().setYear(focusedDay.year);
           context.read<UserServicesCubit>().setMonth(focusedDay.month);
           setState(() {

@@ -42,6 +42,7 @@ class UserServicesCubit extends Cubit<UserServicesState> {
       if (token == null) {
         print("token is invalid");
       }
+      print("getting dates with ${state.month} ${state.year}");
       CaregiverBookedDatesDto bookedDates = await _caregiverProvider.getCaregiverBookedDates(
         token!, state.caregiverId, state.month, state.year
       );

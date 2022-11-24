@@ -22,6 +22,7 @@ class CaregiverProfile extends StatelessWidget {
       listenWhen: (previous, current) => previous.status != current.status,
       listener: (context, state) {},
       builder: (context, state) {
+        print(state.dogs);
         if(state.status == PageStatus.fetching) {
           return const Center(
             child: CircularProgressIndicator(),

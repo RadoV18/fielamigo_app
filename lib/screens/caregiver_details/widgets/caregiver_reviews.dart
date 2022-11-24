@@ -26,35 +26,35 @@ class CaregiverReviews extends StatelessWidget {
                     firstName: "Juan",
                     lastName: "Perez",
                     rating: 4.5,
-                    review: "Muy buen servicio, recomendado. Lorem ipsum dolor sit amet asdf jakshd alkjhd fhjlk dsf hjkadsfhjkl adsfghjkl asfdhjkl "
+                    review: "Muy buen servicio, recomendado."
                   ),
                   SizedBox(height: 20,),
                   ReviewCard(
                     firstName: "Juan",
                     lastName: "Perez",
                     rating: 4.5,
-                    review: "Muy buen servicio, recomendado. Lorem ipsum dolor sit amet asdf jakshd alkjhd fhjlk dsf hjkadsfhjkl adsfghjkl asfdhjkl "
+                    review: "Muy buen servicio, recomendado."
                   ),
                   SizedBox(height: 20,),
                   ReviewCard(
                     firstName: "Juan",
                     lastName: "Perez",
                     rating: 4.5,
-                    review: "Muy buen servicio, recomendado. Lorem ipsum dolor sit amet asdf jakshd alkjhd fhjlk dsf hjkadsfhjkl adsfghjkl asfdhjkl "
+                    review: "Muy buen servicio, recomendado."
                   ),
                   SizedBox(height: 20,),
                   ReviewCard(
                     firstName: "Juan",
                     lastName: "Perez",
                     rating: 4.5,
-                    review: "Muy buen servicio, recomendado. Lorem ipsum dolor sit amet asdf jakshd alkjhd fhjlk dsf hjkadsfhjkl adsfghjkl asfdhjkl "
+                    review: "Muy buen servicio, recomendado."
                   ),
                   SizedBox(height: 20,),
                   ReviewCard(
                     firstName: "Juan",
                     lastName: "Perez",
                     rating: 4.5,
-                    review: "Muy buen servicio, recomendado. Lorem ipsum dolor sit amet asdf jakshd alkjhd fhjlk dsf hjkadsfhjkl adsfghjkl asfdhjkl "
+                    review: "Muy buen servicio, recomendado."
                   ),
                 ],
               ),

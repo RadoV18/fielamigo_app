@@ -19,12 +19,15 @@ class VerificationCodeScreen extends StatelessWidget {
           listenWhen: (previous, current) => previous.status != current.status,
           listener: (context, state) {
             if(state.status == PageStatus.success) {
-              Navigator.of(context).popUntil(ModalRoute.withName('/welcome'));
               UiUtils.showAlertDialog(context,
-                message: "Cuenta verificada, inicia sesión para continuar.",
+                message: "Cuenta verificada.",
                 isDismissible: true,
                 hasCircularProgressIndicator: false,
-                );
+                onOkButtonPressed: () {
+                  Navigator.of(context)
+                    .pushNamedAndRemoveUntil('/log-in', (Route<dynamic> route) => false);
+                },
+              );
             } else if (state.status == PageStatus.loading) {
               UiUtils.showAlertDialog(
                 context,
