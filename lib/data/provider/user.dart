@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:fielamigo_app/data/models/address_req_dto.dart';
 import 'package:fielamigo_app/data/models/user_details_req_dto.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
@@ -129,4 +130,22 @@ class UserProvider {
       throw Exception('Failed to get profile picture');
     }
   }
+
+  // POST /users/address
+    Future<void> postUserAddress(String token, AddressReqDto req) async {
+      final response = await http.post(
+        Uri.parse("$_url/address"),
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json'
+        }
+      );
+
+      if(response.statusCode == 201) {
+        print("user address submitted succesfully");
+        return;
+      } else {
+        throw Exception('Failed to submit user address');
+      }
+    }
 } 

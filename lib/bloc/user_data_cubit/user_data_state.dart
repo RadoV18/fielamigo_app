@@ -1,57 +1,46 @@
 part of 'user_data_cubit.dart';
 
 class UserDataState extends Equatable {
-  // user form
-  final String firstName;
-  final String lastName;
-  final String phoneNumber;
-  final String birthDate;
   // address form
   final String address1;
   final String address2;
-  final String country;
-  final String city;
+  final String zone;
+  final int country;
+  final int city;
+  final PageStatus status;
   
   const UserDataState({
-    this.firstName = '',
-    this.lastName = '',
-    this.phoneNumber = '',
-    this.birthDate = 'dd/mm/aaaa',
+    this.zone = '',
     this.address1 = '',
     this.address2 = '',
-    this.country = '',
-    this.city = ''
+    this.country = -1,
+    this.city = -1,
+    this.status = PageStatus.initial,
   });
 
   UserDataState copyWith({
-    String? firstName,
-    String? lastName,
-    String? phoneNumber,
-    String? birthDate,
+    String? zone,
     String? address1,
     String? address2,
-    String? country,
-    String? city
+    int? country,
+    int? city,
+    PageStatus? status,
   }) => UserDataState(
-    firstName: firstName ?? this.firstName,
-    lastName: lastName ?? this.lastName,
-    phoneNumber: phoneNumber ?? this.phoneNumber,
-    birthDate: birthDate ?? this.birthDate,
+    zone: zone ?? this.zone,
     address1: address1 ?? this.address1,
     address2: address2 ?? this.address2,
     country: country ?? this.country,
-    city: city ?? this.city
+    city: city ?? this.city,
+    status: status ?? this.status,
   );
 
   @override
   List<Object> get props => [
-    firstName,
-    lastName,
-    phoneNumber,
-    birthDate,
+    zone,
     address1,
     address2,
     country,
-    city
+    city,
+    status,
   ];
 }

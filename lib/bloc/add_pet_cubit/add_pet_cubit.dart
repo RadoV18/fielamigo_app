@@ -26,6 +26,10 @@ class AddPetCubit extends Cubit<AddPetState> {
     emit(state.copyWith(breed: breed));
   }
 
+  void setBreedId(int id) {
+    emit(state.copyWith(breedId: id));
+  }
+
   void setBirthDate(String birthDate) {
     emit(state.copyWith(birthDate: birthDate));
   }
@@ -109,7 +113,7 @@ class AddPetCubit extends Cubit<AddPetState> {
     }
     print("ok");
     bool isMale = state.isMale;
-    int size = state.isSmall ? 1 : state.isMedium ? 2 : 3;
+    int size = state.isSmall ? 342 : state.isMedium ? 343 : 344;
 
     DogReqDto newPetDto = DogReqDto(
       name: state.name,

@@ -136,7 +136,7 @@ class MyApp extends StatelessWidget {
                         const PaymentMethodsScreen(),
                     '/payment-methods/add': (context) => AddPaymentMethodScreen(),
                     '/search-results': (context) => const SearchResultsScreen(),
-                    '/user-form': (context) => const UserFormScreen(),
+                    // '/user-form': (context) => const UserFormScreen(),
                     '/caregiver/home': ((context) =>
                         const CaregiverHomeScreen()), //TODO change this
                     '/caregiver/biography': (context) => CaregiverBiographyScreen(),

@@ -1,25 +1,20 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:fielamigo_app/utils/token_utils.dart';
+
+import '../../data/models/address_req_dto.dart';
+import '../../data/provider/user.dart';
+import '../page_status.dart';
 
 part 'user_data_state.dart';
 
 class UserDataCubit extends Cubit<UserDataState> {
   UserDataCubit() : super(const UserDataState());
 
-  void setFirstName(String firstName) {
-    emit(state.copyWith(firstName: firstName));
-  }
+  final UserProvider _provider = UserProvider();
 
-  void setLastName(String lastName) {
-    emit(state.copyWith(lastName: lastName));
-  }
-
-  void setPhoneNumber(String phoneNumber) {
-    emit(state.copyWith(phoneNumber: phoneNumber));
-  }
-
-  void setBirthDate(String birthDate) {
-    emit(state.copyWith(birthDate: birthDate));
+  void setZone(String zone) {
+    emit(state.copyWith(zone: zone));
   }
 
   void setAddress1(String address1) {
@@ -30,17 +25,38 @@ class UserDataCubit extends Cubit<UserDataState> {
     emit(state.copyWith(address2: address2));
   }
 
-  void setCountry(String country) {
+  void setCountry(int country) {
     emit(state.copyWith(country: country));
   }
 
-  void setCity(String city) {
+  void setCity(int city) {
     emit(state.copyWith(city: city));
   }
 
-  void submit() {
-    // TODO: send http request
-    print(state.toString());
+  void submit() async {
+    emit(state.copyWith(status: PageStatus.loading));
+
+    String? token = await TokenUtils.getToken();
+
+    if (token == null) {
+      emit(state.copyWith(status: PageStatus.error));
+      return;
+    }
+
+    AddressReqDto req = AddressReqDto(
+      zone: state.zone,
+      address1: state.address1,
+      address2: state.address2,
+      countryId: state.country,
+      cityId: state.city,
+    );
+
+    try {
+      await _provider.postUserAddress(token, req);
+      emit(state.copyWith(status: PageStatus.success));
+    } catch (e) {
+      emit(state.copyWith(status: PageStatus.error));
+    }
   }
 
 }
