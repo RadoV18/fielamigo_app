@@ -89,16 +89,23 @@ class AccountType extends StatelessWidget {
             )
           ],
           color: isSelected
-            ? Theme.of(context).primaryColor
+            ? const Color(0xff047b5b)
             : Colors.white,
         ),
         child: Column(
             children: [
               Icon(
                 icon,
-                size: 40.0
+                size: 40.0,
+                color: isSelected ? Colors.white : Colors.black,
               ),
-              Text(text)
+              Text(
+                text,
+                style: TextStyle(
+                  color: isSelected ? Colors.white : Colors.black,
+                  fontSize: 14.0,
+                ),
+              )
             ]
           )
       )

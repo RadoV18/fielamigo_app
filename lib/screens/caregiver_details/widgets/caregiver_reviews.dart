@@ -66,9 +66,33 @@ class CaregiverReviews extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(child: ElevatedButton(onPressed: () {}, child: const Text("Anterior"))),
+              Expanded(
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xff3a5080),
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.5),
+                    ),
+                  ),
+                  onPressed: () {},
+                  child: const Text("Anterior")
+                )
+              ),
               const SizedBox(width: 20),
-              Expanded(child: ElevatedButton(onPressed: () {}, child: const Text("Siguiente"))),
+              Expanded(
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xff3a5080),
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.5),
+                    ),
+                  ),
+                  onPressed: () {},
+                  child: const Text("Siguiente")
+                )
+              ),
             ],
           ),
         )

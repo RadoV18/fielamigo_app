@@ -13,6 +13,7 @@ class AddPetState extends Equatable {
   final bool isLarge;
   final bool isSterilized;
   final String notes;
+  final PageStatus status;
 
   const AddPetState({
     this.image,
@@ -26,7 +27,8 @@ class AddPetState extends Equatable {
     this.isMedium = false,
     this.isLarge = false,
     this.isSterilized = false,
-    this.notes = ''
+    this.notes = '',
+    this.status = PageStatus.initial
   });
 
   AddPetState copyWith({
@@ -41,7 +43,8 @@ class AddPetState extends Equatable {
     bool? isMedium,
     bool? isLarge,
     bool? isSterilized,
-    String? notes
+    String? notes,
+    PageStatus? status
   }) => AddPetState(
     image: image ?? this.image,
     name: name ?? this.name,
@@ -54,7 +57,8 @@ class AddPetState extends Equatable {
     isMedium: isMedium ?? this.isMedium,
     isLarge: isLarge ?? this.isLarge,
     isSterilized: isSterilized ?? this.isSterilized,
-    notes: notes ?? this.notes
+    notes: notes ?? this.notes,
+    status: status ?? this.status
   );
 
   @override
@@ -70,6 +74,7 @@ class AddPetState extends Equatable {
     isMedium,
     isLarge,
     isSterilized,
-    notes
+    notes,
+    status
   ];
 }

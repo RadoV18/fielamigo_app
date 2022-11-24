@@ -57,7 +57,7 @@ class PetList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<DogCubit, DogState>(
-      buildWhen: (previous, current) => previous != current,
+      buildWhen: (previous, current) => previous.dogs != current.dogs,
       builder: (context, state) {
         if(state.dogs.isEmpty) {
           return const SizedBox.shrink();

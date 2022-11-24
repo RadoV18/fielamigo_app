@@ -106,7 +106,11 @@ class CaregiverDetailsScreen extends StatelessWidget {
                 child: TabBarView(
                   children: [
                     CaregiverProfile(firstName: firstName),
-                    CaregiverServices(caregiverId: userId, firstName: firstName),
+                    CaregiverServices(
+                      caregiverId: userId,
+                      firstName: firstName,
+                      price: price
+                    ),
                     CaregiverReviews(firstName: firstName),
                   ],
                 ),

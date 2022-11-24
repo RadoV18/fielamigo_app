@@ -6,6 +6,9 @@ import 'package:fielamigo_app/widgets/custom_app_bar.dart';
 import 'package:fielamigo_app/widgets/custom_date_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../bloc/dog_cubit/dog_cubit.dart';
+import '../../bloc/page_status.dart';
+import '../../utils/ui_utils.dart';
 import 'widgets/dog_size_options.dart';
 
 class OwnerAddPetScreen extends StatelessWidget {
@@ -19,7 +22,37 @@ class OwnerAddPetScreen extends StatelessWidget {
         onBackButtonPressed: () => Navigator.pop(context),
         title: 'Agregar Mascota',
       ),
-      body: BlocBuilder<AddPetCubit, AddPetState>(
+      body: BlocConsumer<AddPetCubit, AddPetState>(
+        listenWhen: ((previous, current) => previous.status != current.status),
+        listener: (context, state) {
+          if (state.status == PageStatus.success) {
+            Navigator.pop(context, true);
+            UiUtils.showAlertDialog(
+              context,
+              message: "Su mascota ha sido agregada con éxito",
+              isDismissible: true,
+              onOkButtonPressed: () {
+                context.read<DogCubit>().init();
+                context.read<AddPetCubit>().clear();
+                Navigator.pop(context, true);
+                Navigator.pop(context);
+              },);
+          } else if(state.status == PageStatus.loading) {
+            UiUtils.showAlertDialog(
+              context,
+              message: "Guardando datos...",
+              isDismissible: false,
+              hasCircularProgressIndicator: true
+            );
+          } else if(state.status == PageStatus.error) {
+            Navigator.pop(context, true);
+            UiUtils.showAlertDialog(
+              context,
+              message: "Ocurrió un error, intente nuevamente.",
+              isDismissible: true
+            );
+          }
+        },
         builder: (context, state) {
           return SafeArea(
             child: NotificationListener<OverscrollIndicatorNotification>(

@@ -1,12 +1,12 @@
 import 'date_count.dart';
 
 class CaregiverBookedDatesDto {
-  int? maxDogs;
-  List<DateCount>? dates;
+  final int? maxDogs;
+  final List<DateCount>? dates;
 
-  CaregiverBookedDatesDto({
-    this.maxDogs,
-    this.dates,
+  const CaregiverBookedDatesDto({
+    this.maxDogs = -1,
+    this.dates = const <DateCount>[],
   });
 
   factory CaregiverBookedDatesDto.fromJson(Map<String, dynamic> json) => CaregiverBookedDatesDto(

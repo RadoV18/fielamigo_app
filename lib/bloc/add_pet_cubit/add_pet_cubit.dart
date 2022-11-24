@@ -6,6 +6,7 @@ import 'package:fielamigo_app/data/repository/add_pet_repository.dart';
 
 import '../../data/models/dog_req_dto.dart';
 import '../../utils/token_utils.dart';
+import '../page_status.dart';
 
 part 'add_pet_state.dart';
 
@@ -81,6 +82,7 @@ class AddPetCubit extends Cubit<AddPetState> {
   }
 
   void save() async {
+    emit(state.copyWith(status: PageStatus.loading));
     // validating fields
     bool ok = true;
     if (state.image == null) {
@@ -109,6 +111,7 @@ class AddPetCubit extends Cubit<AddPetState> {
     }
 
     if(!ok) {
+      emit(state.copyWith(status: PageStatus.error));
       return;
     }
     print("ok");
@@ -124,6 +127,16 @@ class AddPetCubit extends Cubit<AddPetState> {
       isSterilized: state.isSterilized,
       notes: state.notes,
     );
-    await _addPetRepository.addPet(newPetDto, state.image, token);
+    try {
+      await _addPetRepository.addPet(newPetDto, state.image!, token);
+      emit(state.copyWith(status: PageStatus.success));
+    } catch (e) {
+      print(e);
+      emit(state.copyWith(status: PageStatus.error));
+    }
+  }
+
+  void clear() {
+    emit(const AddPetState());
   }
 }
