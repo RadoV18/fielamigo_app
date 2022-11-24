@@ -1,4 +1,5 @@
 import 'package:fielamigo_app/bloc/bio_features_cubit/bio_features_cubit.dart';
+import 'package:fielamigo_app/bloc/page_status.dart';
 import 'package:fielamigo_app/widgets/custom_app_bar.dart';
 import 'package:fielamigo_app/widgets/features_widget.dart';
 import 'package:fielamigo_app/widgets/large_text_input.dart';
@@ -10,7 +11,6 @@ import '../../widgets/experience_widget.dart';
 import 'widgets/photo_grid.dart';
 
 class CaregiverBiographyScreen extends StatelessWidget {
-  final TextEditingController _bioController = TextEditingController();
 
   CaregiverBiographyScreen({Key? key}) : super(key: key);
 
@@ -33,28 +33,24 @@ class CaregiverBiographyScreen extends StatelessWidget {
             ),
             child: Column(
               children: [
-                BlocProvider(
-                    create: (context) => BioFeaturesCubit()..init(),
-                    child: BlocBuilder<BioFeaturesCubit, BioFeaturesState>(
-                        builder: (context, state) {
-                          if (state is BioFeaturesLoading) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          } else if (state is BioFeaturesLoaded) {
-                            return LargeTextInput(
-                              inputController: _bioController,
-                              hintText: 'Soy...',
-                              title: 'Cuéntanos un poco mas de ti:',
-                              bioText: state.bio,
-                            );
-                          } else {
-                            return const Center(
-                              child: Text("Error"),
-                            );
-                          }
-                        },
-                    )
+                BlocBuilder<BioFeaturesCubit, BioFeaturesState>(
+                  builder: (context, state) {
+                    if (state.pageStatus == PageStatus.loading) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else if (state.pageStatus == PageStatus.success) {
+                      return LargeTextInput(
+                        hintText: 'Soy...',
+                        title: 'Cuéntanos un poco mas de ti:',
+                        bioText: state.bio,
+                      );
+                    } else {
+                      return const Center(
+                        child: Text("Error"),
+                      );
+                    }
+                  },
                 ),
                 const SizedBox(
                   height: 30,
@@ -96,7 +92,9 @@ class CaregiverBiographyScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(15)),
                             )),
                         onPressed: () {
-                          context.read<BioFeaturesCubit>().addBioFeatures();
+                          // context.read<BioFeaturesCubit>().setBio(_bioController.text);
+
+                          context.read<BioFeaturesCubit>().saveBioFeatures();
                           Navigator.pop(context);
                         },
                         child: const Text(
@@ -104,6 +102,9 @@ class CaregiverBiographyScreen extends StatelessWidget {
                           style:
                               TextStyle(color: Color(0xffffffff), fontSize: 16),
                         ))),
+                Padding(
+                    padding: EdgeInsets.only(
+                        bottom: MediaQuery.of(context).padding.bottom + 10))
               ],
             ),
           ),

@@ -1,8 +1,9 @@
+import 'package:fielamigo_app/bloc/bio_features_cubit/bio_features_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 
-class LargeTextInput extends StatelessWidget {
-  final TextEditingController inputController;
+class LargeTextInput extends StatefulWidget {
 
   final String title;
   final String hintText;
@@ -10,12 +11,17 @@ class LargeTextInput extends StatelessWidget {
 
   const LargeTextInput(
       {Key? key,
-      required this.inputController,
       required this.title,
-      required this.hintText, 
+      required this.hintText,
       this.bioText = ""})
       : super(key: key);
 
+  @override
+  State<LargeTextInput> createState() => _LargeTextInputState();
+}
+
+class _LargeTextInputState extends State<LargeTextInput> {
+  final TextEditingController _controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     const primaryColor = Color(0xff01bf8f);
@@ -23,14 +29,11 @@ class LargeTextInput extends StatelessWidget {
     const accentColor = Color(0xffffffff);
     const errorColor = Color(0xffEF4444);
 
-    if(bioText.isNotEmpty) { //checks whether the bioText has already been filled before
-      inputController.text = bioText;
-    }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          title,
+          widget.title,
           style: TextStyle(
               fontSize: 4.w,
               fontWeight: FontWeight.bold,
@@ -48,11 +51,9 @@ class LargeTextInput extends StatelessWidget {
                 spreadRadius: 0,
                 color: Colors.grey.withOpacity(.1)),
           ]),
-          child: TextField(
-            controller: inputController,
-            onChanged: (value) {
-              //Do something wi
-            },
+          child: TextFormField(
+            initialValue: widget.bioText,
+            onChanged: (value) => context.read<BioFeaturesCubit>().setBio(value),
             keyboardType: TextInputType.multiline,
             maxLines: null,
             expands: true,
@@ -63,7 +64,7 @@ class LargeTextInput extends StatelessWidget {
               // prefixIcon: Icon(Icons.email),
               filled: true,
               fillColor: accentColor,
-              hintText: hintText,
+              hintText: widget.hintText,
               hintStyle: TextStyle(color: Colors.grey.withOpacity(.75)),
               contentPadding:
                   const EdgeInsets.symmetric(vertical: 10, horizontal: 20.0),

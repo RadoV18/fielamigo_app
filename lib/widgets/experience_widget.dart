@@ -4,11 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 
+import '../bloc/page_status.dart';
+
 class Experience extends StatelessWidget {
   final String title;
   final String buttonString;
 
-  const Experience({super.key, required this.title, required this.buttonString});
+  const Experience(
+      {super.key, required this.title, required this.buttonString});
 
   @override
   Widget build(BuildContext context) {
@@ -43,9 +46,7 @@ class Experience extends StatelessWidget {
                         RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(5)),
                       )),
-                  onPressed: () {
-                    //TODO: make this button work
-                  },
+                  onPressed: () {}, //TODO: add functionality
                   child: Text(
                     '$buttonString +',
                     style:
@@ -64,27 +65,24 @@ class Experience extends StatelessWidget {
                 spreadRadius: 0,
                 color: Colors.grey.withOpacity(.1)),
           ]),
-          child: BlocProvider(
-            create: (context) => BioFeaturesCubit()..init(),
-            child: BlocBuilder<BioFeaturesCubit, BioFeaturesState>(
-                builder: (context, state) {
-              if (state is BioFeaturesLoading) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else if (state is BioFeaturesLoaded) {
-                return ListView.builder(
-                  itemCount: state.experiences.length,
-                  itemBuilder: (context, index) =>
-                      FeatureItem(feature: state.experiences[index]),
-                );
-              } else {
-                return const Center(
-                  child: Text('Error'),
-                );
-              }
-            }),
-          ),
+          child: BlocBuilder<BioFeaturesCubit, BioFeaturesState>(
+              builder: (context, state) {
+            if (state.pageStatus == PageStatus.loading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (state.pageStatus == PageStatus.success) {
+              return ListView.builder(
+                itemCount: state.experiences.length,
+                itemBuilder: (context, index) =>
+                    FeatureItem(feature: state.experiences[index]),
+              );
+            } else {
+              return const Center(
+                child: Text('Error'),
+              );
+            }
+          }),
         ),
       ],
     );

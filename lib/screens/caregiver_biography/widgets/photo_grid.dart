@@ -1,29 +1,18 @@
 import 'dart:developer';
-import 'dart:io';
 
-import 'package:fielamigo_app/bloc/caregiver_info_image_cubit/caregiver_info_image_cubit.dart';
-import 'package:fielamigo_app/utils/ui_utils.dart';
+import 'package:fielamigo_app/bloc/bio_features_cubit/bio_features_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:sizer/sizer.dart';
+
+import '../../../bloc/page_status.dart';
+import 'custom_image.dart';
 
 class PhotoGrid extends StatelessWidget {
   const PhotoGrid({super.key});
 
   @override
   Widget build(BuildContext context) {
-    Future<void> addImagestoState() async {
-      final ImagePicker _picker = ImagePicker();
-      List<XFile?> imagesPicked = await _picker.pickMultiImage();
-      for (int i = 0; i < imagesPicked.length; i++) {
-        // TODO; add images to state
-        log(imagesPicked[i].toString());
-        // context.read<CaregiverInfoImageCubit>().addImage(imagesPicked[i]);
-      }
-      return;
-    }
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -35,30 +24,14 @@ class PhotoGrid extends StatelessWidget {
               color: Colors.black.withOpacity(.9)),
         ),
         Center(
-          child: BlocBuilder<CaregiverInfoImageCubit, CaregiverInfoImageState>(
+          child: BlocBuilder<BioFeaturesCubit, BioFeaturesState>(
             builder: (context, state) {
-              if (state is CaregiverInfoImageLoading) {
+              if (state.pageStatus == PageStatus.loading) {
                 return const Center(
                   child: CircularProgressIndicator(),
                 );
-              } else if (state is CaregiverInfoImageSuccess) {
-                //  Navigator.pop(context, true);
-                //  UiUtils.showAlertDialog(
-                //   context,
-                //   message: "Imagenes agregadas con éxito",
-                //   isDismissible: true,
-                //   onOkButtonPressed: () {
-                //       Navigator.pop(context);
-                //      Navigator.pop(context);
-                //    }
-                //  );
-                return const Padding(
-                    padding: EdgeInsets.all(20.0),
-                    child: Text("Exito."),
-                  );
-              } 
-              else if (state is CaregiverInfoImageLoaded) {
-                if (state.imagesPicked!.isEmpty) {
+              } else if (state.pageStatus == PageStatus.success) {
+                if (state.imagesRes.isEmpty) {
                   return const Padding(
                     padding: EdgeInsets.all(20.0),
                     child: Text("No hay imágenes."),
@@ -71,7 +44,7 @@ class PhotoGrid extends StatelessWidget {
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 3),
-                    itemCount: state.imagesPicked?.length,
+                    itemCount: state.imagesRes.length,
                     itemBuilder: (context, index) {
                       return Container(
                         margin: const EdgeInsets.all(5),
@@ -79,7 +52,7 @@ class PhotoGrid extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10),
                           color: Colors.grey.withOpacity(.2),
                         ),
-                        child: CustomImage(url: state.imagesPicked![index]),
+                        child: CustomImage(url: state.imagesRes[index]),
                       );
                     },
                   ),
@@ -113,25 +86,14 @@ class PhotoGrid extends StatelessWidget {
                             borderRadius: BorderRadius.circular(5)),
                       )),
                   onPressed: () {
-                    context.read<CaregiverInfoImageCubit>().addImages();
-                    context.read<CaregiverInfoImageCubit>().init();
+                    context.read<BioFeaturesCubit>().setImagesReq();
                   },
                   child: const Text(
-                    'Eliminar y añadir nuevas fotos +',
+                    'Añadir nuevas fotos +',
                     style: TextStyle(color: Color(0xffffffff), fontSize: 14),
                   ))),
         )
       ],
     );
-  }
-}
-
-class CustomImage extends StatelessWidget {
-  final String url;
-  const CustomImage({super.key, required this.url});
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(width: 80.w, height: 30.h, child: Image.network(url));
   }
 }

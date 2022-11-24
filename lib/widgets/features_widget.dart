@@ -1,4 +1,5 @@
 import 'package:fielamigo_app/bloc/bio_features_cubit/bio_features_cubit.dart';
+import 'package:fielamigo_app/bloc/page_status.dart';
 import 'package:fielamigo_app/screens/caregiver_biography/widgets/list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -64,27 +65,24 @@ class Features extends StatelessWidget {
                 spreadRadius: 0,
                 color: Colors.grey.withOpacity(.1)),
           ]),
-          child: BlocProvider(
-            create: (context) => BioFeaturesCubit()..init(),
-            child: BlocBuilder<BioFeaturesCubit, BioFeaturesState>(
-                builder: (context, state) {
-              if (state is BioFeaturesLoading) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else if (state is BioFeaturesLoaded) {
-                return ListView.builder(
-                  itemCount: state.houseFeatures.length,
-                  itemBuilder: (context, index) =>
-                      FeatureItem(feature: state.houseFeatures[index]),
-                );
-              } else {
-                return const Center(
-                  child: Text('Error'),
-                );
-              }
-            }),
-          ),
+          child: BlocBuilder<BioFeaturesCubit, BioFeaturesState>(
+              builder: (context, state) {
+            if (state.pageStatus == PageStatus.loading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (state.pageStatus == PageStatus.success) {
+              return ListView.builder(
+                itemCount: state.houseFeatures.length,
+                itemBuilder: (context, index) =>
+                    FeatureItem(feature: state.houseFeatures[index]),
+              );
+            } else {
+              return const Center(
+                child: Text('Error'),
+              );
+            }
+          }),
         ),
       ],
     );

@@ -1,33 +1,45 @@
 part of 'bio_features_cubit.dart';
 
-abstract class BioFeaturesState extends Equatable {
-  String bio;
-  List<String> experiences;
-  List<String> houseFeatures;
+class BioFeaturesState extends Equatable {
+  final String bio;
+  final List<XFile ?> imagesReq;
+  final List<String> imagesRes;
+  final List<String> experiences;
+  final List<String> houseFeatures;
+  final PageStatus pageStatus;
 
-  BioFeaturesState({
-    required this.bio,
-    required this.experiences,
-    required this.houseFeatures,
+  const BioFeaturesState({
+    this.bio = '',
+    this.imagesRes = const [],
+    this.imagesReq = const [],
+    this.experiences = const [],
+    this.houseFeatures = const [],
+    this.pageStatus = PageStatus.initial,
   });
 
+  BioFeaturesState copyWith({
+    String? bio,
+    List<String>? imagesRes,
+    List<XFile ?> imagesReq = const [],
+    List<String>? experiences,
+    List<String>? houseFeatures,
+    PageStatus? pageStatus,
+  }) =>
+      BioFeaturesState(
+        bio: bio ?? this.bio,
+        imagesRes: imagesRes ?? this.imagesRes,
+        imagesReq: imagesReq,
+        experiences: experiences ?? this.experiences,
+        houseFeatures: houseFeatures ?? this.houseFeatures,
+        pageStatus: pageStatus ?? this.pageStatus,
+      );
+
   @override
-  List<Object> get props => [];
-}
-
-class BioFeaturesInitial extends BioFeaturesState {
-  //TODO: make backend GET repuest
-  BioFeaturesInitial() : super(bio: "", experiences: [], houseFeatures: []);
-}
-
-class BioFeaturesLoading extends BioFeaturesState {
-  BioFeaturesLoading() : super(bio: "", experiences: [], houseFeatures: []);
-}
-
-class BioFeaturesLoaded extends BioFeaturesState {
-  BioFeaturesLoaded({
-    required String bio,
-    required List<String> experiences,
-    required List<String> houseFeatures,
-  }) : super(bio: bio, experiences: experiences, houseFeatures: houseFeatures);
+  List<Object> get props => [
+        bio,
+        imagesRes,
+        experiences,
+        houseFeatures,
+        pageStatus,
+      ];
 }

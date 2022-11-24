@@ -1,37 +1,104 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:fielamigo_app/screens/caregiver_biography/widgets/list_item.dart';
-
-import '../../data/provider/bio.dart';
+import 'package:fielamigo_app/bloc/page_status.dart';
+import 'package:fielamigo_app/data/models/bio_req_dto.dart';
+import 'package:fielamigo_app/data/repository/edit_bio_repository.dart';
+import 'package:fielamigo_app/screens/caregiver_biography/widgets/custom_image.dart';
+import 'package:fielamigo_app/screens/caregiver_biography/widgets/photo_grid.dart';
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import '../../utils/token_utils.dart';
 
 part 'bio_features_state.dart';
 
 class BioFeaturesCubit extends Cubit<BioFeaturesState> {
-  BioFeaturesCubit() : super(BioFeaturesInitial());
+  final EditBioRepository _editBioRepository = EditBioRepository();
 
-  Future<void> init() async {
-    emit(BioFeaturesLoading());
+  BioFeaturesCubit() : super(const BioFeaturesState());
 
+  void init() async {
+    emit(state.copyWith(pageStatus: PageStatus.loading));
     try {
-      // FeatureDto featureDto = await BioProvider.getBioFeatures();
-      await Future.delayed(Duration(seconds: 3)); //TODO: remove this after backend is done
-      emit(BioFeaturesLoaded(bio: "SEXOOOOO", experiences: ["Bueno con los perros"], houseFeatures: ["Test 1"])); //change this with data from dto
+      final token = await TokenUtils.getToken();
+      final id = TokenUtils.getCaregiverId(token);
+
+      final bio = await _editBioRepository.getCaregiverBio(token!, id!);
+      final imagesReq =
+          await _editBioRepository.getCaregiverPictures(token, id);
+      final experiences =
+          await _editBioRepository.getCaregiverExperience(token, id);
+      final houseFeatures =
+          await _editBioRepository.getCaregiverHouseDetails(token, id);
+      emit(state.copyWith(
+        bio: bio,
+        imagesRes: imagesReq,
+        experiences: experiences,
+        houseFeatures: houseFeatures,
+        pageStatus: PageStatus.success,
+      ));
+
+      return;
     } catch (e) {
-      // emit(BioFeaturesError());
+      log(e.toString());
+      emit(state.copyWith(pageStatus: PageStatus.error));
     }
+    throw Exception("Error");
+  }
+
+  void setBio(String bio) {
+    emit(state.copyWith(bio: bio));
+  }
+
+  Future<void> setImagesReq() async {
+    ImagePicker imagePicker = ImagePicker();
+    List<XFile?> images = await imagePicker.pickMultiImage();
+
+    final String? token = await TokenUtils.getToken()!;
+    images.forEach((image) async {
+      final imageFile = File(image!.path);
+
+      try {
+        await _editBioRepository.uploadPicture(token!, imageFile);
+      } catch (e) {
+        log(e.toString());
+      }
+    });
+    init();
     return;
   }
 
-  void addBioFeatures() async{
-    // emit(); // Page loading
-    try {
-      await BioProvider.addBioFeatures(state.bio, state.experiences, state.houseFeatures);
-    } catch (e) {
+  void setExperiences(List<String> experiences) {
+    emit(state.copyWith(experiences: experiences));
+  }
 
+  void setHouseFeatures(List<String> houseFeatures) {
+    emit(state.copyWith(houseFeatures: houseFeatures));
+  }
+
+  void saveBioFeatures() async {
+    final token = await TokenUtils.getToken();
+    emit(state.copyWith(pageStatus: PageStatus.loading));
+    try {
+      final bio = BioReqDto(
+          bio: state.bio,
+          experience: state.experiences,
+          houseFeatures: state.houseFeatures);
+
+      await _editBioRepository.postCaregiverBio(token!, bio);
+
+      for (int i = 0; i < state.imagesReq.length; i++) {
+        log(state.imagesReq[i]!.path.toString());
+        final image = File(state.imagesReq[i]!.path);
+        await _editBioRepository.uploadPicture(token, image);
+      }
+      emit(state.copyWith(pageStatus: PageStatus.success));
+      return;
+    } catch (e) {
+      log(e.toString());
+      throw Exception(e);
     }
   }
 }
-
-class FeatureDto {}
