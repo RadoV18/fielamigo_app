@@ -79,7 +79,7 @@ class PetList extends StatelessWidget {
                 birthDate: state.dogs[index].birthDate!,
                 age: age,
                 imageUrl: state.dogs[index].imageUrl,
-                isSelectable: true,
+                isSelectable: isSelectable,
               );
             },
             separatorBuilder: (context, index) {

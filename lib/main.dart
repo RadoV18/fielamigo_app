@@ -6,6 +6,7 @@ import 'package:fielamigo_app/bloc/payment_methods_cubit/payment_methods_cubit.d
 import 'package:fielamigo_app/bloc/profile_picture_cubit/profile_picture_cubit.dart';
 import 'package:fielamigo_app/bloc/sign_up_cubit/sign_up_cubit.dart';
 import 'package:fielamigo_app/screens/add_payment_method/add_payment_method_screen.dart';
+import 'package:fielamigo_app/screens/boarding_confirmation/boarding_confirmation_screen.dart';
 import 'package:fielamigo_app/screens/boarding_form/boarding_form_screen.dart';
 import 'package:fielamigo_app/screens/caregiver_biography/caregiver_biography_screen.dart';
 import 'package:fielamigo_app/screens/caregiver_booking_request/caregiver_booking_request_screen.dart';
@@ -25,6 +26,7 @@ import 'package:fielamigo_app/screens/profile/profile_screen.dart';
 import 'package:fielamigo_app/screens/profile_personal_information/profile_personal_information.dart';
 import 'package:fielamigo_app/screens/profile_user_address/profile_user_address.dart';
 import 'package:fielamigo_app/screens/search_results/search_results_screen.dart';
+import 'package:fielamigo_app/screens/select_payment_method/select_payment_method_screen.dart';
 import 'package:fielamigo_app/screens/user_form_screen/user_form_screen.dart';
 import 'package:fielamigo_app/utils/token_utils.dart';
 import 'package:fielamigo_app/widgets/pet_info.dart';
@@ -150,6 +152,8 @@ class MyApp extends StatelessWidget {
                     '/caregiver/bookings/completed': ((context) =>
                         const CaregiverCompletedBookingsScreen()),
                     '/owner/pets/info': ((context) => const PetInfo()),
+                    '/select-payment-method': ((context) => const SelectPaymentMethodScreen()),
+                    '/boarding-confirmation':(context) => const BoardingConfirmationScreen(),
                   })),
     );
   }

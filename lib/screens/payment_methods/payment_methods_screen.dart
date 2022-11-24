@@ -41,6 +41,7 @@ class PaymentMethodsScreen extends StatelessWidget {
                               itemBuilder: (context, index) => Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: PaymentMethodCard(
+                                  paymentMethodId: state.paymentMethods![index].paymentMethodId,
                                   cardNumber: '**** **** **** ${state.paymentMethods![index].lastDigits}',
                                   cardType: 'Visa',
                                   expirationDate: state.paymentMethods![index].getExpirationDate(),

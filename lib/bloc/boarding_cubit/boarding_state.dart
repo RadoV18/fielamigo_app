@@ -8,6 +8,7 @@ class BoardingState extends Equatable {
   final List<CaregiverCardDto> caregivers;
   final bool pickup;
   final String notes;
+  final int paymentMethod;
   final PageStatus status;
 
   const BoardingState({
@@ -18,6 +19,7 @@ class BoardingState extends Equatable {
     required this.caregivers,
     this.pickup = false,
     this.notes = '',
+    this.paymentMethod = -1,
     this.status = PageStatus.initial,
   });
 
@@ -29,6 +31,7 @@ class BoardingState extends Equatable {
     List<CaregiverCardDto>? caregivers,
     bool? pickup,
     String? notes,
+    int? paymentMethod,
     PageStatus? status,
   }) {
     return BoardingState(
@@ -39,6 +42,7 @@ class BoardingState extends Equatable {
       caregivers: caregivers ?? this.caregivers,
       pickup: pickup ?? this.pickup,
       notes: notes ?? this.notes,
+      paymentMethod: paymentMethod ?? this.paymentMethod,
       status: status ?? this.status,
     );
   }
@@ -52,6 +56,7 @@ class BoardingState extends Equatable {
     caregivers,
     pickup,
     notes,
+    paymentMethod,
     status,
   ];
 }

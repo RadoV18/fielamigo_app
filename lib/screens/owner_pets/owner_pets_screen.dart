@@ -34,6 +34,7 @@ class OwnerPetsScreen extends StatelessWidget {
                       padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
                       child: PetList(
                         isScrollable: false,
+                        isSelectable: false,
                       ),
                     ),
                   ),

@@ -312,7 +312,9 @@ class _CaregiverBookingRequestScreenState extends State<CaregiverBookingRequestS
                           ),
                         ] : [
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pushNamed(context, "/select-payment-method");
+                            },
                             child: const Text("Confirmar"),
                           ),
                         ],

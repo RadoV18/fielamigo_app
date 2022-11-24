@@ -59,6 +59,12 @@ class BoardingCubit extends Cubit<BoardingState> {
     ));
   }
 
+  void selectPaymentMethod(int id) {
+    emit(state.copyWith(
+      paymentMethod: id
+    ));
+  }
+
   void clear() {
     emit(const BoardingState(
       dogs: [],
@@ -97,6 +103,18 @@ class BoardingCubit extends Cubit<BoardingState> {
     emit(state.copyWith(
       pickup: value
     ));
+  }
+
+  void confirm() {
+    emit(state.copyWith(
+      status: PageStatus.submitting
+    ));
+
+    Future.delayed(const Duration(seconds: 3), () {
+      emit(state.copyWith(
+        status: PageStatus.finished
+      ));
+    });
   }
 
 }
