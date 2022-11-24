@@ -87,11 +87,11 @@ class ProfileScreen extends StatelessWidget {
                       icon: Icons.logout,
                       text: 'Cerrar Sesión',
                       onPressed: () {
+                        Navigator.pushNamedAndRemoveUntil(context, '/welcome', (Route<dynamic> route) => false);
                         FlutterSecureStorage storage = const FlutterSecureStorage();
                         storage.delete(key: "token");
                         storage.delete(key: "refresh");
                         context.read<UserInfoCubit>().clear();
-                        Navigator.pushNamedAndRemoveUntil(context, '/welcome', (Route<dynamic> route) => false);
                       }
                     ),
                 ],

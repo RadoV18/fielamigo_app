@@ -12,11 +12,10 @@ import 'api.dart';
 
 class CaregiverProvider {
 
-  // TODO: uncomment to use with Flutter
-  // final String _url = "${Api.url}/caregivers";
+  final String _url = "${Api.url}/caregivers";
 
   // testing url
-  final String _url = "http://localhost:8080/api/v1/caregivers";
+  // final String _url = "http://localhost:8080/api/v1/caregivers";
 
   // GET /caregivers/boarding - Search
   Future<List<CaregiverCardDto>> searchBoarding(
@@ -39,7 +38,11 @@ class CaregiverProvider {
 
     if(response.statusCode == 200) {
       ResponseDto backendResponse = ResponseDto.fromJson(jsonDecode(response.body));
-      return backendResponse.data.map<CaregiverCardDto>((json) => CaregiverCardDto.fromJson(json)).toList();
+      if(backendResponse.succesful) {
+        return backendResponse.data.map<CaregiverCardDto>((json) => CaregiverCardDto.fromJson(json)).toList();
+      } else {
+        throw Exception(backendResponse.message);
+      }
     } else {
       throw Exception('Failed to search boarding');
     }

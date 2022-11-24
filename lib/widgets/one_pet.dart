@@ -12,6 +12,7 @@ class OnePet extends StatelessWidget {
           // TODO: use a ListView.builder to display the pets
           SizedBox(height: 5),
           PetCard(
+            dogId: 1,
               name: "Fido",
               breed: "Golden",
               size: "Pequeño",

@@ -16,7 +16,12 @@ class BoardingPets extends StatelessWidget {
             fontWeight: FontWeight.w600,
           ),
         ),
-        PetList(),
+        SizedBox(
+          height: 10,
+        ),
+        PetList(
+          isSelectable: true
+        ),
       ],
     );
   }

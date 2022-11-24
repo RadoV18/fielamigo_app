@@ -14,8 +14,6 @@ class BiographyCard extends StatelessWidget {
   final String? imageUrl;
   final Function() onContactPressed;
 
-  // TODO: change to DTO
-
   const BiographyCard({
     super.key,
     required this.userId,

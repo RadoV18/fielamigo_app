@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../bloc/boarding_cubit/boarding_cubit.dart';
+import '../../../data/models/caregiver_card_dto.dart';
 import '../../../widgets/caregiver_card.dart';
 
 class ResultsList extends StatelessWidget {
@@ -7,51 +10,28 @@ class ResultsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CaregiverCard(
-          userId: 1,
-          name: 'Juan Perez',
-          rating: 4.5,
-          price: 100.75,
-          isVerified: true,
-          priceDetails: "Precio por noche",
-          zone: "Miraflores",
-          city: "La Paz",
-          onCardPressed: () => print('card pressed'),
-        ),
-        const SizedBox(height: 10),
-        CaregiverCard(
-          userId: 2,
-          name: 'Juan Perez',
-          rating: 4.5,
-          price: 100.75,
-          isVerified: true,
-          priceDetails: "Precio por noche",
-          zone: "Miraflores",
-          city: "La Paz",
-          imageUrl: "https://storage.googleapis.com/petbacker/images/blog/2018/pet-care-dog-sitting-services.jpg",
-          onCardPressed: () => print('card pressed'),
-        ),
-      ]
-
-      // TODO: add when result list is empty
-      // const SizedBox(height: 10),
-      //   const Text(
-      //     "No se encontraron resultados",
-      //     style: TextStyle(
-      //       fontSize: 18,
-      //       fontWeight: FontWeight.w600,
-      //     ),
-      //   ),
-      //   const SizedBox(height: 10),
-      //   const Text(
-      //     "Intenta con otros datos",
-      //     style: TextStyle(
-      //       fontSize: 16,
-      //       fontWeight: FontWeight.w400,
-      //     ),
-      //   ),
+    return BlocBuilder<BoardingCubit, BoardingState>(
+      builder: (context, state) {
+        List<CaregiverCardDto> caregivers = state.caregivers;
+        return ListView.separated(
+          shrinkWrap: true,
+          itemBuilder: (context, index) => CaregiverCard(
+              userId: caregivers[index].caregiverId!,
+              firstName: caregivers[index].firstName!,
+              lastName: caregivers[index].lastName!,
+              isVerified: caregivers[index].isVerified!,
+              reviewCount: caregivers[index].reviewCount!,
+              rating: caregivers[index].rating!,
+              price: caregivers[index].price!,
+              zone: caregivers[index].zone!,
+              city: caregivers[index].city!,
+              priceDetails: "por noche",
+              imageUrl: caregivers[index].imageUrl,
+            ),
+          separatorBuilder: (context, index) => const SizedBox(height: 10),
+          itemCount: caregivers.length
+        );
+      }
     );
   }
 }

@@ -4,6 +4,11 @@ import 'package:fielamigo_app/screens/boarding_form/widgets/boarding_location.da
 import 'package:fielamigo_app/screens/boarding_form/widgets/boarding_pets.dart';
 import 'package:fielamigo_app/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../bloc/boarding_cubit/boarding_cubit.dart';
+import '../../bloc/page_status.dart';
+import '../../utils/ui_utils.dart';
 
 class BoardingFormScreen extends StatelessWidget {
   const BoardingFormScreen({super.key});
@@ -13,12 +18,41 @@ class BoardingFormScreen extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: CustomAppBar(
-        onBackButtonPressed: () => Navigator.pop(context),
+        onBackButtonPressed: () {
+          Navigator.pop(context);
+          context.read<BoardingCubit>().clear();
+        },
         title: 'Alojamiento para perros',
       ),
       body: SingleChildScrollView(
-        child:
-          Padding(
+        child: BlocConsumer<BoardingCubit, BoardingState>(
+          listenWhen:(previous, current) => previous.status != current.status,
+          listener: (context, state) {
+            if (state.status == PageStatus.success) {
+              // go to the results page
+              Navigator.pop(context, true);
+              Navigator.pushNamed(context, '/search-results');
+            } else if(state.status == PageStatus.loading) {
+              // show loading
+              UiUtils.showAlertDialog(
+                context,
+                message: "Buscando cuidadores...",
+                isDismissible: false,
+                hasCircularProgressIndicator: true
+              );
+            } else if(state.status == PageStatus.error) {
+              // show error
+              UiUtils.showAlertDialog(
+                context,
+                message: "No se encontraron cuidadores.",
+                isDismissible: true
+              );
+            }
+          },
+          buildWhen:(previous, current) {
+            return previous != current;
+          },
+          builder: (context, state) => Padding(
             padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
             child: Column(
               children: [
@@ -39,13 +73,15 @@ class BoardingFormScreen extends StatelessWidget {
                   height: 20,
                 ),
                 ElevatedButton(
-                  onPressed: () =>
-                      Navigator.pushNamed(context, '/search-results'),
+                  onPressed: () {
+                    context.read<BoardingCubit>().submit();
+                  },
                   child: const Text('Buscar alojamiento'),
                 ),
               ],
             ),
-          )
+          ),
+        )
       ),
     );
   }

@@ -6,10 +6,30 @@ import '../../widgets/custom_app_bar.dart';
 
 class CaregiverDetailsScreen extends StatelessWidget {
   final int userId;
+  final String firstName;
+  final String lastName;
+  final bool isVerified;
+  final int reviewCount;
+  final double rating;
+  final double price;
+  final String zone;
+  final String city;
+  final String priceDetails;
+  final String? imageUrl;
 
   const CaregiverDetailsScreen({
     super.key,
-    required this.userId
+    required this.userId,
+    required this.firstName,
+    required this.lastName,
+    this.isVerified = false,
+    this.reviewCount = 0,
+    this.rating = 0,
+    required this.price,
+    required this.priceDetails,
+    required this.zone,
+    required this.city,
+    this.imageUrl
   });
 
   @override
@@ -27,8 +47,8 @@ class CaregiverDetailsScreen extends StatelessWidget {
             // profile card
             BiographyCard(
               userId: userId,
-              firstName: "Juan",
-              lastName: "Perez",
+              firstName: firstName,
+              lastName: lastName,
               isVerified: true,
               rating: 4.3,
               reviewCount: 25,

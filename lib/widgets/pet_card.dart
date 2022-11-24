@@ -1,20 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class PetCard extends StatelessWidget {
+import '../bloc/boarding_cubit/boarding_cubit.dart';
+
+class PetCard extends StatefulWidget {
+  final int dogId;
   final String name;
   final String breed;
   final String size;
   final int age;
   final String imageUrl;
+  final bool isSelectable;
 
   const PetCard({
     super.key,
+    required this.dogId,
     required this.name,
     required this.breed,
     required this.size,
     required this.age,
-    required this.imageUrl
+    required this.imageUrl,
+    this.isSelectable = false
+    // this.onSelectable;
   });
+
+  @override
+  State<PetCard> createState() => _PetCardState();
+}
+
+class _PetCardState extends State<PetCard> {
+  bool isSelected = false;
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +65,7 @@ class PetCard extends StatelessWidget {
                 ),
                 child: ClipRRect(
                   child: Image.network(
-                    imageUrl,
+                    widget.imageUrl,
                     height: 70,
                     fit: BoxFit.cover
                     )
@@ -62,7 +77,7 @@ class PetCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    name,
+                    widget.name,
                     textAlign: TextAlign.left,
                     style: const TextStyle(
                       fontSize: 16,
@@ -72,7 +87,7 @@ class PetCard extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        '$breed ${size.toLowerCase()}',
+                        '${widget.breed} ${widget.size.toLowerCase()}',
                         style: const TextStyle(
                           fontSize: 14,
                         ),
@@ -81,7 +96,7 @@ class PetCard extends StatelessWidget {
                       const Icon(Icons.pets, size: 14),
                       const SizedBox(width: 10,),
                       Text(
-                        '${age.toString()} años',
+                        '${widget.age.toString()} años',
                         style: const TextStyle(
                           fontSize: 14,
                         ),
@@ -92,7 +107,28 @@ class PetCard extends StatelessWidget {
               ),
             ]
           ),
-          IconButton(
+          widget.isSelectable ?
+          Checkbox(
+            checkColor: Colors.white,
+            activeColor: const Color(0xff3a5080),
+            value: isSelected,
+            onChanged: (value) {
+              if(value != null) {
+                if(value) {
+                  context.read<BoardingCubit>().addDog(widget.dogId);
+                  setState(() {
+                    isSelected = true;
+                  });
+                } else {
+                  context.read<BoardingCubit>().removeDog(widget.dogId);
+                  setState(() {
+                    isSelected = false;
+                  });
+                }
+                
+              }
+            },
+          ) : IconButton(
             onPressed: () {
               Navigator.pushNamed(context, "/owner/pets/info");
             },

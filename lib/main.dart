@@ -32,10 +32,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
-import 'bloc/log_in_cubit/log_in_cubit.dart';
+import 'bloc/boarding_cubit/boarding_cubit.dart';
 import 'bloc/user_data_cubit/user_data_cubit.dart';
 import 'bloc/user_info_cubit/user_info_cubit.dart';
-import 'bloc/verification_code_cubit/verifiaction_code_cubit.dart';
 import 'screens/sign_up/sign_up_screen.dart';
 import 'screens/verification_code/verification_code_screen.dart';
 import 'screens/welcome/welcome_screen.dart';
@@ -44,7 +43,7 @@ import 'utils/global_theme.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
-  final bool showHome = prefs.getBool("showWelcome") ?? false;
+  bool showHome = prefs.getBool("showWelcome") ?? false;
 
   FlutterSecureStorage storage = const FlutterSecureStorage();
   final bool hasToken = await storage.containsKey(key: "token");
@@ -84,6 +83,9 @@ class MyApp extends StatelessWidget {
         BlocProvider<ProfilePictureCubit>(
           create: (context) => ProfilePictureCubit()..init(),
         ),
+        BlocProvider<BoardingCubit>(
+          create: (context) => BoardingCubit(),
+        ),
         BlocProvider<SignUpCubit>(
             create: (BuildContext context) => SignUpCubit()),
         BlocProvider<UserDataCubit>(
@@ -101,9 +103,9 @@ class MyApp extends StatelessWidget {
                   initialRoute: redirectToHomeScreen ?
                     isOwner ? '/owner/home' : '/caregiver/home' : '/',
                   routes: {
-                    '/': (context) => showHome
-                        ? const WelcomeScreen()
-                        : const OnboardingScreen(),
+                    '/': (context) {
+                      return showHome ? WelcomeScreen() : OnboardingScreen();
+                    },
                     '/welcome': (context) => const WelcomeScreen(),
                     '/sign-up': (context) => const SignUpScreen(),
                     '/log-in': (context) => const LoginScreen(),

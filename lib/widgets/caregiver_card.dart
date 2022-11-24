@@ -5,7 +5,8 @@ import '../screens/caregiver_details/caregiver_details_screen.dart';
 
 class CaregiverCard extends StatelessWidget {
   final int userId;
-  final String name;
+  final String firstName;
+  final String lastName;
   final bool isVerified;
   final int reviewCount;
   final double rating;
@@ -14,13 +15,13 @@ class CaregiverCard extends StatelessWidget {
   final String city;
   final String priceDetails;
   final String? imageUrl;
-  final Function() onCardPressed;
 
 
   const CaregiverCard({
     super.key,
     required this.userId,
-    required this.name,
+    required this.firstName,
+    required this.lastName,
     this.isVerified = false,
     this.reviewCount = 0,
     this.rating = 0,
@@ -28,15 +29,26 @@ class CaregiverCard extends StatelessWidget {
     required this.priceDetails,
     required this.zone,
     required this.city,
-    this.imageUrl,
-    required this.onCardPressed
+    this.imageUrl
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => CaregiverDetailsScreen(userId: userId))
+        MaterialPageRoute(builder: (context) => CaregiverDetailsScreen(
+          userId: userId,
+          firstName: firstName,
+          lastName: lastName,
+          isVerified: isVerified,
+          reviewCount: reviewCount,
+          rating: rating,
+          price: price,
+          priceDetails: priceDetails,
+          zone: zone,
+          city: city,
+          imageUrl: imageUrl
+        ))
       ),
       child: Container(
         width: double.infinity,
@@ -100,7 +112,7 @@ class CaregiverCard extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        name,
+                        "$firstName $lastName",
                         style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600
@@ -134,9 +146,9 @@ class CaregiverCard extends StatelessWidget {
                           print(rating);
                         }
                       ),
-                      const SizedBox(width: 5),
+                      const SizedBox(width: 3),
                       Text(
-                        rating.toString(),
+                        rating.toStringAsFixed(2),
                         style: const TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w600

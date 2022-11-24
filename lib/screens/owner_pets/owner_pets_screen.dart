@@ -29,6 +29,7 @@ class OwnerPetsScreen extends StatelessWidget {
                       // TODO: use a ListView.builder to display the pets
                       SizedBox(height: 5),
                       PetCard(
+                        dogId: 1,
                         name: "Toffee",
                         breed: "Chihuahua",
                         size: "Pequeño",
@@ -37,6 +38,7 @@ class OwnerPetsScreen extends StatelessWidget {
                       ),
                       SizedBox(height: 5),
                       PetCard(
+                        dogId: 1,
                         name: "Toffee",
                         breed: "Chihuahua",
                         size: "Pequeño",
@@ -45,6 +47,7 @@ class OwnerPetsScreen extends StatelessWidget {
                       ),
                       SizedBox(height: 5),
                       PetCard(
+                        dogId: 1,
                         name: "Toffee",
                         breed: "Chihuahua",
                         size: "Pequeño",
